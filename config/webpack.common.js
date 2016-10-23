@@ -29,6 +29,9 @@ const METADATA = {
   isDevServer: helpers.isWebpackDevServer()
 };
 
+const precss = require('precss');
+const autoprefixer = require('autoprefixer');
+
 /*
  * Webpack configuration
  *
@@ -123,7 +126,15 @@ module.exports = function (options) {
          */
         {
           test: /\.css$/,
-          loaders: ['to-string-loader', 'css-loader']
+          loaders: ['to-string-loader', 'css-loader', 'postcss-loader']
+        },
+
+        /*
+         * SASS Loader
+         */
+        {
+          test: /\.s(a|c)ss$/,
+          loaders: ['to-string-loader', 'css-loader', 'postcss-loader', 'sass-loader']
         },
 
         /* Raw loader support for *.html
@@ -140,12 +151,44 @@ module.exports = function (options) {
         /* File loader for supporting images, for example, in CSS files.
          */
         {
-          test: /\.(jpg|png|gif)$/,
+          test: /\.(jpg|png|gif|svg)$/,
           loader: 'file'
         },
 
+        {
+          test: /\.(woff2?|ttf|eot|svg)$/,
+          loader: 'url?limit=10000'
+        },
+
+        // Semantic-UI
+        {
+          test: /semantic\/dist\/.*\.js$/,
+          loader: 'imports?jQuery=jquery'
+        }
       ],
 
+      // TODO: check if this is necessary?
+      postLoaders: [
+        {
+          test: /\.js$/,
+          loader: 'string-replace-loader',
+          query: {
+            search: 'var sourceMappingUrl = extractSourceMappingUrl\\(cssText\\);',
+            replace: 'var sourceMappingUrl = "";',
+            flags: 'g'
+          }
+        }
+      ]
+    },
+
+    /**
+     * PostCSS Config
+     * @returns {*[]}
+     */
+    postcss: function () {
+      return [precss, autoprefixer({
+        browsers: ['>0.01%']
+      })];
     },
 
     /*
@@ -268,6 +311,11 @@ module.exports = function (options) {
        */
       new LoaderOptionsPlugin({}),
 
+      new webpack.ProvidePlugin({
+        jQuery: 'jquery',
+        $: 'jquery',
+        jquery: 'jquery'
+      })
     ],
 
     /*
@@ -284,6 +332,5 @@ module.exports = function (options) {
       clearImmediate: false,
       setImmediate: false
     }
-
   };
-}
+};
