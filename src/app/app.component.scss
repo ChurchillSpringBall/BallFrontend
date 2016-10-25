@@ -6,3 +6,10 @@ html, body{
 span.active {
   background-color: gray;
 }
+
+.test {
+
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}

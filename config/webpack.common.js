@@ -29,9 +29,6 @@ const METADATA = {
   isDevServer: helpers.isWebpackDevServer()
 };
 
-const precss = require('precss');
-const autoprefixer = require('autoprefixer');
-
 /*
  * Webpack configuration
  *
@@ -126,7 +123,7 @@ module.exports = function (options) {
          */
         {
           test: /\.css$/,
-          loaders: ['to-string-loader', 'css-loader', 'postcss-loader']
+          loaders: ['to-string-loader', 'css-loader?importLoaders=1', 'postcss-loader']
         },
 
         /*
@@ -134,7 +131,7 @@ module.exports = function (options) {
          */
         {
           test: /\.s(a|c)ss$/,
-          loaders: ['to-string-loader', 'css-loader', 'postcss-loader', 'sass-loader']
+          loaders: ['to-string-loader', 'css-loader?importLoaders=1', 'postcss-loader', 'sass-loader']
         },
 
         /* Raw loader support for *.html
@@ -164,11 +161,11 @@ module.exports = function (options) {
         {
           test: /semantic\/dist\/.*\.js$/,
           loader: 'imports?jQuery=jquery'
-        }
-      ],
+        },
 
-      // TODO: check if this is necessary?
-      postLoaders: [
+        /**
+         * Post-Loaders
+         */
         {
           test: /\.js$/,
           loader: 'string-replace-loader',
@@ -176,19 +173,10 @@ module.exports = function (options) {
             search: 'var sourceMappingUrl = extractSourceMappingUrl\\(cssText\\);',
             replace: 'var sourceMappingUrl = "";',
             flags: 'g'
-          }
+          },
+          enforce: 'post'
         }
       ]
-    },
-
-    /**
-     * PostCSS Config
-     * @returns {*[]}
-     */
-    postcss: function () {
-      return [precss, autoprefixer({
-        browsers: ['>0.01%']
-      })];
     },
 
     /*
@@ -248,7 +236,7 @@ module.exports = function (options) {
         to: 'assets',
       }, {
         from: 'src/meta',
-      }, ]),
+      },]),
 
 
       /*
