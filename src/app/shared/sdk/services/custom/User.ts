@@ -1715,12 +1715,41 @@ export class UserApi extends BaseLoopBackApi {
    *   populated with the actual data once the response is returned
    *   from the server.
    *
-   * This method returns no data.
+   * Data properties:
+   *
+   *  - `isChurchill` – `{boolean}` - 
+   */
+  public isChurchill(crsid: any): Observable<any> {
+    let method: string = "GET";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/users/ischurchill";
+    let routeParams: any = {};
+    let postBody: any = {};
+    let urlParams: any = {};
+    if (crsid) urlParams.crsid = crsid;
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  /**
+   * <em>
+         * (The remote method definition does not provide any description.)
+         * </em>
+   *
+   * @param string crsid 
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * Data properties:
+   *
+   *  - `data` – `{Object}` - 
    */
   public ldapLookup(crsid: any): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/users/:crsid/ldap";
+    "/users/ldap";
     let routeParams: any = {};
     let postBody: any = {};
     let urlParams: any = {};

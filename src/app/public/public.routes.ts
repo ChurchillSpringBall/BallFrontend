@@ -4,7 +4,8 @@ import {Public} from './public.component';
 import {
   HomeComponent,
   AboutComponent,
-  TicketsComponent
+  TicketsComponent,
+  PurchaseTicketsComponent
 } from './index';
 
 export const PUBLIC_ROUTES: Routes = [{
@@ -13,6 +14,7 @@ export const PUBLIC_ROUTES: Routes = [{
   children: [
     {path: '', component: HomeComponent},
     {path: 'about', component: AboutComponent},
-    {path: 'tickets', component: TicketsComponent}
+    {path: 'tickets', component: TicketsComponent},
+    {path: 'tickets/purchase', component: PurchaseTicketsComponent}
   ]
 }];

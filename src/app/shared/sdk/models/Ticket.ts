@@ -8,6 +8,7 @@ export interface TicketInterface {
   price?: string;
   barCode?: string;
   orderId?: number;
+  admittedAt?: any;
   id?: number;
 }
 
@@ -18,6 +19,7 @@ export class Ticket implements TicketInterface {
   price: string;
   barCode: string;
   orderId: number;
+  admittedAt: any;
   id: number;
   constructor(instance?: TicketInterface) {
     Object.assign(this, instance);
