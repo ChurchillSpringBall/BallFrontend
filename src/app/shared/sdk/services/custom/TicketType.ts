@@ -10,17 +10,17 @@ import { ErrorHandler } from '../core/error.service';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import { Order } from '../../models/Order';
+import { TicketType } from '../../models/TicketType';
 import { Ticket } from '../../models/Ticket';
 
 // Making Sure EventSource Type is available to avoid compilation issues.
 declare var EventSource: any;
 
 /**
- * Api services for the `Order` model.
+ * Api services for the `TicketType` model.
  */
 @Injectable()
-export class OrderApi extends BaseLoopBackApi {
+export class TicketTypeApi extends BaseLoopBackApi {
 
   constructor(
     @Inject(Http) http: Http,
@@ -44,13 +44,13 @@ export class OrderApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Order` object.)
+   * This usually means the response is a `TicketType` object.)
    * </em>
    */
   public findByIdTickets(id: any, fk: any): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Orders/:id/tickets/:fk";
+    "/TicketTypes/:id/tickets/:fk";
     let routeParams: any = {
       id: id,
       fk: fk
@@ -77,7 +77,7 @@ export class OrderApi extends BaseLoopBackApi {
   public destroyByIdTickets(id: any, fk: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Orders/:id/tickets/:fk";
+    "/TicketTypes/:id/tickets/:fk";
     let routeParams: any = {
       id: id,
       fk: fk
@@ -105,13 +105,13 @@ export class OrderApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Order` object.)
+   * This usually means the response is a `TicketType` object.)
    * </em>
    */
   public updateByIdTickets(id: any, fk: any, data: any = undefined): Observable<any> {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Orders/:id/tickets/:fk";
+    "/TicketTypes/:id/tickets/:fk";
     let routeParams: any = {
       id: id,
       fk: fk
@@ -125,7 +125,7 @@ export class OrderApi extends BaseLoopBackApi {
   }
 
   /**
-   * Queries tickets of Order.
+   * Queries tickets of TicketType.
    *
    * @param any id PersistedModel id
    *
@@ -137,13 +137,13 @@ export class OrderApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Order` object.)
+   * This usually means the response is a `TicketType` object.)
    * </em>
    */
   public getTickets(id: any, filter: LoopBackFilter = undefined): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Orders/:id/tickets";
+    "/TicketTypes/:id/tickets";
     let routeParams: any = {
       id: id
     };
@@ -169,13 +169,13 @@ export class OrderApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Order` object.)
+   * This usually means the response is a `TicketType` object.)
    * </em>
    */
   public createTickets(id: any, data: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Orders/:id/tickets";
+    "/TicketTypes/:id/tickets";
     let routeParams: any = {
       id: id
     };
@@ -201,7 +201,7 @@ export class OrderApi extends BaseLoopBackApi {
   public deleteTickets(id: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Orders/:id/tickets";
+    "/TicketTypes/:id/tickets";
     let routeParams: any = {
       id: id
     };
@@ -212,7 +212,7 @@ export class OrderApi extends BaseLoopBackApi {
   }
 
   /**
-   * Counts tickets of Order.
+   * Counts tickets of TicketType.
    *
    * @param any id PersistedModel id
    *
@@ -229,7 +229,7 @@ export class OrderApi extends BaseLoopBackApi {
   public countTickets(id: any, where: any = undefined): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Orders/:id/tickets/count";
+    "/TicketTypes/:id/tickets/count";
     let routeParams: any = {
       id: id
     };
@@ -253,20 +253,20 @@ export class OrderApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Order` object.)
+   * This usually means the response is a `TicketType` object.)
    * </em>
    */
-  public create(data: any = undefined): Observable<Order> {
+  public create(data: any = undefined): Observable<TicketType> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Orders";
+    "/TicketTypes";
     let routeParams: any = {};
     let postBody: any = {
       data: data
     };
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result.map((instance: Order) => new Order(instance));
+    return result.map((instance: TicketType) => new TicketType(instance));
   }
 
   /**
@@ -282,13 +282,13 @@ export class OrderApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Order` object.)
+   * This usually means the response is a `TicketType` object.)
    * </em>
    */
   public patchOrCreate(data: any = undefined): Observable<any> {
     let method: string = "PATCH";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Orders";
+    "/TicketTypes";
     let routeParams: any = {};
     let postBody: any = {
       data: data
@@ -311,13 +311,13 @@ export class OrderApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Order` object.)
+   * This usually means the response is a `TicketType` object.)
    * </em>
    */
   public replaceOrCreate(data: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Orders/replaceOrCreate";
+    "/TicketTypes/replaceOrCreate";
     let routeParams: any = {};
     let postBody: any = {
       data: data
@@ -342,13 +342,13 @@ export class OrderApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Order` object.)
+   * This usually means the response is a `TicketType` object.)
    * </em>
    */
-  public upsertWithWhere(where: any = undefined, data: any = undefined): Observable<Order> {
+  public upsertWithWhere(where: any = undefined, data: any = undefined): Observable<TicketType> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Orders/upsertWithWhere";
+    "/TicketTypes/upsertWithWhere";
     let routeParams: any = {};
     let postBody: any = {
       data: data
@@ -356,7 +356,7 @@ export class OrderApi extends BaseLoopBackApi {
     let urlParams: any = {};
     if (where) urlParams.where = where;
     let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result.map((instance: Order) => new Order(instance));
+    return result.map((instance: TicketType) => new TicketType(instance));
   }
 
   /**
@@ -375,7 +375,7 @@ export class OrderApi extends BaseLoopBackApi {
   public exists(id: any): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Orders/:id/exists";
+    "/TicketTypes/:id/exists";
     let routeParams: any = {
       id: id
     };
@@ -398,13 +398,13 @@ export class OrderApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Order` object.)
+   * This usually means the response is a `TicketType` object.)
    * </em>
    */
-  public findById(id: any, filter: LoopBackFilter = undefined): Observable<Order> {
+  public findById(id: any, filter: LoopBackFilter = undefined): Observable<TicketType> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Orders/:id";
+    "/TicketTypes/:id";
     let routeParams: any = {
       id: id
     };
@@ -412,7 +412,7 @@ export class OrderApi extends BaseLoopBackApi {
     let urlParams: any = {};
     if (filter) urlParams.filter = filter;
     let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result.map((instance: Order) => new Order(instance));
+    return result.map((instance: TicketType) => new TicketType(instance));
   }
 
   /**
@@ -430,13 +430,13 @@ export class OrderApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Order` object.)
+   * This usually means the response is a `TicketType` object.)
    * </em>
    */
   public replaceById(id: any, data: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Orders/:id/replace";
+    "/TicketTypes/:id/replace";
     let routeParams: any = {
       id: id
     };
@@ -459,20 +459,20 @@ export class OrderApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Order` object.)
+   * This usually means the response is a `TicketType` object.)
    * </em>
    */
-  public find(filter: LoopBackFilter = undefined): Observable<Array<Order>> {
+  public find(filter: LoopBackFilter = undefined): Observable<Array<TicketType>> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Orders";
+    "/TicketTypes";
     let routeParams: any = {};
     let postBody: any = {};
     let urlParams: any = {};
     if (filter) urlParams.filter = filter;
     let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result.map((instances: Array<Order>) =>
-        instances.map((instance: Order) => new Order(instance))
+    return result.map((instances: Array<TicketType>) =>
+        instances.map((instance: TicketType) => new TicketType(instance))
     );
   }
 
@@ -487,19 +487,19 @@ export class OrderApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Order` object.)
+   * This usually means the response is a `TicketType` object.)
    * </em>
    */
-  public findOne(filter: LoopBackFilter = undefined): Observable<Order> {
+  public findOne(filter: LoopBackFilter = undefined): Observable<TicketType> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Orders/findOne";
+    "/TicketTypes/findOne";
     let routeParams: any = {};
     let postBody: any = {};
     let urlParams: any = {};
     if (filter) urlParams.filter = filter;
     let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result.map((instance: Order) => new Order(instance));
+    return result.map((instance: TicketType) => new TicketType(instance));
   }
 
   /**
@@ -520,7 +520,7 @@ export class OrderApi extends BaseLoopBackApi {
   public updateAll(where: any = undefined, data: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Orders/update";
+    "/TicketTypes/update";
     let routeParams: any = {};
     let postBody: any = {
       data: data
@@ -542,13 +542,13 @@ export class OrderApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Order` object.)
+   * This usually means the response is a `TicketType` object.)
    * </em>
    */
   public deleteById(id: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Orders/:id";
+    "/TicketTypes/:id";
     let routeParams: any = {
       id: id
     };
@@ -574,7 +574,7 @@ export class OrderApi extends BaseLoopBackApi {
   public count(where: any = undefined): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Orders/count";
+    "/TicketTypes/count";
     let routeParams: any = {};
     let postBody: any = {};
     let urlParams: any = {};
@@ -598,13 +598,13 @@ export class OrderApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Order` object.)
+   * This usually means the response is a `TicketType` object.)
    * </em>
    */
   public patchAttributes(id: any, data: any = undefined): Observable<any> {
     let method: string = "PATCH";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Orders/:id";
+    "/TicketTypes/:id";
     let routeParams: any = {
       id: id
     };
@@ -633,7 +633,7 @@ export class OrderApi extends BaseLoopBackApi {
    */
   public createChangeStream(): Observable<any> {
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Orders/change-stream";
+    "/TicketTypes/change-stream";
     let subject = new Subject();
     if (typeof EventSource !== 'undefined') {
       let emit   = (msg: any) => subject.next(JSON.parse(msg.data));
@@ -660,13 +660,13 @@ export class OrderApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Order` object.)
+   * This usually means the response is a `TicketType` object.)
    * </em>
    */
   public createManyTickets(id: any, data: Array<any> = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Orders/:id/tickets";
+    "/TicketTypes/:id/tickets";
     let routeParams: any = {
       id: id
     };
@@ -691,29 +691,29 @@ export class OrderApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Order` object.)
+   * This usually means the response is a `TicketType` object.)
    * </em>
    */
-  public createMany(data: Array<any> = undefined): Observable<Array<Order>> {
+  public createMany(data: Array<any> = undefined): Observable<Array<TicketType>> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Orders";
+    "/TicketTypes";
     let routeParams: any = {};
     let postBody: any = {
       data: data
     };
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result.map((instances: Array<Order>) =>
-        instances.map((instance: Order) => new Order(instance))
+    return result.map((instances: Array<TicketType>) =>
+        instances.map((instance: TicketType) => new TicketType(instance))
     );
   }
 
   /**
    * The name of the model represented by this $resource,
-   * i.e. `Order`.
+   * i.e. `TicketType`.
    */
   public getModelName() {
-    return "Order";
+    return "TicketType";
   }
 }

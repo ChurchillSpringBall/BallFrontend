@@ -2,16 +2,22 @@
 
 declare var Object: any;
 export interface TicketInterface {
-  type: string;
-  quantity: number;
-  Price: number;
+  ticketTypeId: number;
+  name?: string;
+  email?: string;
+  price?: string;
+  barCode?: string;
+  orderId?: number;
   id?: number;
 }
 
 export class Ticket implements TicketInterface {
-  type: string;
-  quantity: number;
-  Price: number;
+  ticketTypeId: number;
+  name: string;
+  email: string;
+  price: string;
+  barCode: string;
+  orderId: number;
   id: number;
   constructor(instance?: TicketInterface) {
     Object.assign(this, instance);

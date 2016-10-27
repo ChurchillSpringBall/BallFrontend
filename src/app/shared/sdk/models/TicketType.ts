@@ -4,28 +4,28 @@ import {
 } from '../index';
 
 declare var Object: any;
-export interface OrderInterface {
-  date: any;
-  total: number;
-  userId: number;
+export interface TicketTypeInterface {
+  name?: string;
+  price?: number;
+  quantity?: number;
   id?: number;
   tickets?: Array<Ticket>;
 }
 
-export class Order implements OrderInterface {
-  date: any;
-  total: number;
-  userId: number;
+export class TicketType implements TicketTypeInterface {
+  name: string;
+  price: number;
+  quantity: number;
   id: number;
   tickets: Array<Ticket>;
-  constructor(instance?: OrderInterface) {
+  constructor(instance?: TicketTypeInterface) {
     Object.assign(this, instance);
   }
   /**
    * The name of the model represented by this $resource,
-   * i.e. `Order`.
+   * i.e. `TicketType`.
    */
   public static getModelName() {
-    return "Order";
+    return "TicketType";
   }
 }

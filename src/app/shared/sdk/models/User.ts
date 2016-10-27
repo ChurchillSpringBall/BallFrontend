@@ -1,4 +1,8 @@
 /* tslint:disable */
+import {
+  Order,
+  Ticket
+} from '../index';
 
 declare var Object: any;
 export interface UserInterface {
@@ -10,6 +14,8 @@ export interface UserInterface {
   verificationToken?: string;
   id?: number;
   accessTokens?: Array<any>;
+  orders?: Array<Order>;
+  tickets?: Array<Ticket>;
   identities?: Array<any>;
   credentials?: Array<any>;
 }
@@ -23,6 +29,8 @@ export class User implements UserInterface {
   verificationToken: string;
   id: number;
   accessTokens: Array<any>;
+  orders: Array<Order>;
+  tickets: Array<Ticket>;
   identities: Array<any>;
   credentials: Array<any>;
   constructor(instance?: UserInterface) {
