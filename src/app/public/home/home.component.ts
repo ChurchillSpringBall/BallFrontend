@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
-import { AppState } from '../../app.service';
-import { Title } from './title';
-import { XLarge } from './x-large';
+import {UserApi} from '../../shared/sdk';
+import {AppState} from '../../app.service';
+import {Title} from './title';
+import {XLarge} from './x-large';
 
 @Component({
   // The selector is what angular internally uses
@@ -14,21 +15,29 @@ import { XLarge } from './x-large';
     Title
   ],
   // Our list of styles in our component. We may add more to compose many styles together
-  styleUrls: [ './home.component.scss' ],
+  styleUrls: ['./home.component.scss'],
   // Every Angular template is first compiled by the browser before Angular runs it's compiler
   templateUrl: './home.component.html'
 })
 export class HomeComponent {
   // Set our default values
-  localState = { value: '' };
+  localState = {value: ''};
   // TypeScript public modifiers
-  constructor(public appState: AppState, public title: Title) {
+  constructor(public appState: AppState, public title: Title, public userApi: UserApi) {
 
   }
 
   ngOnInit() {
     console.log('hello `Home` component');
     // this.title.getData().subscribe(data => this.data = data);
+    this.userApi.getCurrent()
+      .subscribe((user) => {
+        console.log(user);
+        console.log(this.userApi.isAuthenticated());
+      }, console.error.bind(console));
+
+    this.userApi.ldapLookup('lng25')
+      .subscribe(console.log.bind(console), console.error.bind(console));
   }
 
   submitState(value: string) {

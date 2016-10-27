@@ -17,6 +17,9 @@ import '@angular/router';
 // AngularClass
 import '@angularclass/hmr';
 
+// Cookies
+import 'angular2-cookie/core';
+
 // RxJS
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
