@@ -3,7 +3,9 @@ import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {RouterModule} from '@angular/router';
+
 import {removeNgStyles, createNewHosts, createInputTransfer} from '@angularclass/hmr';
+import {CookieService} from 'angular2-cookie/core';
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -14,11 +16,10 @@ import {ROUTES} from './app.routes';
 import {AppComponent} from './app.component';
 import {APP_RESOLVER_PROVIDERS} from './app.resolver';
 import {AppState, InternalStateType} from './app.service';
-import * as PUBLIC_COMPONENTS from './public';
 import {NoContentComponent} from './no-content';
+import * as PUBLIC_COMPONENTS from './public';
+import * as AUTH_COMPONENTS from './shared/auth';
 import {SDKModule} from './shared/sdk/index';
-import {PassportComponent} from './shared/auth';
-import {CookieService} from 'angular2-cookie';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -41,8 +42,8 @@ type StoreType = {
   declarations: [
     AppComponent,
     NoContentComponent,
-    PassportComponent,
-    ...Object.keys(PUBLIC_COMPONENTS).map((key) => PUBLIC_COMPONENTS[key])  // convert object into array for decomposition
+    ...Object.keys(PUBLIC_COMPONENTS).map((key) => PUBLIC_COMPONENTS[key]),  // convert object into array for decomposition
+    ...Object.keys(AUTH_COMPONENTS).map((key) => AUTH_COMPONENTS[key])
   ],
   imports: [ // import Angular's modules
     BrowserModule,

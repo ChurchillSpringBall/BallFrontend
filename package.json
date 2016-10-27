@@ -1,14 +1,17 @@
 {
-  "name": "angular2-webpack-starter",
+  "name": "Churchill-Spring-Ball-Frontend",
   "version": "5.0.5",
-  "description": "An Angular 2 Webpack Starter kit featuring Angular 2 (Router, Http, Forms, Services, Tests, E2E, Coverage), Karma, Protractor, Jasmine, Istanbul, TypeScript, and Webpack by AngularClass",
+  "description": "An Angular 2 web app for the Chruchill Spring Ball ticketing system",
   "keywords": [
     "angular2",
     "webpack",
-    "typescript"
+    "typescript",
+    "churchill",
+    "spring ball",
+    "springball.com"
   ],
-  "author": "Patrick Stapleton <patrick@angularclass.com>",
-  "homepage": "https://github.com/angularclass/angular2-webpack-starter",
+  "author": "Liam Gray <@hoxxep>",
+  "homepage": "https://springball.com",
   "license": "MIT",
   "scripts": {
     "build:dev": "webpack --config config/webpack.dev.js --progress --profile",
@@ -141,13 +144,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/angularclass/angular2-webpack-starter.git"
+    "url": "https://github.com/ChurchillSpringBall/BallFrontend.git"
   },
   "bugs": {
-    "url": "https://github.com/angularclass/angular2-webpack-starter/issues"
+    "url": "https://github.com/ChurchillSpringBall/BallFrontend/issues"
   },
   "engines": {
-    "node": ">= 4.2.1",
+    "node": ">= 6.0.0",
     "npm": ">= 3"
   }
 }

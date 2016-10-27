@@ -23,6 +23,7 @@ export class PassportComponent {
     this.auth.setRememberMe(true);
     this.auth.save();
 
-    this.router.navigate(['/']);
+    // TODO: check if user is admin or not, then decide on route
+    this.router.navigate(['/tickets']);
   }
 }

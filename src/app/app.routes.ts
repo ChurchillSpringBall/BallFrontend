@@ -1,12 +1,12 @@
 import {Routes, RouterModule} from '@angular/router';
 import {PUBLIC_ROUTES} from './public/public.routes';
 import {NoContentComponent} from './no-content';
-import {PassportComponent} from './shared/auth';
+import {AUTH_ROUTES} from './shared/auth/auth.routes';
 
 import {DataResolver} from './app.resolver';
 
 
 export const ROUTES: Routes = [
-  ...PUBLIC_ROUTES,
-  {path: 'passport', component: PassportComponent}
+  ...AUTH_ROUTES,
+  ...PUBLIC_ROUTES
 ];
