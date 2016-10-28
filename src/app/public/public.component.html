@@ -1,4 +1,12 @@
-<!--<app-header></app-header>-->
+<nav>
+  <span><a [routerLink]=" ['/'] ">Index</a></span>
+  |
+  <span><a [routerLink]=" ['/about'] ">About</a></span>
+  |
+  <span><a href="/auth/raven">Login to Raven</a></span>
+  |
+  <span><a [routerLink]="['/logout']">Logout</a></span>
+</nav>
 
 <main class="ui container">
   <router-outlet></router-outlet>

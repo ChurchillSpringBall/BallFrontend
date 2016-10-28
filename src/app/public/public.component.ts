@@ -12,6 +12,8 @@ import {Component, ViewEncapsulation} from '@angular/core';
   ],
   templateUrl: './public.component.html'
 })
-export class Public {
+export class PublicComponent {
   constructor() {}
+
+  // TODO: show customer's name in the nav
 }
