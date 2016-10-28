@@ -6,7 +6,9 @@ import {
 
 declare var Object: any;
 export interface OrderInterface {
-  date: any;
+  created?: any;
+  paymentMethod: string;
+  paymentFee?: number;
   total: number;
   id?: number;
   userId?: number;
@@ -15,7 +17,9 @@ export interface OrderInterface {
 }
 
 export class Order implements OrderInterface {
-  date: any;
+  created: any;
+  paymentMethod: string;
+  paymentFee: number;
   total: number;
   id: number;
   userId: number;

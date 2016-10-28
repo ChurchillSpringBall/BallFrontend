@@ -3,7 +3,7 @@
     <div class="ui segment" *ngFor="let type of typesOfTickets">
       <!--{{ type | json }}-->
       <h2>{{ type.name }}</h2>
-      <span>Price: £{{ type.price }}</span>
+      <span>Price: {{ type.price | currency:'GBP':true:'1.2-2' }}</span>
       <div class="ui input">
         <input type="number" [(ngModel)]="type.purchaseQuantity" [disabled]="type.sold >= type.quantity">
       </div>
@@ -11,26 +11,29 @@
   </div>
   <div class="sixteen wide mobile six wide tablet six wide computer column">
     <div class="ui segment">
-      <h2>Payment Method</h2>
+      <h2>Summary</h2>
       <div class="ui form">
-        <div class="fields">
+        <div class="grouped fields">
+          <label>Payment Method</label>
           <div class="field">
             <div class="ui radio checkbox">
               <input type="radio" name="payment-method" [(ngModel)]="paymentMethod" value="stripe" checked="checked">
-              <label>Stripe</label>
+              <label>Stripe ({{ calculateStripeFee() | currency:'GBP':true:'1.2-2' }} fee)</label>
             </div>
           </div>
           <div class="field">
             <div class="ui radio checkbox">
               <input type="radio" name="payment-method" [(ngModel)]="paymentMethod" value="college-account" [disabled]="!isChurchill">
-              <label>College Account</label>
+              <label>College Account (No fee)</label>
             </div>
           </div>
         </div>
       </div>
       <p>Please note that payment via college accounts are only available to Churchill members</p>
 
-      <button class="ui primary button" [disabled]="!checkTicketsAvailable()">Purchase</button>
+      <p><strong>Total:</strong> {{ calculateOrderTotal() + (paymentMethod === 'stripe' ? calculateStripeFee() : 0) | currency:'GBP':true:'1.2-2' }}</p>
+
+      <button class="ui primary button" [disabled]="!checkTicketsAvailable()" (click)="purchaseTickets()">Purchase</button>
     </div>
   </div>
 </div>

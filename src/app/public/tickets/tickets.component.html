@@ -1,5 +1,14 @@
 <h1>Tickets</h1>
-<p>TODO: show tickets you have purchased</p>
 <p>TODO: design this page nicely</p>
-<p>TODO: design buy tickets page?</p>
-<a [routerLink]="['/tickets', 'purchase']">Buy (More?) Tickets</a>
+
+<div class="ui segment" *ngFor="let ticket of tickets">
+  <!--{{ ticket | json }}-->
+  <h2>{{ ticket.name || 'Ticketholder Name' }}</h2>
+  <p>Email: {{ ticket.email || 'Ticketholder Email' }}</p>
+  <p>Type: {{ ticket.type.name }}</p>
+  <p>Purchased: {{ ticket.order.created }}</p>
+  <p>Payment Method: {{ ticket.order.paymentMethod }}</p>
+  <p>Price: {{ ticket.price | currency:'GBP':true:'1.2-2' }}</p>
+</div>
+
+<a class="ui primary button" [routerLink]="['/tickets', 'purchase']">Buy Tickets</a>

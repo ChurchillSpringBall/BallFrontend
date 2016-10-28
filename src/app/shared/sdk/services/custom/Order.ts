@@ -677,6 +677,35 @@ export class OrderApi extends BaseLoopBackApi {
     return subject.asObservable();
   }
   /**
+   * <em>
+         * (The remote method definition does not provide any description.)
+         * </em>
+   *
+   * @param object data Request data.
+   *
+   *  - `order` – `{Object}` - 
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * Data properties:
+   *
+   *  - `success` – `{boolean}` - 
+   */
+  public makeOrder(order: any): Observable<any> {
+    let method: string = "POST";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Orders/make";
+    let routeParams: any = {};
+    let postBody: any = {};
+    let urlParams: any = {};
+    if (order) urlParams.order = order;
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  /**
    * Creates a new instance in tickets of this model.
    *
    * @param any id PersistedModel id

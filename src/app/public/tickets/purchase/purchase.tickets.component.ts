@@ -2,7 +2,7 @@ import {Observable} from 'rxjs';
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {AppState} from '../../../app.service';
-import {UserApi, OrderApi, TicketApi, TicketTypeApi} from '../../../shared/sdk';
+import {UserApi, OrderApi, TicketApi, TicketTypeApi, Order, Ticket} from '../../../shared/sdk';
 
 @Component({
   selector: 'container',
@@ -14,7 +14,7 @@ import {UserApi, OrderApi, TicketApi, TicketTypeApi} from '../../../shared/sdk';
 export class PurchaseTicketsComponent {
   typesOfTickets = [];
   isChurchill = false;
-  paymentMethod = 'college-account';
+  paymentMethod = 'stripe';
 
   constructor(private appState: AppState,
               private router: Router,
@@ -46,20 +46,68 @@ export class PurchaseTicketsComponent {
   }
 
   /**
+   * TODO: refactor and optimise payment total calculation logic
+   * @returns {number}
+   */
+  protected calculateStripeFee() {
+    return 0.2 + 0.018 * this.calculateOrderTotal();
+  }
+
+  protected calculateOrderTotal() {
+    return this.typesOfTickets.reduce((total, ticket) => {
+      return total + (ticket.purchaseQuantity * ticket.price);
+    }, 0);
+  }
+
+  /**
    * Check if the user is able to buy the number of tickets they want
    * @returns {boolean}
    */
   protected checkTicketsAvailable() {
     return !!this.typesOfTickets.reduce((buying, type) => {
-      if (buying === false || buying + type.purchaseQuantity > 5) {  // TODO: adjust max ticket purchase quantity
+      // TODO: adjust max ticket purchase quantity
+      if (buying === false || buying + type.purchaseQuantity > 5 || type.purchaseQuantity < 0) {
         return false;
       } else {
-        if (type.sold + type.purchaseQuantity < type.quantity) {
+        if (type.sold + type.purchaseQuantity < type.quantity || type.purchaseQuantity === 0) {
           return type.purchaseQuantity + buying;
         } else {
           return false;
         }
       }
     }, 0);
+  }
+
+  /**
+   * Purchase tickets for a user
+   * TODO: stripe payments!
+   */
+  protected purchaseTickets() {
+    const order = new Order({
+      paymentMethod: this.paymentMethod,
+      paymentFee: (this.paymentMethod === 'stripe' ? this.calculateStripeFee() : 0),
+      total: this.calculateOrderTotal(),
+      user: this.users.getCurrentId()
+    });
+
+    const tickets: Ticket[] = [];
+    this.typesOfTickets.forEach(ticket => {
+      for (let i = 0; i < ticket.purchaseQuantity; i += 1) {
+        tickets.push(new Ticket({
+          price: ticket.price,
+          ticketTypeId: ticket.id,
+        }));
+      }
+    });
+
+    order.tickets = tickets;
+
+    this.orders.makeOrder(order)
+      .subscribe(savedOrder => {
+        console.log(savedOrder);
+        this.router.navigate(['/tickets']);
+      }, error => {
+        console.error(error);
+      });
   }
 }
