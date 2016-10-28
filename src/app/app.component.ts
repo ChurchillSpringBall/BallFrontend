@@ -5,8 +5,9 @@ import {AppState} from './app.service';
   selector: 'app',
   encapsulation: ViewEncapsulation.None,
   styleUrls: [
-    './app.component.scss',
+    '../../node_modules/sweetalert2/dist/sweetalert2.min.css',
     './../assets/semantic/dist/semantic.css',
+    './app.component.scss'
   ],
   templateUrl: './app.component.html'
 })

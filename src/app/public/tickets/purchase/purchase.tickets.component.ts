@@ -3,6 +3,7 @@ import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {AppState} from '../../../app.service';
 import {UserApi, OrderApi, TicketApi, TicketTypeApi, Order, Ticket} from '../../../shared/sdk';
+import {SweetAlertService} from 'ng2-sweetalert2';
 
 @Component({
   selector: 'container',
@@ -18,6 +19,7 @@ export class PurchaseTicketsComponent {
 
   constructor(private appState: AppState,
               private router: Router,
+              private swal: SweetAlertService,
               private users: UserApi,
               private orders: OrderApi,
               private tickets: TicketApi,
@@ -25,6 +27,23 @@ export class PurchaseTicketsComponent {
   }
 
   ngOnInit() {
+    // NOTE: this is a horrible hack to get Stripe.js to stop complaning about Angular2 zone and circular deps
+    // See: http://stackoverflow.com/questions/36258252/stripe-json-circular-reference
+    // const _stringify = <any>JSON.stringify;
+    // JSON.stringify = function (value, ...args) {
+    //   if (args.length) {
+    //     return _stringify(value, ...args);
+    //   } else {
+    //     return _stringify(value, function (key, value) {
+    //       if (value && key === 'zone' && value['_zoneDelegate']
+    //         && value['_zoneDelegate']['zone'] === value) {
+    //         return undefined;
+    //       }
+    //       return value;
+    //     });
+    //   }
+    // };
+
     this.ticketTypes.find()
       .flatMap(types => {
         this.typesOfTickets = types;
@@ -50,13 +69,17 @@ export class PurchaseTicketsComponent {
    * @returns {number}
    */
   protected calculateStripeFee() {
-    return 0.2 + 0.018 * this.calculateOrderTotal();
+    return 0.2 + 0.014 * this.calculateOrderTotal();
   }
 
   protected calculateOrderTotal() {
     return this.typesOfTickets.reduce((total, ticket) => {
       return total + (ticket.purchaseQuantity * ticket.price);
     }, 0);
+  }
+
+  protected calculateOrderTotalWithFees() {
+    return this.calculateOrderTotal() + (this.paymentMethod === 'stripe' ? this.calculateStripeFee() : 0);
   }
 
   /**
@@ -79,15 +102,47 @@ export class PurchaseTicketsComponent {
   }
 
   /**
+   * Purchase the tickets via Stripe checkout, or if using college account simply create the order
+   * TODO: confirmation dialog for college account purchases
+   */
+  protected makePayment() {
+    if (this.paymentMethod === 'stripe') {
+      const stripePayment = (<any>window).StripeCheckout.configure({
+        key: 'pk_test_pbW1kBm6URlNhqXhiRu7AynG',  // TODO: set stripe token globally
+        locale: 'auto',
+        billingAddress: false,
+        // TODO: fix zone.js wrapping bug causing circular deps with JSON.stringify with this callback
+        token: function (token: any) {
+          this.purchaseTickets(token);
+        }
+      });
+
+      const numberOfTickets = this.typesOfTickets.reduce((total, type) => {
+        return total + type.purchaseQuantity;
+      }, 0);
+
+      stripePayment.open({
+        name: 'Churchill Spring Ball',
+        description: `${numberOfTickets} Ticket${numberOfTickets > 1 ? 's' : ''}`,
+        amount: Math.round(this.calculateOrderTotalWithFees() * 100),
+        currency: 'GBP'
+      });
+    } else if (this.paymentMethod === 'college-account') {
+      this.purchaseTickets(null);
+    }
+  }
+
+  /**
    * Purchase tickets for a user
    * TODO: stripe payments!
+   * @param token - the stripe token
    */
-  protected purchaseTickets() {
+  protected purchaseTickets(token) {
     const order = new Order({
       paymentMethod: this.paymentMethod,
       paymentFee: (this.paymentMethod === 'stripe' ? this.calculateStripeFee() : 0),
-      total: this.calculateOrderTotal(),
-      user: this.users.getCurrentId()
+      total: this.calculateOrderTotalWithFees(),
+      paymentToken: token
     });
 
     const tickets: Ticket[] = [];
@@ -102,12 +157,24 @@ export class PurchaseTicketsComponent {
 
     order.tickets = tickets;
 
-    this.orders.makeOrder(order)
+    // TODO: look into makeOrder `req` bug
+    this.orders.makeOrder(undefined, order)
       .subscribe(savedOrder => {
         console.log(savedOrder);
-        this.router.navigate(['/tickets']);
+        // TODO: emailing
+        this.swal.success({
+          title: 'Success',
+          text: 'You have bought tickets to Churchill Spring Ball!'
+        })
+          .then(() => {
+            this.router.navigate(['/tickets']);
+          });
       }, error => {
         console.error(error);
+        this.swal.error({
+          title: 'Error Purchasing Tickets',
+          text: 'Please contact the Spring Ball Committee! Error:' + error.message
+        });
       });
   }
 }

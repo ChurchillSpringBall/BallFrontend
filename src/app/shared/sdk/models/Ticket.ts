@@ -8,7 +8,7 @@ declare var Object: any;
 export interface TicketInterface {
   name?: string;
   email?: string;
-  price?: string;
+  price?: number;
   barCode?: string;
   admittedAt?: any;
   id?: number;
@@ -21,7 +21,7 @@ export interface TicketInterface {
 export class Ticket implements TicketInterface {
   name: string;
   email: string;
-  price: string;
+  price: number;
   barCode: string;
   admittedAt: any;
   id: number;

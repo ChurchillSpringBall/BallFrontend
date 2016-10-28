@@ -9,6 +9,7 @@ export interface OrderInterface {
   created?: any;
   paymentMethod: string;
   paymentFee?: number;
+  paymentToken?: string;
   total: number;
   id?: number;
   userId?: number;
@@ -20,6 +21,7 @@ export class Order implements OrderInterface {
   created: any;
   paymentMethod: string;
   paymentFee: number;
+  paymentToken: string;
   total: number;
   id: number;
   userId: number;

@@ -19,6 +19,7 @@ import '@angularclass/hmr';
 
 // Cookies
 import 'angular2-cookie/core';
+import 'ng2-sweetalert2';
 
 // RxJS
 import 'rxjs/add/operator/map';

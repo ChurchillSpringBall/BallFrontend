@@ -81,8 +81,10 @@
     "http-server": "^0.9.0",
     "ie-shim": "^0.1.0",
     "jquery": "^3.1.1",
+    "ng2-sweetalert2": "github:juracy/ng2-sweetalert2",
     "rxjs": "^5.0.0-rc.1",
     "semantic-ui": "^2.2.4",
+    "sweetalert2": "^5.3.8",
     "zone.js": "~0.6.17"
   },
   "devDependencies": {

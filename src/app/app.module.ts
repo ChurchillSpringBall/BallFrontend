@@ -6,6 +6,7 @@ import {RouterModule} from '@angular/router';
 
 import {removeNgStyles, createNewHosts, createInputTransfer} from '@angularclass/hmr';
 import {CookieService} from 'angular2-cookie/core';
+import {SweetAlertService} from 'ng2-sweetalert2';
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -25,7 +26,8 @@ import {SDKModule} from './shared/sdk/index';
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
   AppState,
-  CookieService
+  CookieService,
+  SweetAlertService
 ];
 
 type StoreType = {

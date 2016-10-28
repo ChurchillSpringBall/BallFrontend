@@ -1,7 +1,6 @@
 /* tslint:disable */
 import {
   Order,
-  Ticket,
   Profile
 } from '../index';
 
@@ -16,7 +15,6 @@ export interface UserInterface {
   id?: number;
   accessTokens?: Array<any>;
   orders?: Array<Order>;
-  tickets?: Array<Ticket>;
   profile?: Profile;
   identities?: Array<any>;
   credentials?: Array<any>;
@@ -32,7 +30,6 @@ export class User implements UserInterface {
   id: number;
   accessTokens: Array<any>;
   orders: Array<Order>;
-  tickets: Array<Ticket>;
   profile: Profile;
   identities: Array<any>;
   credentials: Array<any>;

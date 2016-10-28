@@ -683,7 +683,9 @@ export class OrderApi extends BaseLoopBackApi {
    *
    * @param object data Request data.
    *
-   *  - `order` – `{Object}` - 
+   *  - `order` – `{object}` - 
+   *
+   *  - `req` – `{object}` - 
    *
    * @returns object An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -691,16 +693,18 @@ export class OrderApi extends BaseLoopBackApi {
    *
    * Data properties:
    *
-   *  - `success` – `{boolean}` - 
+   *  - `order` – `{object}` - 
    */
-  public makeOrder(order: any): Observable<any> {
+  public makeOrder(order: any, req: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Orders/make";
     let routeParams: any = {};
-    let postBody: any = {};
+    let postBody: any = {
+      order: order
+    };
     let urlParams: any = {};
-    if (order) urlParams.order = order;
+    if (req) urlParams.req = req;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
