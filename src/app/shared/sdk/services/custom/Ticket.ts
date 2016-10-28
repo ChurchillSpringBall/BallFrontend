@@ -11,6 +11,8 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { Ticket } from '../../models/Ticket';
+import { Order } from '../../models/Order';
+import { TicketType } from '../../models/TicketType';
 
 // Making Sure EventSource Type is available to avoid compilation issues.
 declare var EventSource: any;
@@ -28,6 +30,66 @@ export class TicketApi extends BaseLoopBackApi {
     @Optional() @Inject(ErrorHandler) errorHandler: ErrorHandler
   ) {
     super(http, auth, searchParams, errorHandler);
+  }
+
+  /**
+   * Fetches belongsTo relation order.
+   *
+   * @param any id PersistedModel id
+   *
+   * @param boolean refresh 
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Ticket` object.)
+   * </em>
+   */
+  public getOrder(id: any, refresh: any = undefined): Observable<any> {
+    let method: string = "GET";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Tickets/:id/order";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {};
+    let urlParams: any = {};
+    if (refresh) urlParams.refresh = refresh;
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  /**
+   * Fetches belongsTo relation ticketType.
+   *
+   * @param any id PersistedModel id
+   *
+   * @param boolean refresh 
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Ticket` object.)
+   * </em>
+   */
+  public getTicketType(id: any, refresh: any = undefined): Observable<any> {
+    let method: string = "GET";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Tickets/:id/ticketType";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {};
+    let urlParams: any = {};
+    if (refresh) urlParams.refresh = refresh;
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
   }
 
   /**

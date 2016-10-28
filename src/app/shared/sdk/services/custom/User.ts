@@ -13,6 +13,7 @@ import 'rxjs/add/operator/map';
 import { User } from '../../models/User';
 import { Order } from '../../models/Order';
 import { Ticket } from '../../models/Ticket';
+import { Profile } from '../../models/Profile';
 
 // Making Sure EventSource Type is available to avoid compilation issues.
 declare var EventSource: any;
@@ -397,6 +398,126 @@ export class UserApi extends BaseLoopBackApi {
     let routeParams: any = {
       id: id,
       fk: fk
+    };
+    let postBody: any = {};
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  /**
+   * Fetches hasOne relation profile.
+   *
+   * @param any id User id
+   *
+   * @param boolean refresh 
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `User` object.)
+   * </em>
+   */
+  public getProfile(id: any, refresh: any = undefined): Observable<any> {
+    let method: string = "GET";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/users/:id/profile";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {};
+    let urlParams: any = {};
+    if (refresh) urlParams.refresh = refresh;
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  /**
+   * Creates a new instance in profile of this model.
+   *
+   * @param any id User id
+   *
+   * @param object data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `User` object.)
+   * </em>
+   */
+  public createProfile(id: any, data: any = undefined): Observable<any> {
+    let method: string = "POST";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/users/:id/profile";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {
+      data: data
+    };
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  /**
+   * Update profile of this model.
+   *
+   * @param any id User id
+   *
+   * @param object data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `User` object.)
+   * </em>
+   */
+  public updateProfile(id: any, data: any = undefined): Observable<any> {
+    let method: string = "PUT";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/users/:id/profile";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {
+      data: data
+    };
+    let urlParams: any = {};
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  /**
+   * Deletes profile of this model.
+   *
+   * @param any id User id
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * This method returns no data.
+   */
+  public destroyProfile(id: any): Observable<any> {
+    let method: string = "DELETE";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/users/:id/profile";
+    let routeParams: any = {
+      id: id
     };
     let postBody: any = {};
     let urlParams: any = {};
@@ -1705,55 +1826,34 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
-   * <em>
-         * (The remote method definition does not provide any description.)
-         * </em>
+   * Creates a new instance in profile of this model.
    *
-   * @param string crsid 
+   * @param any id User id
    *
-   * @returns object An empty reference that will be
+   * @param object data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns object[] An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
-   * Data properties:
-   *
-   *  - `isChurchill` – `{boolean}` - 
-   */
-  public isChurchill(crsid: any): Observable<any> {
-    let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/users/ischurchill";
-    let routeParams: any = {};
-    let postBody: any = {};
-    let urlParams: any = {};
-    if (crsid) urlParams.crsid = crsid;
-    let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result;
-  }
-
-  /**
    * <em>
-         * (The remote method definition does not provide any description.)
-         * </em>
-   *
-   * @param string crsid 
-   *
-   * @returns object An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * Data properties:
-   *
-   *  - `data` – `{Object}` - 
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `User` object.)
+   * </em>
    */
-  public ldapLookup(crsid: any): Observable<any> {
-    let method: string = "GET";
+  public createManyProfile(id: any, data: Array<any> = undefined): Observable<any> {
+    let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/users/ldap";
-    let routeParams: any = {};
-    let postBody: any = {};
+    "/users/:id/profile";
+    let routeParams: any = {
+      id: id
+    };
+    let postBody: any = {
+      data: data
+    };
     let urlParams: any = {};
-    if (crsid) urlParams.crsid = crsid;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }

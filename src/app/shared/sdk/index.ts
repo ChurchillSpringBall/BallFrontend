@@ -43,6 +43,7 @@ import { TicketApi } from './services/custom/Ticket';
 import { OrderApi } from './services/custom/Order';
 import { UserApi } from './services/custom/User';
 import { TicketTypeApi } from './services/custom/TicketType';
+import { ProfileApi } from './services/custom/Profile';
 
 @NgModule({
   imports:      [ CommonModule, HttpModule ],
@@ -63,7 +64,8 @@ export class SDKModule {
         TicketApi,
         OrderApi,
         UserApi,
-        TicketTypeApi
+        TicketTypeApi,
+        ProfileApi
       ]
     };
   }

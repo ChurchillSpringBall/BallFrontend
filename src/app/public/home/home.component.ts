@@ -1,7 +1,5 @@
 import {Component} from '@angular/core';
 
-import {UserApi} from '../../shared/sdk';
-
 @Component({
   selector: 'home',  // <home></home>
   providers: [],
@@ -9,11 +7,9 @@ import {UserApi} from '../../shared/sdk';
   templateUrl: './home.component.html'
 })
 export class HomeComponent {
-  constructor(public users: UserApi) {
+  constructor() {
   }
 
   ngOnInit() {
-    this.users.ldapLookup('lng25')
-      .subscribe(console.log.bind(console), console.error.bind(console));
   }
 }

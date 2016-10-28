@@ -1,7 +1,8 @@
 /* tslint:disable */
 import {
   Order,
-  Ticket
+  Ticket,
+  Profile
 } from '../index';
 
 declare var Object: any;
@@ -16,6 +17,7 @@ export interface UserInterface {
   accessTokens?: Array<any>;
   orders?: Array<Order>;
   tickets?: Array<Ticket>;
+  profile?: Profile;
   identities?: Array<any>;
   credentials?: Array<any>;
 }
@@ -31,6 +33,7 @@ export class User implements UserInterface {
   accessTokens: Array<any>;
   orders: Array<Order>;
   tickets: Array<Ticket>;
+  profile: Profile;
   identities: Array<any>;
   credentials: Array<any>;
   constructor(instance?: UserInterface) {

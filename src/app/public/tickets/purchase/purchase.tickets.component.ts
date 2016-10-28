@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
-import {UserApi} from '../../../shared/sdk';
+import {AppState} from '../../../app.service';
 
 @Component({
   selector: 'container',
@@ -10,17 +10,11 @@ import {UserApi} from '../../../shared/sdk';
   templateUrl: './purchase.tickets.component.html'
 })
 export class PurchaseTicketsComponent {
-  constructor(private users: UserApi,
+  constructor(private appState: AppState,
               private router: Router) {
   }
 
   ngOnInit() {
-    this.users.isChurchill('lng25')
-      .subscribe(isChurchill => {
-        console.log(isChurchill);
-      }, error => {
-        console.error(error);
-        // TODO: error handling!
-      })
+    console.log(this.appState.state);
   }
 }

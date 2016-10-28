@@ -1,26 +1,34 @@
 /* tslint:disable */
+import {
+  Order,
+  TicketType
+} from '../index';
 
 declare var Object: any;
 export interface TicketInterface {
-  ticketTypeId: number;
   name?: string;
   email?: string;
   price?: string;
   barCode?: string;
-  orderId?: number;
   admittedAt?: any;
   id?: number;
+  orderId?: number;
+  ticketTypeId?: number;
+  order?: Order;
+  ticketType?: TicketType;
 }
 
 export class Ticket implements TicketInterface {
-  ticketTypeId: number;
   name: string;
   email: string;
   price: string;
   barCode: string;
-  orderId: number;
   admittedAt: any;
   id: number;
+  orderId: number;
+  ticketTypeId: number;
+  order: Order;
+  ticketType: TicketType;
   constructor(instance?: TicketInterface) {
     Object.assign(this, instance);
   }

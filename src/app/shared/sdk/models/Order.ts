@@ -1,23 +1,26 @@
 /* tslint:disable */
 import {
-  Ticket
+  Ticket,
+  User
 } from '../index';
 
 declare var Object: any;
 export interface OrderInterface {
   date: any;
   total: number;
-  userId: number;
   id?: number;
+  userId?: number;
   tickets?: Array<Ticket>;
+  user?: User;
 }
 
 export class Order implements OrderInterface {
   date: any;
   total: number;
-  userId: number;
   id: number;
+  userId: number;
   tickets: Array<Ticket>;
+  user: User;
   constructor(instance?: OrderInterface) {
     Object.assign(this, instance);
   }
