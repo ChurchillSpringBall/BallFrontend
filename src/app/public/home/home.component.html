@@ -26,8 +26,7 @@
     <div class="ui grid container">
       <div class="sixteen wide center aligned column">
         <h1 class="title">The Night of Your Life</h1>
-        <h2 class="subtitle">I need some better dummy text and headings</h2>
-
+        <h2 class="subtitle">Join us on Saturday 11th February 2017 for a night of ridiculously good fun. Food, drink, and music from 9pm until 3am.</h2>
       </div>
     </div>
 
@@ -61,13 +60,27 @@
         <h2 class="subtitle">Queue jump and something else dummy text</h2>
       </div>
       <div class="sixteen wide mobile eight wide tablet eight wide computer column">
-        <div class="ui segment">
-          Standard Ticket Perks
+        <div class="ui center aligned ticket segment">
+          <h3 class="ticket-title">Standard Ticket</h3>
+          <p class="ticket-description">Very short sentence about what the standard ticket offers.</p>
+          <p><span class="price">
+            <span class="currency symbol">£</span>
+            <span class="pounds">85</span>
+            <span class="pennies">.00</span>
+          </span></p>
+          <p><a class="ui primary right labeled icon button" [routerLink]="['/tickets']">Buy Now <i class="ticket icon"></i></a></p>
         </div>
       </div>
       <div class="sixteen wide mobile eight wide tablet eight wide computer column">
-        <div class="ui segment">
-          Queue Jump Ticket Perks
+        <div class="ui center aligned ticket segment">
+          <h3 class="ticket-title">Queue Jump Ticket</h3>
+          <p class="ticket-description">Very short sentence about what the queue jump ticket offers.</p>
+          <p><span class="price">
+            <span class="currency symbol">£</span>
+            <span class="pounds">95</span>
+            <span class="pennies">.00</span>
+          </span></p>
+          <p><a class="ui primary right labeled icon button" [routerLink]="['/tickets']">Buy Now <i class="ticket icon"></i></a></p>
         </div>
       </div>
     </div>

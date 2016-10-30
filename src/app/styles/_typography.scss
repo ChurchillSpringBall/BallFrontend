@@ -1,5 +1,9 @@
-h1, h2, h3, h4, h5, h6 {
+h1, h2 {
   font-weight: 300;
+}
+
+h3, h4, h5, h6 {
+  font-weight: 400;
 }
 
 body {
@@ -10,7 +14,7 @@ body {
 .section {
   .title {
     font-size: 34px;
-    margin-bottom: 0;
+    margin-bottom: 0.5rem;
   }
 
   .subtitle {
