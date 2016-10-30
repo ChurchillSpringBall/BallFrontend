@@ -1,0 +1,13 @@
+.section {
+  &.white {
+    background-color: #fff;
+  }
+
+  &.light.grey {
+    background-color: #f7f9fa;
+  }
+
+  &.bordered {
+    border-bottom: 1px solid #dbe3e7;
+  }
+}

@@ -1,1 +1,15 @@
-/*styles for home content only*/
+.home.component {
+  .header.section {
+    padding-top: 3rem;
+    padding-bottom: 6rem;
+
+    .header.image {
+      width: 500px;
+      max-width: 100%;
+    }
+  }
+
+  .sponsors.section {
+    padding: 1rem 0;
+  }
+}

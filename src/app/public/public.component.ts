@@ -1,4 +1,5 @@
 import {Component, ViewEncapsulation} from '@angular/core';
+import {UserApi} from '../shared/sdk';
 
 /*
  * App Component
@@ -6,14 +7,13 @@ import {Component, ViewEncapsulation} from '@angular/core';
  */
 @Component({
   selector: 'container',
-  encapsulation: ViewEncapsulation.Native,
   styleUrls: [
     './public.component.scss',
   ],
   templateUrl: './public.component.html'
 })
 export class PublicComponent {
-  constructor() {}
+  constructor(protected users: UserApi) {}
 
   // TODO: show customer's name in the nav
 }

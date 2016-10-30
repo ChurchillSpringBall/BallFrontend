@@ -5,7 +5,6 @@ import {Observable} from "rxjs";
 
 @Component({
   selector: 'container',
-  // encapsulation: ViewEncapsulation.Native,
   styleUrls: [
     './tickets.component.scss',
   ],

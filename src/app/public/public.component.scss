@@ -1,0 +1,41 @@
+//.page.main {
+//  padding-top: 60px;
+//}
+
+.page.nav.container {
+  padding: 20px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  .logo {
+    display: flex;
+    align-items: center;
+
+    img {
+      height: 50px;
+      margin-right: 0.5rem;
+    }
+
+    .text {
+      font-size: 1.2rem;
+    }
+  }
+
+  .links {
+    .item {
+      display: inline-block;
+      margin: 0 20px;
+
+      a:not(.button) {
+        color: #8091A5;
+        transition: color 0.25s ease;
+
+        &:hover {
+          color: #414b56;
+        }
+      }
+    }
+  }
+}
