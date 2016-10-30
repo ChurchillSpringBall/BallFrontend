@@ -1,4 +1,5 @@
-import {Component} from '@angular/core';
+import {Component, ViewChild, ElementRef} from '@angular/core';
+import {Carousel} from '../../shared/jquery/carousel';
 
 @Component({
   selector: 'home',  // <home></home>
@@ -7,9 +8,12 @@ import {Component} from '@angular/core';
   templateUrl: './home.component.html'
 })
 export class HomeComponent {
+  @ViewChild('promoCarousel') promoCarousel: ElementRef;
+
   constructor() {
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
+    new Carousel(this.promoCarousel.nativeElement);
   }
 }

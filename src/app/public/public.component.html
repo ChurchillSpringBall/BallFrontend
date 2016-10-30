@@ -1,14 +1,14 @@
 <nav class="ui page nav container">
-  <div class="logo">
+  <a class="logo" [routerLink]="['/']">
     <img src="/assets/icon/favicon.png">
     <span class="text">Churchill Spring Ball</span>
-  </div>
+  </a>
   <div class="links">
     <span class="item"><a [routerLink]=" ['/'] ">Home</a></span>
     <span class="item" *ngIf="!users.isAuthenticated()"><a href="/auth/raven">Login</a></span>
     <!-- TODO: have an Account dropdown and show the user's name here? -->
     <span class="item" *ngIf="users.isAuthenticated()"><a [routerLink]="['/logout']">Logout</a></span>
-    <span class="item"><a class="ui primary button" [routerLink]=" ['/tickets'] ">Tickets</a></span>
+    <span class="item"><a class="ui primary right labeled icon button" [routerLink]=" ['/tickets'] ">Tickets <i class="ticket icon"></i></a></span>
   </div>
 </nav>
 

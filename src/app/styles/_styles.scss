@@ -1,3 +1,10 @@
+// mixins
+@import 'responsive';
+
+// basics
 @import 'base';
-@import 'sections';
 @import 'typeface';
+@import 'sections';
+
+// elements
+@import 'carousel';

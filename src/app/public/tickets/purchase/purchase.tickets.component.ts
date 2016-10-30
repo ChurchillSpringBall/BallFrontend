@@ -89,7 +89,7 @@ export class PurchaseTicketsComponent {
   protected checkTicketsAvailable() {
     return !!this.typesOfTickets.reduce((buying, type) => {
       // TODO: adjust max ticket purchase quantity
-      if (buying === false || buying + type.purchaseQuantity > 5 || type.purchaseQuantity < 0) {
+      if (buying === false || buying + type.purchaseQuantity > 20 || type.purchaseQuantity < 0) {
         return false;
       } else {
         if (type.sold + type.purchaseQuantity < type.quantity || type.purchaseQuantity === 0) {

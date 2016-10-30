@@ -10,4 +10,9 @@
   &.bordered {
     border-bottom: 1px solid #dbe3e7;
   }
+
+  > .ui.grid.container {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 }
