@@ -26,7 +26,19 @@
     }
   }
 
-  .image.promo.section {
+  .images.promo.section {
     padding: 3rem 0 0;
+
+    .image.carousel {
+      margin-bottom: -5vw;
+    }
+  }
+
+  .bordered.committee.section {
+    padding-top: calc(5vw + 4rem);
+  }
+
+  .purchase.tickets.section {
+    padding: 3rem 0;
   }
 }
