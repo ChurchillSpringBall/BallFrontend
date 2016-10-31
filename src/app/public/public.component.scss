@@ -54,7 +54,11 @@
     margin: 0 auto;
   }
 
-  .copyright a {
-    color: #FFF;
+  .copyright {
+    margin-bottom: 0;
+
+    &, & a {
+      color: #8091A5;
+    }
   }
 }

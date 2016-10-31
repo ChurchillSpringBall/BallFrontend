@@ -20,6 +20,15 @@ body.sidebar-open {
     overflow: auto;
   }
 
+  a:not(.button) {
+    color: #8091A5;
+    transition: all 0.25s ease;
+
+    &:hover {
+      color: #2A3039;
+    }
+  }
+
   .nav-above {
     text-align: right;
     border-bottom: 1px solid #f1f1f1;
@@ -106,7 +115,7 @@ body.sidebar-open {
 
       a {
         img {
-          width: 70px;
+          height: 50px;
         }
       }
     }
@@ -114,7 +123,7 @@ body.sidebar-open {
     .menu ul {
       > li {
         > a {
-          color: #2185D0;
+          color: #8091A5;
         }
       }
     }
@@ -125,11 +134,6 @@ body.sidebar-open {
     justify-content: space-between;
     align-items: center;
     transition: width 0.35s ease, padding 0.35s ease;
-
-    @media screen and (min-width: $tablet-breakpoint) and (max-width: 1500px) {
-      width: 100%;
-      padding: 0 20px;
-    }
   }
 
   .menu {
@@ -138,6 +142,14 @@ body.sidebar-open {
 
     .item {
       margin: 0 15px;
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
     }
 
     &.mobile.toggle {
@@ -317,7 +329,8 @@ body.sidebar-open {
     transition: padding $animation-duration ease;
 
     img {
-      width: 70px;
+      height: 50px;
+      margin-right: 0.5rem;
     }
 
     @include mobile {
@@ -333,27 +346,9 @@ body.sidebar-open {
         vertical-align: middle;
       }
 
-      svg {
-        width: 211px;
-        height: 37px;
-        vertical-align: top;
-
-        @include mobile {
-          width: 171px;
-          height: 30px;
-        }
-
-        .logo-text {
-          transition: fill $animation-duration ease;
-        }
-      }
-
-      &:hover {
-        svg {
-          .logo-text {
-            fill: blue !important;
-          }
-        }
+      .text {
+        font-size: 1.1rem;
+        color: #2b3138;
       }
     }
   }
@@ -419,42 +414,6 @@ body.sidebar-open {
           }
         }
       }
-    }
-
-    .ui.button {
-      padding: 0.8rem 2rem;
-    }
-
-    a.call {
-      color: #2185D0;
-      font-size: 1.1rem;
-
-      .icon {
-        color: blue;
-      }
-    }
-  }
-}
-
-// WP admin bar fix
-.admin-bar {
-  #navigation-bar {
-    margin-top: 70px; // NOTE: arbitrary value that looks good
-
-    &.scrolling {
-      margin-top: 32px;
-    }
-  }
-
-  @media (max-width: 782px) {
-    #navigation-bar.scrolling {
-      margin-top: 46px;
-    }
-  }
-
-  @media (max-width: 600px) {
-    #navigation-bar.scrolling {
-      margin-top: 0;
     }
   }
 }
