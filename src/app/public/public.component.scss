@@ -40,3 +40,21 @@
     }
   }
 }
+
+.page.main {
+  padding-top: 93px;
+}
+
+.padded.footer {
+  padding-top: 50px;
+  padding-bottom: 50px;
+
+  .logo {
+    display: block;
+    margin: 0 auto;
+  }
+
+  .copyright a {
+    color: #FFF;
+  }
+}

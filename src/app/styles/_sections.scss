@@ -37,3 +37,17 @@
     }
   }
 }
+
+.footer {
+  .legal.column {
+    @include mobile {
+      text-align: center !important;
+    }
+  }
+
+  .open-source.column {
+    @include mobile {
+      text-align: center !important;
+    }
+  }
+}

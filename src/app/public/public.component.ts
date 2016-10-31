@@ -1,5 +1,6 @@
-import {Component, ViewEncapsulation} from '@angular/core';
+import {Component, ViewEncapsulation, ViewChild, ElementRef} from '@angular/core';
 import {UserApi} from '../shared/sdk';
+import {Header} from '../shared/jquery/header';
 
 /*
  * App Component
@@ -13,7 +14,12 @@ import {UserApi} from '../shared/sdk';
   templateUrl: './public.component.html'
 })
 export class PublicComponent {
+
+  @ViewChild('navbar') navbar: ElementRef;
+
   constructor(protected users: UserApi) {}
 
-  // TODO: show customer's name in the nav
+  ngAfterViewInit() {
+    new Header(this.navbar.nativeElement);
+  }
 }
