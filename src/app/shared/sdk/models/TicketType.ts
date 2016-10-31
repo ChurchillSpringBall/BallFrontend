@@ -6,6 +6,7 @@ import {
 declare var Object: any;
 export interface TicketTypeInterface {
   name?: string;
+  description?: string;
   price?: number;
   quantity?: number;
   id?: number;
@@ -14,6 +15,7 @@ export interface TicketTypeInterface {
 
 export class TicketType implements TicketTypeInterface {
   name: string;
+  description: string;
   price: number;
   quantity: number;
   id: number;

@@ -1,0 +1,51 @@
+.purchase.tickets.component {
+  .ticket.segment {
+    padding: 3rem 2rem;
+
+    .ticket-title {
+
+    }
+
+    .ticket-description {
+      color: #8091A5;
+      position: relative;
+      margin-bottom: 2rem;
+
+      &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 50%;
+        bottom: -1rem;
+        height: 0;
+        width: 60px;
+        margin-left: -30px;
+        border-top: 1px solid #DBE3E7;
+      }
+    }
+
+    .price {
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      padding: 0.5rem 0;
+
+      .currency.symbol {
+        color: #8091A5;
+        align-self: flex-start;
+      }
+
+      .pounds {
+        font-size: 3rem;
+        line-height: 3rem;
+        margin: 0 0.25rem;
+      }
+
+      .pennies {
+        color: #8091A5;
+        align-self: flex-end;
+      }
+    }
+  }
+}

@@ -1,39 +1,64 @@
-<div class="ui grid">
-  <div class="sixteen wide mobile ten wide tablet ten wide computer column">
-    <div class="ui segment" *ngFor="let type of typesOfTickets">
-      <!--{{ type | json }}-->
-      <h2>{{ type.name }}</h2>
-      <span>Price: {{ type.price | currency:'GBP':true:'1.2-2' }}</span>
-      <div class="ui input">
-        <input type="number" [(ngModel)]="type.purchaseQuantity" [disabled]="type.sold >= type.quantity">
+<div class="purchase tickets component">
+  <div class="purchase section">
+    <div class="ui grid container">
+      <div class="sixteen wide center aligned column">
+        <h1 class="title">Purchase Tickets</h1>
       </div>
     </div>
-  </div>
-  <div class="sixteen wide mobile six wide tablet six wide computer column">
-    <div class="ui segment">
-      <h2>Summary</h2>
-      <div class="ui form">
-        <div class="grouped fields">
-          <label>Payment Method</label>
-          <div class="field">
-            <div class="ui radio checkbox">
-              <input type="radio" name="payment-method" [(ngModel)]="paymentMethod" value="stripe" checked="checked">
-              <label>Stripe ({{ calculateStripeFee() | currency:'GBP':true:'1.2-2' }} fee)</label>
+    <div class="ui centered grid container">
+      <div class="sixteen wide mobile sixteen wide tablet ten wide computer column">
+        <div class="ui grid">
+
+          <div class="sixteen wide mobile eight wide tablet eight wide computer column" *ngFor="let type of typesOfTickets">
+            <div class="ui center aligned ticket segment">
+              <h3 class="ticket-title">{{ type.name }}</h3>
+              <p class="ticket-description">{{ type.description }}</p>
+              <p>
+                <span class="price">
+                  <span class="currency symbol">£</span>
+                  <span class="pounds">{{ type.price | number:0 }}</span>
+                  <span class="pennies">.{{ type.price | pennies }}</span>
+                </span>
+              </p>
+              <div class="ui input">
+                <input type="number" [(ngModel)]="type.purchaseQuantity" [disabled]="type.sold >= type.quantity">
+              </div>
             </div>
           </div>
-          <div class="field">
-            <div class="ui radio checkbox">
-              <input type="radio" name="payment-method" [(ngModel)]="paymentMethod" value="college-account" [disabled]="!isChurchill">
-              <label>College Account (No fee)</label>
-            </div>
-          </div>
+
         </div>
       </div>
-      <p>Please note that payment via college account is only available to Churchill members.</p>
+      <div class="sixteen wide mobile eight wide tablet six wide computer column">
+        <div class="ui ticket segment">
+          <h3>Summary</h3>
+          <div class="ui form">
+            <div class="grouped fields">
+              <label>Payment Method</label>
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="payment-method" [(ngModel)]="paymentMethod" value="stripe"
+                         checked="checked">
+                  <label>Stripe ({{ calculateStripeFee() | currency:'GBP':true:'1.2-2' }} fee)</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="payment-method" [(ngModel)]="paymentMethod" value="college-account"
+                         [disabled]="!isChurchill">
+                  <label>College Account (No fee)</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p>Please note that payment via college account is only available to Churchill members.</p>
 
-      <p><strong>Total:</strong> {{ calculateOrderTotal() + (paymentMethod === 'stripe' ? calculateStripeFee() : 0) | currency:'GBP':true:'1.2-2' }}</p>
+          <p><strong>Total:</strong> {{ calculateOrderTotal() + (paymentMethod === 'stripe' ? calculateStripeFee() : 0)
+            | currency:'GBP':true:'1.2-2' }}</p>
 
-      <button class="ui primary button" [disabled]="!checkTicketsAvailable()" (click)="makePayment()">Purchase</button>
+          <button class="ui primary button" [disabled]="!checkTicketsAvailable()" (click)="makePayment()">Purchase
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
