@@ -12,10 +12,11 @@ import {SweetAlertService} from 'ng2-sweetalert2';
   templateUrl: './tickets.component.html'
 })
 export class TicketsComponent {
-  tickets:Ticket[] = [];
-  types:TicketType[] = [];
-  editCount:number = 0;
-  nameChange:boolean = false;
+  tickets: any[] = [];
+  types: TicketType[] = [];
+  ticketTypesObject: {[key: number]: TicketType} = {};
+  editCount: number = 0;
+  nameChange: boolean = false;
 
   constructor(private users: UserApi,
               private orders: OrderApi,
@@ -38,16 +39,15 @@ export class TicketsComponent {
       .subscribe((ticketSets: any[][]) => {
         this.ticketTypes.find()
           .subscribe(types => {
-            const ticketTypes = {};
             types.forEach(type => {
-              ticketTypes[type.id] = type;
+              this.ticketTypesObject[type.id] = type;
             });
 
             // bundle the order detail into each ticket so we can display it on the frontend
             ticketSets.forEach((ticketSet, index) => {
               ticketSet.forEach(ticket => {
                 ticket.order = orderCache[index];
-                ticket.type = ticketTypes[ticket.ticketTypeId];
+                ticket.type = this.ticketTypesObject[ticket.ticketTypeId];
                 ticket.editing = false;
               });
             });
@@ -61,9 +61,9 @@ export class TicketsComponent {
    * Handle the toggling of tickets for editing
    * @param ticket
    */
-  protected toggleTicket(ticket:Ticket):void {
+  protected toggleTicket(ticket: any): void {
     ticket.editing = !ticket.editing;
-    this.editCount = ticket.editing ? this.editCount+1 : this.editCount-1;
+    this.editCount = ticket.editing ? this.editCount + 1 : this.editCount - 1;
     this.nameChange = (this.editCount > 0);
   }
 
@@ -71,7 +71,7 @@ export class TicketsComponent {
    * Save the name changes to the backend
    */
   // TODO: Revert to original ticket state (just fetch them again if you want)
-  protected saveNameChange():void {
+  protected saveNameChange(): void {
     console.log(this.tickets);
   }
 }

@@ -2,10 +2,10 @@
   <div class="header section">
     <div class="ui grid container">
       <div class="four wide computer only column"></div>
-      <div class="sixteen wide mobile ten wide tablet eight wide computer center aligned column left-not-computer">
+      <div class="sixteen wide mobile sixteen wide tablet eight wide computer center aligned column">
         <h1>Your Tickets</h1>
       </div>
-      <div class="sixteen wide mobile six wide tablet four wide computer right aligned column left-on-mobile" (click)="saveNameChange()">
+      <div class="sixteen wide mobile sixteen wide tablet four wide computer right aligned column" (click)="saveNameChange()">
         <div class="ui labeled button" tabindex="0" *ngIf="nameChange">
           <div class="ui button">
             Save Name Change{{editCount>1 ? 's' : ''}}
@@ -20,26 +20,37 @@
 
   <div class="tickets section">
     <div class="ui grid container">
-      <div class="sixteen wide mobile eight wide tablet eight wide computer column" *ngFor="let ticket of tickets">
-        <div class="ui segment">
-          <!--{{ ticket | json }}-->
-          <h2 *ngIf="!ticket.editing">{{ ticket.name || 'Ticketholder Name' }}</h2>
-          <p *ngIf="!ticket.editing">Email: {{ ticket.email || 'Ticketholder Email' }}</p>
-          <h2 *ngIf="ticket.editing" class="ui input"><input [(ngModel)]="ticket.name" [value]="ticket.name" placeholder="Ticketholder Name" type="text"></h2>
-          <p *ngIf="ticket.editing" class="ui input"><input [(ngModel)]="ticket.email" [value]="ticket.email" placeholder="Ticketholder Email" type="email"></p>
-          <p>Type: {{ ticket.type.name }}</p>
-          <p>Purchased: {{ ticket.order.created | date:'medium' }}</p>
-          <p>Payment Method: {{ ticket.order.paymentMethod }}</p>
-          <p>Price: {{ ticket.price | currency:'GBP':true:'1.2-2' }}</p>
-          <a (click)="toggleTicket(ticket)" class="ui primary button"><i class="edit icon"></i>{{ ticket.editing ? 'Cancel' : 'Name Change' }}</a>
+      <div class="sixteen wide mobile eight wide tablet ten wide computer column">
+        <div class="ui grid">
+
+          <div class="sixteen wide mobile sixteen wide tablet eight wide computer column" *ngFor="let ticket of tickets">
+            <div class="ui click effect segment">
+              <!--{{ ticket | json }}-->
+              <h2 *ngIf="!ticket.editing">{{ ticket.name || 'Ticketholder Name' }}</h2>
+              <p *ngIf="!ticket.editing">Email: {{ ticket.email || 'Ticketholder Email' }}</p>
+              <h2 *ngIf="ticket.editing" class="ui input"><input [(ngModel)]="ticket.name" [value]="ticket.name" placeholder="Ticketholder Name" type="text"></h2>
+              <p *ngIf="ticket.editing" class="ui input"><input [(ngModel)]="ticket.email" [value]="ticket.email" placeholder="Ticketholder Email" type="email"></p>
+              <p>Type: {{ ticket.type.name }}</p>
+              <p>Purchased: {{ ticket.order.created | date:'medium' }}</p>
+              <p>Payment Method: {{ ticket.order.paymentMethod }}</p>
+              <p>Price: {{ ticket.price | currency:'GBP':true:'1.2-2' }}</p>
+              <a (click)="toggleTicket(ticket)" class="ui primary button"><i class="edit icon"></i>{{ ticket.editing ? 'Cancel' : 'Name Change' }}</a>
+            </div>
+          </div>
+
+          <div class="sixteen wide center aligned no tickets column" *ngIf="!tickets.length">
+            <h2 class="subtitle">You haven't purchased any tickets yet!</h2>
+          </div>
+
         </div>
       </div>
-    </div>
-  </div>
 
-  <div class="cta section">
-    <div class="ui container">
-      <a class="ui primary button" [routerLink]="['/tickets', 'purchase']">Buy Tickets</a>
+      <div class="sixteen wide mobile eight wide tablet six wide computer column">
+        <div class="ui segment">
+          <p>TODO: namechange stuff, summary of tickets, message about namechange/warning names have not been set, date name changes start costing money, etc.</p>
+          <p><a class="ui primary button" [routerLink]="['/tickets', 'purchase']">Buy Tickets</a></p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
