@@ -1,7 +1,6 @@
-import {Observable} from 'rxjs';
-import {Component} from '@angular/core';
+import {Component, NgZone} from '@angular/core';
 import {Router} from '@angular/router';
-import {AppState} from '../../../app.service';
+import {Observable} from 'rxjs';
 import {UserApi, OrderApi, TicketApi, TicketTypeApi, Order, Ticket} from '../../../shared/sdk';
 import {SweetAlertService} from 'ng2-sweetalert2';
 
@@ -13,51 +12,43 @@ import {SweetAlertService} from 'ng2-sweetalert2';
   templateUrl: './purchase.tickets.component.html'
 })
 export class PurchaseTicketsComponent {
-  typesOfTickets = [];
-  isChurchill = false;
-  paymentMethod = 'stripe';
+  public typesOfTickets:any = [];
+  public isChurchill:boolean = false;
+  public paymentMethod:string = 'stripe';
+  private flatFee:number = 0.2;
+  private stripeRate:number = 0.014;
+  // TODO: adjust max ticket purchase quantity
+  private maxTickets:number = 20;
+  private stripeToken:string = 'pk_test_pbW1kBm6URlNhqXhiRu7AynG';
 
-  constructor(private appState: AppState,
-              private router: Router,
-              private swal: SweetAlertService,
-              private users: UserApi,
-              private orders: OrderApi,
-              private tickets: TicketApi,
-              private ticketTypes: TicketTypeApi) {
+  constructor(private router:Router,
+              private swal:SweetAlertService,
+              private users:UserApi,
+              private orders:OrderApi,
+              private tickets:TicketApi,
+              private ticketTypes:TicketTypeApi,
+              private _ngZone:NgZone) {
   }
 
+  /**
+   * Ng Initialisation
+   */
   ngOnInit() {
-    // NOTE: this is a horrible hack to get Stripe.js to stop complaning about Angular2 zone and circular deps
-    // See: http://stackoverflow.com/questions/36258252/stripe-json-circular-reference
-    // const _stringify = <any>JSON.stringify;
-    // JSON.stringify = function (value, ...args) {
-    //   if (args.length) {
-    //     return _stringify(value, ...args);
-    //   } else {
-    //     return _stringify(value, function (key, value) {
-    //       if (value && key === 'zone' && value['_zoneDelegate']
-    //         && value['_zoneDelegate']['zone'] === value) {
-    //         return undefined;
-    //       }
-    //       return value;
-    //     });
-    //   }
-    // };
-
     this.ticketTypes.find()
-      .flatMap(types => {
+      .flatMap(types => { // Get all the ticket types types
         this.typesOfTickets = types;
         // TODO: use a single "ticket types available" endpoint so I don't give away the # of sold tickets?
-        // this will send off parallel requests to count the number of each ticket sold
+        // This will send off parallel requests to count the number of each ticket sold
         return Observable.forkJoin(types.map(type => this.tickets.count({where: {ticketTypeId: type.id}})));
       })
-      .subscribe(counts => {
+      .subscribe(counts => { // Populate counts, initialise purchase quantity
         this.typesOfTickets.forEach((type, index) => {
           type.sold = counts[index].count;
           type.purchaseQuantity = 0;
         });
       });
 
+    // Get the user profile for isChurchill
     this.users.getProfile(this.users.getCurrentId())
       .subscribe(profile => {
         this.isChurchill = profile.isChurchill;
@@ -68,17 +59,25 @@ export class PurchaseTicketsComponent {
    * TODO: refactor and optimise payment total calculation logic
    * @returns {number}
    */
-  protected calculateStripeFee() {
-    return 0.2 + 0.014 * this.calculateOrderTotal();
+  protected calculateStripeFee():number {
+    return this.flatFee + (this.stripeRate * this.calculateOrderTotal());
   }
 
-  protected calculateOrderTotal() {
+  /**
+   * Calculate the order total
+   * @returns {any}
+   */
+  protected calculateOrderTotal():number {
     return this.typesOfTickets.reduce((total, ticket) => {
       return total + (ticket.purchaseQuantity * ticket.price);
     }, 0);
   }
 
-  protected calculateOrderTotalWithFees() {
+  /**
+   * Calculate the order total with fees
+   * @returns {number}
+   */
+  protected calculateOrderTotalWithFees():number{
     return this.calculateOrderTotal() + (this.paymentMethod === 'stripe' ? this.calculateStripeFee() : 0);
   }
 
@@ -86,10 +85,9 @@ export class PurchaseTicketsComponent {
    * Check if the user is able to buy the number of tickets they want
    * @returns {boolean}
    */
-  protected checkTicketsAvailable() {
+  protected checkTicketsAvailable():boolean {
     return !!this.typesOfTickets.reduce((buying, type) => {
-      // TODO: adjust max ticket purchase quantity
-      if (buying === false || buying + type.purchaseQuantity > 20 || type.purchaseQuantity < 0) {
+      if (buying === false || buying + type.purchaseQuantity > this.maxTickets || type.purchaseQuantity < 0) {
         return false;
       } else {
         if (type.sold + type.purchaseQuantity < type.quantity || type.purchaseQuantity === 0) {
@@ -105,18 +103,21 @@ export class PurchaseTicketsComponent {
    * Purchase the tickets via Stripe checkout, or if using college account simply create the order
    * TODO: confirmation dialog for college account purchases
    */
-  protected makePayment() {
-    if (this.paymentMethod === 'stripe') {
+  protected makePayment():void {
+    if (this.paymentMethod === 'stripe') { // Handle stripe
       const stripePayment = (<any>window).StripeCheckout.configure({
-        key: 'pk_test_pbW1kBm6URlNhqXhiRu7AynG',  // TODO: set stripe token globally
+        // TODO: set stripe token globally
+        key: this.stripeToken,
         locale: 'auto',
         billingAddress: false,
-        // TODO: fix zone.js wrapping bug causing circular deps with JSON.stringify with this callback
-        token: function (token: any) {
-          this.purchaseTickets(token);
+        token: (token:any) => {
+          this._ngZone.run(() => {
+            this.purchaseTickets.bind(this)(token);
+          });
         }
       });
 
+      // Count tickets
       const numberOfTickets = this.typesOfTickets.reduce((total, type) => {
         return total + type.purchaseQuantity;
       }, 0);
@@ -134,10 +135,10 @@ export class PurchaseTicketsComponent {
 
   /**
    * Purchase tickets for a user
-   * TODO: stripe payments!
    * @param token - the stripe token
    */
-  protected purchaseTickets(token) {
+  protected purchaseTickets(token):void {
+    // Construct order
     const order = new Order({
       paymentMethod: this.paymentMethod,
       paymentFee: (this.paymentMethod === 'stripe' ? this.calculateStripeFee() : 0),
@@ -145,7 +146,8 @@ export class PurchaseTicketsComponent {
       paymentToken: token
     });
 
-    const tickets: Ticket[] = [];
+    // Construct tickets array
+    const tickets:Ticket[] = [];
     this.typesOfTickets.forEach(ticket => {
       for (let i = 0; i < ticket.purchaseQuantity; i += 1) {
         tickets.push(new Ticket({
@@ -155,10 +157,12 @@ export class PurchaseTicketsComponent {
       }
     });
 
+    // Add tickets to order
     order.tickets = tickets;
 
+    // Save to DB, open sweetalert
     // TODO: look into makeOrder `req` bug
-    this.orders.makeOrder(undefined, order)
+    this.orders.makeOrder(order, undefined)
       .subscribe(savedOrder => {
         console.log(savedOrder);
         // TODO: emailing
