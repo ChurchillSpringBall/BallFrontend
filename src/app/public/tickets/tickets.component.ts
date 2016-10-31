@@ -1,7 +1,8 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 import {Router} from '@angular/router';
-import {UserApi, OrderApi, TicketTypeApi} from '../../shared/sdk';
+import {UserApi, OrderApi, TicketTypeApi, Ticket, TicketType} from '../../shared/sdk';
 import {Observable} from "rxjs";
+import {SweetAlertService} from 'ng2-sweetalert2';
 
 @Component({
   selector: 'container',
@@ -11,8 +12,10 @@ import {Observable} from "rxjs";
   templateUrl: './tickets.component.html'
 })
 export class TicketsComponent {
-  tickets = [];
-  types = [];
+  tickets:Ticket[] = [];
+  types:TicketType[] = [];
+  editCount:number = 0;
+  nameChange:boolean = false;
 
   constructor(private users: UserApi,
               private orders: OrderApi,
@@ -45,11 +48,29 @@ export class TicketsComponent {
               ticketSet.forEach(ticket => {
                 ticket.order = orderCache[index];
                 ticket.type = ticketTypes[ticket.ticketTypeId];
+                ticket.editing = false;
               });
             });
 
             this.tickets = [].concat.apply([], ticketSets);
           });
       });
+  }
+
+  /**
+   * Handle the toggling of tickets for editing
+   * @param ticket
+   */
+  protected toggleTicket(ticket:Ticket):void {
+    ticket.editing = !ticket.editing;
+    this.editCount = ticket.editing ? this.editCount+1 : this.editCount-1;
+    this.nameChange = (this.editCount > 0);
+  }
+
+  /**
+   * Save the name changes to the backend
+   */
+  protected saveNameChange():void {
+    console.log(this.tickets);
   }
 }

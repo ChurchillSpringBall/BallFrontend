@@ -2,8 +2,19 @@
 
 <div class="header section">
   <div class="ui grid container">
-    <div class="sixteen wide center aligned column">
+    <div class="four wide computer only column"></div>
+    <div class="sixteen wide mobile ten wide tablet eight wide computer center aligned column left-not-computer">
       <h1>Your Tickets</h1>
+    </div>
+    <div class="sixteen wide mobile six wide tablet four wide computer right aligned column left-on-mobile" (click)="saveNameChange()">
+      <div class="ui labeled button" tabindex="0" *ngIf="nameChange">
+        <div class="ui button">
+          Save Name Change{{editCount>1 ? 's' : ''}}
+        </div>
+        <a class="ui basic label">
+          {{editCount}}
+        </a>
+      </div>
     </div>
   </div>
 </div>
@@ -13,12 +24,15 @@
     <div class="sixteen wide mobile eight wide tablet eight wide computer column" *ngFor="let ticket of tickets">
       <div class="ui segment">
         <!--{{ ticket | json }}-->
-        <h2>{{ ticket.name || 'Ticketholder Name' }}</h2>
-        <p>Email: {{ ticket.email || 'Ticketholder Email' }}</p>
+        <h2 *ngIf="!ticket.editing">{{ ticket.name || 'Ticketholder Name' }}</h2>
+        <p *ngIf="!ticket.editing">Email: {{ ticket.email || 'Ticketholder Email' }}</p>
+        <h2 *ngIf="ticket.editing" class="ui input"><input [(ngModel)]="ticket.name" [value]="ticket.name" placeholder="Ticketholder Name" type="text"></h2>
+        <p *ngIf="ticket.editing" class="ui input"><input [(ngModel)]="ticket.email" [value]="ticket.email" placeholder="Ticketholder Email" type="email"></p>
         <p>Type: {{ ticket.type.name }}</p>
-        <p>Purchased: {{ ticket.order.created }}</p>
+        <p>Purchased: {{ ticket.order.created | date:'medium' }}</p>
         <p>Payment Method: {{ ticket.order.paymentMethod }}</p>
         <p>Price: {{ ticket.price | currency:'GBP':true:'1.2-2' }}</p>
+        <a (click)="toggleTicket(ticket)" class="ui primary button"><i class="edit icon"></i>{{ ticket.editing ? 'Cancel' : 'Name Change' }}</a>
       </div>
     </div>
   </div>

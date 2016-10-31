@@ -39,3 +39,15 @@ $widescreen-monitor-breakpoint: 1920px;
     @content;
   }
 }
+
+.left-not-computer {
+  @include not-computer {
+    text-align: left !important;
+  }
+}
+
+.left-on-mobile {
+  @include mobile {
+    text-align: left !important;
+  }
+}
