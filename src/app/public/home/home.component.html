@@ -25,20 +25,63 @@
   <div class="bordered white images promo section">
     <div class="ui grid container">
       <div class="sixteen wide center aligned column">
-        <h1>The Night of Your Life</h1>
-        <h2>I need some better dummy text and headings</h2>
+        <h1 class="title">The Night of Your Life</h1>
+        <h2 class="subtitle">Join us on Saturday 11th February 2017 for a night of ridiculously good fun. Food, drink, and music from 9pm until 3am.</h2>
+      </div>
+    </div>
 
-        <div #promoCarousel class="image carousel">
-          <div class="image"><img src="/assets/img/home/basshunter.jpg"></div>
-          <div class="image"><img src="/assets/img/home/nick.jpg"></div>
-          <div class="image"><img src="/assets/img/home/ohdear.jpg"></div>
-          <div class="image"><img src="/assets/img/home/morell.jpg"></div>
-          <div class="image"><img src="/assets/img/home/basshunter2.jpg"></div>
-          <div class="image"><img src="/assets/img/home/scotsmen.jpg"></div>
-          <div class="image"><img src="/assets/img/home/people.jpg"></div>
+    <div #promoCarousel class="image carousel">
+      <div class="image"><img src="/assets/img/home/basshunter.jpg"></div>
+      <div class="image"><img src="/assets/img/home/nick.jpg"></div>
+      <div class="image"><img src="/assets/img/home/ohdear.jpg"></div>
+      <div class="image"><img src="/assets/img/home/morell.jpg"></div>
+      <div class="image"><img src="/assets/img/home/basshunter2.jpg"></div>
+      <div class="image"><img src="/assets/img/home/scotsmen.jpg"></div>
+      <div class="image"><img src="/assets/img/home/people.jpg"></div>
 
-          <div class="arrow left"><img src="/assets/img/carousel/arrow-left.png"></div>
-          <div class="arrow right"><img src="/assets/img/carousel/arrow-left.png"></div>
+      <div class="arrow left"><img src="/assets/img/carousel/arrow-left.png"></div>
+      <div class="arrow right"><img src="/assets/img/carousel/arrow-right.png"></div>
+    </div>
+  </div>
+
+  <div class="bordered committee section">
+    <div class="ui grid container">
+      <div class="sixteen wide center aligned column">
+        <h1 class="title">Committee</h1>
+        <h2 class="subtitle">Some text about the sick committee</h2>
+        <p>TODO: committee section slider or something here</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bordered purchase tickets section">
+    <div class="ui very relaxed centered grid container">
+      <div class="sixteen wide center aligned column">
+        <h1 class="title">Buy Your Tickets</h1>
+        <h2 class="subtitle">Queue jump and something else dummy text</h2>
+      </div>
+      <div class="sixteen wide mobile eight wide tablet six wide computer column">
+        <div class="ui center aligned ticket segment">
+          <h3 class="ticket-title">Standard Ticket</h3>
+          <p class="ticket-description">Very short sentence about what the standard ticket offers.</p>
+          <p><span class="price">
+            <span class="currency symbol">£</span>
+            <span class="pounds">85</span>
+            <span class="pennies">.00</span>
+          </span></p>
+          <p><a class="ui primary right labeled icon button" [routerLink]="['/tickets']">Buy Now <i class="ticket icon"></i></a></p>
+        </div>
+      </div>
+      <div class="sixteen wide mobile eight wide tablet six wide computer column">
+        <div class="ui center aligned ticket segment">
+          <h3 class="ticket-title">Queue Jump Ticket</h3>
+          <p class="ticket-description">Very short sentence about what the queue jump ticket offers.</p>
+          <p><span class="price">
+            <span class="currency symbol">£</span>
+            <span class="pounds">95</span>
+            <span class="pennies">.00</span>
+          </span></p>
+          <p><a class="ui primary right labeled icon button" [routerLink]="['/tickets']">Buy Now <i class="ticket icon"></i></a></p>
         </div>
       </div>
     </div>

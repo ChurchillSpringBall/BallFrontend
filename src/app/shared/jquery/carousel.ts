@@ -99,7 +99,7 @@ export class Carousel {
    */
   startTimer() {
     this.stopTimer();
-    this.interval = setInterval(this.slideLeft.bind(this), 6000);
+    this.interval = setInterval(this.slideLeft.bind(this), 3000);
   }
 
   /**

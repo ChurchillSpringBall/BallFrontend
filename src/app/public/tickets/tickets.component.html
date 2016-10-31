@@ -1,14 +1,28 @@
-<h1>Tickets</h1>
-<p>TODO: design this page nicely</p>
+<div class="tickets list component">
 
-<div class="ui segment" *ngFor="let ticket of tickets">
-  <!--{{ ticket | json }}-->
-  <h2>{{ ticket.name || 'Ticketholder Name' }}</h2>
-  <p>Email: {{ ticket.email || 'Ticketholder Email' }}</p>
-  <p>Type: {{ ticket.type.name }}</p>
-  <p>Purchased: {{ ticket.order.created }}</p>
-  <p>Payment Method: {{ ticket.order.paymentMethod }}</p>
-  <p>Price: {{ ticket.price | currency:'GBP':true:'1.2-2' }}</p>
+<div class="header section">
+  <div class="ui grid container">
+    <div class="sixteen wide center aligned column">
+      <h1>Your Tickets</h1>
+    </div>
+  </div>
+</div>
+
+<div class="tickets section">
+  <div class="ui grid container">
+    <div class="sixteen wide mobile eight wide tablet eight wide computer column" *ngFor="let ticket of tickets">
+      <div class="ui segment">
+        <!--{{ ticket | json }}-->
+        <h2>{{ ticket.name || 'Ticketholder Name' }}</h2>
+        <p>Email: {{ ticket.email || 'Ticketholder Email' }}</p>
+        <p>Type: {{ ticket.type.name }}</p>
+        <p>Purchased: {{ ticket.order.created }}</p>
+        <p>Payment Method: {{ ticket.order.paymentMethod }}</p>
+        <p>Price: {{ ticket.price | currency:'GBP':true:'1.2-2' }}</p>
+      </div>
+    </div>
+  </div>
 </div>
 
 <a class="ui primary button" [routerLink]="['/tickets', 'purchase']">Buy Tickets</a>
+</div>
