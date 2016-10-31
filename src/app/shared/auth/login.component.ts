@@ -8,7 +8,7 @@ import {Router} from '@angular/router';
  */
 @Component({
   template: `
-<div class="bordered login component section">
+<div class="bordered login component padded section">
   <div class="ui centered grid container">
     <div class="sixteen wide mobile eight wide tablet six wide computer center aligned column">
       <div class="ui segment">
