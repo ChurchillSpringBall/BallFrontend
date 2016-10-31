@@ -84,7 +84,7 @@
               <strong>{{type.name}} Tickets:</strong> {{type.count}}
             </span>
           </div>
-          <p>TODO: Name change date deadline and price raise paragraph.</p>
+          <p>Name change is free until January 1st, at which point you will be charged an admin fee of £10. Name change will close on February 1st.</p>
 
           <div class="ui labeled button" tabindex="0" *ngIf="nameChange" [ngClass]="{disabled: !nameChangeValid() || sendingNameChangeRequest, loading: sendingNameChangeRequest}" (click)="saveNameChange()">
             <div class="ui primary button">

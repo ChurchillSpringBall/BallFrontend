@@ -23,6 +23,8 @@ export class PurchaseTicketsComponent {
   private maxTickets: number = 20;
   private stripeToken: string = 'pk_test_pbW1kBm6URlNhqXhiRu7AynG';
 
+  private profileObservable;
+
   constructor(private router: Router,
               private swal: SweetAlertService,
               private users: UserApi,
@@ -55,6 +57,8 @@ export class PurchaseTicketsComponent {
       .subscribe(profile => {
         this.isChurchill = profile.isChurchill;
       });
+
+    this.profileObservable = this.users.getProfile(this.users.getCurrentId());
   }
 
   /**
@@ -135,11 +139,15 @@ export class PurchaseTicketsComponent {
         return total + type.purchaseQuantity;
       }, 0);
 
-      stripePayment.open({
-        name: 'Churchill Spring Ball',
-        description: `${numberOfTickets} Ticket${numberOfTickets > 1 ? 's' : ''}`,
-        amount: Math.round(this.calculateOrderTotalWithFees() * 100),
-        currency: 'GBP'
+      this.profileObservable.subscribe(profile => {
+        stripePayment.open({
+          name: 'Churchill Spring Ball',
+          email: profile.email,
+          allowRememberMe: false,
+          description: `${numberOfTickets} Ticket${numberOfTickets > 1 ? 's' : ''}`,
+          amount: Math.round(this.calculateOrderTotalWithFees() * 100),
+          currency: 'GBP'
+        });
       });
     } else if (this.paymentMethod === 'college-account') {
       const formattedPrice = new CurrencyPipe('GB').transform(this.calculateOrderTotalWithFees(), 'GBP', true, '1.2-2');
