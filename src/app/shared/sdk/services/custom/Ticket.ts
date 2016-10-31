@@ -498,6 +498,39 @@ export class TicketApi extends BaseLoopBackApi {
     return subject.asObservable();
   }
   /**
+   * <em>
+         * (The remote method definition does not provide any description.)
+         * </em>
+   *
+   * @param object data Request data.
+   *
+   *  - `ticket` – `{object}` - 
+   *
+   *  - `req` – `{object}` - 
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * Data properties:
+   *
+   *  - `ticket` – `{object}` - 
+   */
+  public nameChange(ticket: any, req: any = undefined): Observable<any> {
+    let method: string = "POST";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Tickets/name-change";
+    let routeParams: any = {};
+    let postBody: any = {
+      ticket: ticket
+    };
+    let urlParams: any = {};
+    if (req) urlParams.req = req;
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  /**
    * Create a new instance of the model and persist it into the data source.
    *
    * @param object data Request data.

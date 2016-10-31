@@ -9,7 +9,7 @@
     <nav id="primary-menu" class="desktop links menu">
       <ul>
         <span class="item"><a [routerLink]=" ['/'] ">Home</a></span>
-        <span class="item" *ngIf="!users.isAuthenticated()"><a href="/auth/raven">Login</a></span>
+        <span class="item" *ngIf="!users.isAuthenticated()"><a [routerLink]="['/login']">Login</a></span>
         <!-- TODO: have an Account dropdown and show the user's name here? -->
         <span class="item" *ngIf="users.isAuthenticated()"><a [routerLink]="['/logout']">Logout</a></span>
     <span class="item"><a class="ui primary right labeled icon button" [routerLink]=" ['/tickets'] ">Tickets <i
@@ -26,7 +26,7 @@
     <nav id="primary-menu" class="mobile vertical links">
       <ul>
         <span class="item"><a [routerLink]=" ['/'] ">Home</a></span>
-        <span class="item" *ngIf="!users.isAuthenticated()"><a href="/auth/raven">Login</a></span>
+        <span class="item" *ngIf="!users.isAuthenticated()"><a [routerLink]="['/login']">Login</a></span>
         <!-- TODO: have an Account dropdown and show the user's name here? -->
         <span class="item" *ngIf="users.isAuthenticated()"><a [routerLink]="['/logout']">Logout</a></span>
     <span class="item"><a class="ui primary right labeled icon button" [routerLink]=" ['/tickets'] ">Tickets <i
@@ -64,16 +64,18 @@
         <div class="ui link list">
           <a class="item" [routerLink]="['/']">Home</a>
           <a class="item" [routerLink]="['/tickets']">Tickets</a>
-          <a class="item" href="/auth/raven">Log In</a>
+          <a class="item" [routerLink]="['/login']">Log In</a>
         </div>
       </div>
     </div>
 
     <div class="row">
       <div class="sixteen wide center aligned column">
-        <p class="copyright">Copyright 2016 &copy; Churchill Spring Ball.</p>
-        <p class="copyright">Website built by <a href="http://www.github.com/hoxxep">Liam Gray</a>, with assistance from
-          <a href="http://www.glendelmdesign.co.uk">Matt Lewsley</a>.</p>
+        <p class="copyright">Copyright 2016 &copy; Churchill Spring Ball Committee.</p>
+        <p class="copyright">
+          Website built by <a href="http://www.github.com/hoxxep">Liam Gray</a>,
+          with assistance from <a href="http://www.glendelmdesign.co.uk">Matt Lewsley</a>.
+        </p>
       </div>
     </div>
   </div>

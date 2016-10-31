@@ -101,7 +101,7 @@ body.sidebar-open {
         &,
         &::before,
         &::after {
-          background-color: #2185D0;
+          background-color: #2A3039;
         }
       }
     }
@@ -162,6 +162,7 @@ body.sidebar-open {
         width: 1em;
         height: 1em;
         line-height: 1;
+        color: #2A3039;
 
         span {
           position: absolute;
@@ -169,10 +170,10 @@ body.sidebar-open {
           left: 0;
           right: 0;
           height: 0.1em;
-          background: #2185D0;
+          background: #2A3039;
           text-indent: -9999999px;
           transition: all $animation-duration ease;
-          color: #2185D0;
+          color: #2A3039;
 
           &::before,
           &::after {
@@ -181,7 +182,7 @@ body.sidebar-open {
             left: 0;
             right: 0;
             height: 0.1em;
-            background: #2185D0;
+            background: #2A3039;
             transition: all $animation-duration ease;
           }
 
@@ -363,12 +364,12 @@ body.sidebar-open {
 
     nav {
       > ul {
-        border-top: 1px solid grey;
-        border-bottom: 1px solid grey;
+        border-top: 1px solid #eee;
+        border-bottom: 1px solid #eee;
         padding: 0.75em 0;
         margin: 0 0 2rem;
         list-style: none;
-        font-size: 0.9rem;
+        font-size: 1.1rem;
         font-weight: 400;
         user-select: none;
 

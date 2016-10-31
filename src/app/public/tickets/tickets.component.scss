@@ -1,5 +1,35 @@
 .tickets.section {
+  padding-bottom: 3rem;
+
   .ui.input {
     display: block;
+  }
+
+  .ui.dimmable.ticket.segment {
+    padding: 2rem 1rem;
+
+    .ui.dimmer {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      background: rgba(255, 255, 255, 0.95);
+
+      &.active {
+        opacity: 1;
+      }
+    }
+  }
+
+  .ui.controls.segment {
+    .ticket.types {
+      margin-bottom: 1rem;
+
+      .type {
+        display: block;
+      }
+    }
   }
 }

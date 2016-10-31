@@ -57,6 +57,10 @@ export class Header {
         e.preventDefault();
       }
     });
+
+    this.$mobileMenu.find('.mobile.links .item').click(e => {
+      this.closeMobileMenu();
+    });
   }
 
   /**

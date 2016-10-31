@@ -1,4 +1,5 @@
 import {Component, NgZone} from '@angular/core';
+import {CurrencyPipe} from '@angular/common';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {UserApi, OrderApi, TicketApi, TicketTypeApi, Order, Ticket} from '../../../shared/sdk';
@@ -15,6 +16,7 @@ export class PurchaseTicketsComponent {
   public typesOfTickets: any = [];
   public isChurchill: boolean = false;
   public paymentMethod: string = 'stripe';
+  private sendingPurchaseRequest: boolean = false;
   // TODO: factor out these settings into a static app.config.ts
   private flatFee: number = 0.2;
   private stripeRate: number = 0.014;
@@ -104,13 +106,24 @@ export class PurchaseTicketsComponent {
    * TODO: confirmation dialog for college account purchases
    */
   protected makePayment(): void {
+    this.sendingPurchaseRequest = true;
+
     if (this.paymentMethod === 'stripe') { // Handle stripe
+      let tokenSuccess = false;
       const stripePayment = (<any>window).StripeCheckout.configure({
         // TODO: set stripe token globally
         key: this.stripeToken,
         locale: 'auto',
         billingAddress: false,
+        closed: () => {
+          this._ngZone.run(() => {
+            if (!tokenSuccess) {
+              this.sendingPurchaseRequest = false;
+            }
+          });
+        },
         token: (token: any) => {
+          tokenSuccess = true;
           this._ngZone.run(() => {
             this.purchaseTickets.bind(this)(token);
           });
@@ -129,7 +142,26 @@ export class PurchaseTicketsComponent {
         currency: 'GBP'
       });
     } else if (this.paymentMethod === 'college-account') {
-      this.purchaseTickets(null);
+      const formattedPrice = new CurrencyPipe('GB').transform(this.calculateOrderTotalWithFees(), 'GBP', true, '1.2-2');
+      this.swal.confirm({
+        title: 'Are you sure?',
+        text: `You will be billed ${formattedPrice} to your Churchill College Havent Till Account.`,
+        showCancelButton: true
+      })
+        .then(() => {
+          this.purchaseTickets(null);
+        })
+        .catch((error) => {
+          if (error !== 'cancel') {
+            console.error(error);
+            this.swal.error({
+              title: 'Error',
+              text: 'An error occurred before we could secure your tickets. Please try again.'
+            });
+          }
+
+          this.sendingPurchaseRequest = false;
+        });
     }
   }
 
@@ -143,7 +175,7 @@ export class PurchaseTicketsComponent {
       paymentMethod: this.paymentMethod,
       paymentFee: (this.paymentMethod === 'stripe' ? this.calculateStripeFee() : 0),
       total: this.calculateOrderTotalWithFees(),
-      paymentToken: token.id
+      paymentToken: token ? token.id : null
     });
 
     // Construct tickets array
@@ -179,6 +211,8 @@ export class PurchaseTicketsComponent {
           title: 'Error Purchasing Tickets',
           text: 'Please contact the Spring Ball Committee! Error:' + error.message
         });
+
+        this.sendingPurchaseRequest = false;
       });
   }
 }

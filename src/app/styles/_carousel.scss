@@ -2,8 +2,6 @@
   position: relative;
   z-index: 3;
   height: 26vw;
-  //margin-top: -7vw;
-  //bottom: -7vw;
   user-select: none;
 
   @include mobile {
@@ -60,6 +58,7 @@
     width: 40vw;
     margin-left: -20vw;
     background-size: cover;
+    background-color: #b5bbc0;
     background-position: center;
     text-align: center;
     transform: scale(0.6);
@@ -71,21 +70,9 @@
       margin-left: -40vw;
     }
 
-    h2.accent-bar {
-      color: white;
-      font-size: 1em;
-      position: absolute;
-      top: -50px;
-      width: 100%;
-
-      &:after {
-        margin-top: 0.1em;
-        width: 60px;
-      }
-    }
-
     img, object {
       width: 100%;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.25);
     }
 
     &.hidden {

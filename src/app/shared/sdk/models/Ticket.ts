@@ -11,6 +11,7 @@ export interface TicketInterface {
   price?: number;
   barCode?: string;
   admittedAt?: any;
+  collectedAt?: any;
   id?: number;
   orderId?: number;
   ticketTypeId?: number;
@@ -24,6 +25,7 @@ export class Ticket implements TicketInterface {
   price: number;
   barCode: string;
   admittedAt: any;
+  collectedAt: any;
   id: number;
   orderId: number;
   ticketTypeId: number;
