@@ -60,30 +60,22 @@
         <h1 class="title">Buy Your Tickets</h1>
         <h2 class="subtitle">Queue jump and something else dummy text</h2>
       </div>
-      <div class="sixteen wide mobile eight wide tablet six wide computer column">
+
+      <div class="sixteen wide mobile eight wide tablet six wide computer column" *ngFor="let type of ticketTypes">
         <div class="ui center aligned ticket segment">
-          <h3 class="ticket-title">Standard Ticket</h3>
-          <p class="ticket-description">Very short sentence about what the standard ticket offers.</p>
-          <p><span class="price">
-            <span class="currency symbol">£</span>
-            <span class="pounds">85</span>
-            <span class="pennies">.00</span>
-          </span></p>
+          <h3 class="ticket-title">{{ type.name }}</h3>
+          <p class="ticket-description">{{ type.description }}</p>
+          <p>
+            <span class="price">
+              <span class="currency symbol">£</span>
+              <span class="pounds">{{ type.price | number:0 }}</span>
+              <span class="pennies">.{{ type.price | pennies }}</span>
+            </span>
+          </p>
           <p><a class="ui primary right labeled icon button" [routerLink]="['/tickets']">Buy Now <i class="ticket icon"></i></a></p>
         </div>
       </div>
-      <div class="sixteen wide mobile eight wide tablet six wide computer column">
-        <div class="ui center aligned ticket segment">
-          <h3 class="ticket-title">Queue Jump Ticket</h3>
-          <p class="ticket-description">Very short sentence about what the queue jump ticket offers.</p>
-          <p><span class="price">
-            <span class="currency symbol">£</span>
-            <span class="pounds">95</span>
-            <span class="pennies">.00</span>
-          </span></p>
-          <p><a class="ui primary right labeled icon button" [routerLink]="['/tickets']">Buy Now <i class="ticket icon"></i></a></p>
-        </div>
-      </div>
+
     </div>
   </div>
 </div>

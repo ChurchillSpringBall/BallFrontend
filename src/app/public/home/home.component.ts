@@ -1,5 +1,6 @@
 import {Component, ViewChild, ElementRef} from '@angular/core';
 import {Carousel} from '../../shared/jquery/carousel';
+import {TicketTypeApi, TicketType} from '../../shared/sdk';
 
 @Component({
   selector: 'home',  // <home></home>
@@ -9,8 +10,18 @@ import {Carousel} from '../../shared/jquery/carousel';
 })
 export class HomeComponent {
   @ViewChild('promoCarousel') promoCarousel: ElementRef;
+  ticketTypes: TicketType[] = [];
 
-  constructor() {
+  constructor(private types: TicketTypeApi) {
+  }
+
+  ngOnInit() {
+    this.types.find()
+      .subscribe(types => {
+        this.ticketTypes = types;
+      }, error => {
+        console.error(error);
+      });
   }
 
   ngAfterViewInit() {

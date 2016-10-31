@@ -20,6 +20,7 @@ import {AppState, InternalStateType} from './app.service';
 import {NoContentComponent} from './no-content';
 import * as PUBLIC_COMPONENTS from './public';
 import * as AUTH_COMPONENTS from './shared/auth';
+import * as CUSTOM_PIPES from './shared/pipes';
 import {SDKModule} from './shared/sdk/index';
 
 // Application wide providers
@@ -45,7 +46,8 @@ type StoreType = {
     AppComponent,
     NoContentComponent,
     ...Object.keys(PUBLIC_COMPONENTS).map((key) => PUBLIC_COMPONENTS[key]),  // convert object into array for decomposition
-    ...Object.keys(AUTH_COMPONENTS).map((key) => AUTH_COMPONENTS[key])
+    ...Object.keys(AUTH_COMPONENTS).map((key) => AUTH_COMPONENTS[key]),
+    ...Object.keys(CUSTOM_PIPES).map((key) => CUSTOM_PIPES[key]),
   ],
   imports: [ // import Angular's modules
     BrowserModule,
