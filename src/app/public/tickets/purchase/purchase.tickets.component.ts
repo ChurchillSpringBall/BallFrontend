@@ -12,22 +12,22 @@ import {SweetAlertService} from 'ng2-sweetalert2';
   templateUrl: './purchase.tickets.component.html'
 })
 export class PurchaseTicketsComponent {
-  public typesOfTickets:any = [];
-  public isChurchill:boolean = false;
-  public paymentMethod:string = 'stripe';
-  private flatFee:number = 0.2;
-  private stripeRate:number = 0.014;
+  public typesOfTickets: any = [];
+  public isChurchill: boolean = false;
+  public paymentMethod: string = 'stripe';
+  private flatFee: number = 0.2;
+  private stripeRate: number = 0.014;
   // TODO: adjust max ticket purchase quantity
-  private maxTickets:number = 20;
-  private stripeToken:string = 'pk_test_pbW1kBm6URlNhqXhiRu7AynG';
+  private maxTickets: number = 20;
+  private stripeToken: string = 'pk_test_pbW1kBm6URlNhqXhiRu7AynG';
 
-  constructor(private router:Router,
-              private swal:SweetAlertService,
-              private users:UserApi,
-              private orders:OrderApi,
-              private tickets:TicketApi,
-              private ticketTypes:TicketTypeApi,
-              private _ngZone:NgZone) {
+  constructor(private router: Router,
+              private swal: SweetAlertService,
+              private users: UserApi,
+              private orders: OrderApi,
+              private tickets: TicketApi,
+              private ticketTypes: TicketTypeApi,
+              private _ngZone: NgZone) {
   }
 
   /**
@@ -59,7 +59,7 @@ export class PurchaseTicketsComponent {
    * TODO: refactor and optimise payment total calculation logic
    * @returns {number}
    */
-  protected calculateStripeFee():number {
+  protected calculateStripeFee(): number {
     return this.flatFee + (this.stripeRate * this.calculateOrderTotal());
   }
 
@@ -67,7 +67,7 @@ export class PurchaseTicketsComponent {
    * Calculate the order total
    * @returns {any}
    */
-  protected calculateOrderTotal():number {
+  protected calculateOrderTotal(): number {
     return this.typesOfTickets.reduce((total, ticket) => {
       return total + (ticket.purchaseQuantity * ticket.price);
     }, 0);
@@ -77,7 +77,7 @@ export class PurchaseTicketsComponent {
    * Calculate the order total with fees
    * @returns {number}
    */
-  protected calculateOrderTotalWithFees():number{
+  protected calculateOrderTotalWithFees(): number {
     return this.calculateOrderTotal() + (this.paymentMethod === 'stripe' ? this.calculateStripeFee() : 0);
   }
 
@@ -85,7 +85,7 @@ export class PurchaseTicketsComponent {
    * Check if the user is able to buy the number of tickets they want
    * @returns {boolean}
    */
-  protected checkTicketsAvailable():boolean {
+  protected checkTicketsAvailable(): boolean {
     return !!this.typesOfTickets.reduce((buying, type) => {
       if (buying === false || buying + type.purchaseQuantity > this.maxTickets || type.purchaseQuantity < 0) {
         return false;
@@ -103,14 +103,14 @@ export class PurchaseTicketsComponent {
    * Purchase the tickets via Stripe checkout, or if using college account simply create the order
    * TODO: confirmation dialog for college account purchases
    */
-  protected makePayment():void {
+  protected makePayment(): void {
     if (this.paymentMethod === 'stripe') { // Handle stripe
       const stripePayment = (<any>window).StripeCheckout.configure({
         // TODO: set stripe token globally
         key: this.stripeToken,
         locale: 'auto',
         billingAddress: false,
-        token: (token:any) => {
+        token: (token: any) => {
           this._ngZone.run(() => {
             this.purchaseTickets.bind(this)(token);
           });
@@ -137,7 +137,7 @@ export class PurchaseTicketsComponent {
    * Purchase tickets for a user
    * @param token - the stripe token
    */
-  protected purchaseTickets(token):void {
+  protected purchaseTickets(token): void {
     // Construct order
     const order = new Order({
       paymentMethod: this.paymentMethod,
@@ -147,7 +147,7 @@ export class PurchaseTicketsComponent {
     });
 
     // Construct tickets array
-    const tickets:Ticket[] = [];
+    const tickets: Ticket[] = [];
     this.typesOfTickets.forEach(ticket => {
       for (let i = 0; i < ticket.purchaseQuantity; i += 1) {
         tickets.push(new Ticket({
