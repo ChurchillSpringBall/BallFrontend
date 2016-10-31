@@ -70,6 +70,7 @@ export class TicketsComponent {
   /**
    * Save the name changes to the backend
    */
+  // TODO: Revert to original ticket state (just fetch them again if you want)
   protected saveNameChange():void {
     console.log(this.tickets);
   }
