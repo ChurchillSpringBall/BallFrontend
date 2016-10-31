@@ -15,9 +15,9 @@ export class PurchaseTicketsComponent {
   public typesOfTickets: any = [];
   public isChurchill: boolean = false;
   public paymentMethod: string = 'stripe';
+  // TODO: factor out these settings into a static app.config.ts
   private flatFee: number = 0.2;
   private stripeRate: number = 0.014;
-  // TODO: adjust max ticket purchase quantity
   private maxTickets: number = 20;
   private stripeToken: string = 'pk_test_pbW1kBm6URlNhqXhiRu7AynG';
 
