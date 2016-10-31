@@ -1,0 +1,500 @@
+body.mobile.open,
+body.sidebar-open {
+  overflow: hidden;
+}
+
+#navigation-bar {
+  $animation-duration: 0.25s;
+
+  position: absolute;
+  top: -70px;
+  margin-top: 70px;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  max-height: 100vh;
+  overflow: visible;
+  will-change: background, top, left, margin-top, position;
+
+  @include mobile {
+    overflow: auto;
+  }
+
+  .nav-above {
+    text-align: right;
+    border-bottom: 1px solid #f1f1f1;
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+
+    > span {
+      display: block;
+      width: 100%;
+
+      &.InfinityNumber {
+        display: inline;
+      }
+    }
+  }
+
+  &.scrolling {
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    margin-top: 0;
+    top: -70px;
+    opacity: 0;
+    position: fixed;
+
+    &.slide-down {
+      top: 0;
+      opacity: 1;
+      transition: all $animation-duration ease;
+    }
+
+    &.slide-up {
+      top: -70px;
+      opacity: 0;
+      transition: all $animation-duration ease;
+    }
+  }
+
+  &.mobile.open {
+    box-shadow: 0 0 0;
+    top: 0 !important;
+    margin-top: 0 !important;
+    opacity: 1 !important;
+    position: fixed !important;
+    transition: all $animation-duration ease;
+
+    .mobile.menu.toggle {
+      a {
+        span {
+          background-color: transparent;
+
+          &::before {
+            top: 0;
+            transform: rotate(45deg);
+          }
+
+          &::after {
+            top: 0;
+            bottom: auto;
+            transform: rotate(-45deg);
+          }
+        }
+      }
+    }
+  }
+
+  &.scrolling,
+  &.mobile.open {
+    .menu.mobile.toggle {
+      span {
+        &,
+        &::before,
+        &::after {
+          background-color: #2185D0;
+        }
+      }
+    }
+
+    .logo {
+      padding: 7px 0;
+
+      @include mobile {
+        padding: 12px 0;
+      }
+
+      a {
+        img {
+          width: 70px;
+        }
+      }
+    }
+
+    .menu ul {
+      > li {
+        > a {
+          color: #2185D0;
+        }
+      }
+    }
+  }
+
+  > .ui.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: width 0.35s ease, padding 0.35s ease;
+
+    @media screen and (min-width: $tablet-breakpoint) and (max-width: 1500px) {
+      width: 100%;
+      padding: 0 20px;
+    }
+  }
+
+  .menu {
+    opacity: 1;
+    transition: opacity $animation-duration ease;
+
+    .item {
+      margin: 0 15px;
+    }
+
+    &.mobile.toggle {
+      display: none;
+
+      a {
+        display: block;
+        position: relative;
+        font-size: 24px;
+        width: 1em;
+        height: 1em;
+        line-height: 1;
+
+        span {
+          position: absolute;
+          top: 0.45em;
+          left: 0;
+          right: 0;
+          height: 0.1em;
+          background: #2185D0;
+          text-indent: -9999999px;
+          transition: all $animation-duration ease;
+          color: #2185D0;
+
+          &::before,
+          &::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 0.1em;
+            background: #2185D0;
+            transition: all $animation-duration ease;
+          }
+
+          &::before {
+            top: -0.3em;
+          }
+
+          &::after {
+            bottom: -0.3em;
+          }
+        }
+      }
+    }
+
+    @include mobile {
+      &.desktop.links {
+        display: none;
+      }
+
+      &.mobile.toggle {
+        display: block;
+      }
+    }
+
+    > ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      > li {
+        margin: 0;
+        padding: 0 15px;
+        position: relative;
+        z-index: 120;
+
+        &.menu-item-has-children {
+          &:hover {
+            ul {
+              opacity: 1;
+              visibility: visible;
+            }
+          }
+        }
+
+        @include tablet {
+          padding: 0 10px;
+
+          &:first-child {
+            display: none;
+          }
+        }
+
+        > a {
+          display: block;
+          color: #2d2d2e;
+          font-size: 14px;
+          transition: color $animation-duration ease;
+          will-change: color;
+
+          @include computer {
+            &:hover {
+              color: #2185D0;
+            }
+          }
+
+          .icon {
+            margin-right: 0;
+          }
+        }
+
+        @include not-mobile {
+          ul,
+          .sub.navigation,
+          .sub-menu {
+            opacity: 0;
+            visibility: hidden;
+            position: absolute;
+            top: 20px;
+            background: white;
+            margin: 0;
+            padding: 35px 0 15px;
+            width: 200px;
+            transition: 0.3s ease all;
+
+            li {
+              list-style: none;
+
+              a {
+                padding: 6px 15px;
+                display: block;
+                color: #2d2d2e;
+                font-size: 13px;
+                transition: color $animation-duration ease;
+                will-change: color;
+
+                @include computer {
+                  &:hover {
+                    color: #2185D0;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        &:last-child {
+          padding-right: 0;
+
+          @include not-mobile {
+            > a {
+              color: white;
+              margin-right: 0;
+              box-shadow: 0 0 0 0 rgba(34, 36, 38, .15) inset;
+              background-color: #2185D0;
+              text-shadow: none;
+              cursor: pointer;
+              min-height: 1em;
+              outline: 0;
+              border: 0;
+              vertical-align: baseline;
+              padding: .78571429em 1.5em;
+              font-size: 12px;
+              font-weight: 400;
+              line-height: 1em;
+              border-radius: 2px;
+              user-select: none;
+              transition: background-color $animation-duration ease, color $animation-duration ease, background $animation-duration ease;
+              -webkit-tap-highlight-color: transparent;
+
+              &:hover {
+                background-color: lighten(#2185D0, 10%);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .logo {
+    padding: 7px 0;
+    transition: padding $animation-duration ease;
+
+    img {
+      width: 70px;
+    }
+
+    @include mobile {
+      padding: 20px 0;
+    }
+
+    a {
+      display: block;
+      padding-top: 0.35em;
+      padding-bottom: 0.35em;
+
+      img {
+        vertical-align: middle;
+      }
+
+      svg {
+        width: 211px;
+        height: 37px;
+        vertical-align: top;
+
+        @include mobile {
+          width: 171px;
+          height: 30px;
+        }
+
+        .logo-text {
+          transition: fill $animation-duration ease;
+        }
+      }
+
+      &:hover {
+        svg {
+          .logo-text {
+            fill: blue !important;
+          }
+        }
+      }
+    }
+  }
+
+  .ui.mobile.container {
+    position: relative;
+    z-index: 110;
+    display: none;
+    text-align: center;
+    font-weight: 700;
+    padding-bottom: 2rem;
+
+    nav {
+      > ul {
+        border-top: 1px solid grey;
+        border-bottom: 1px solid grey;
+        padding: 0.75em 0;
+        margin: 0 0 2rem;
+        list-style: none;
+        font-size: 0.9rem;
+        font-weight: 400;
+        user-select: none;
+
+        .item {
+          display: block;
+          margin: 15px auto;
+        }
+
+        > li {
+          // hide the get in touch since we include it manually
+          &:last-child {
+            display: none;
+          }
+
+          a {
+            font-size: 14px;
+            position: relative;
+            display: inline-block;
+            padding: 0.75em 0;
+            color: #2185D0;
+
+            i {
+              position: absolute;
+              top: 10px;
+              right: -30px;
+            }
+          }
+
+          ul {
+            display: none;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+
+            li {
+              a {
+                color: grey;
+                font-size: 12px;
+                padding: 0.5em 0;
+                text-transform: none;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .ui.button {
+      padding: 0.8rem 2rem;
+    }
+
+    a.call {
+      color: #2185D0;
+      font-size: 1.1rem;
+
+      .icon {
+        color: blue;
+      }
+    }
+  }
+}
+
+// WP admin bar fix
+.admin-bar {
+  #navigation-bar {
+    margin-top: 70px; // NOTE: arbitrary value that looks good
+
+    &.scrolling {
+      margin-top: 32px;
+    }
+  }
+
+  @media (max-width: 782px) {
+    #navigation-bar.scrolling {
+      margin-top: 46px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    #navigation-bar.scrolling {
+      margin-top: 0;
+    }
+  }
+}
+
+.mobile.slice {
+  position: fixed;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100vh;
+  background: #fff;
+  transform: matrix(1, -0.3, 0, 1, 0, 0);
+  transition: top 0.35s ease-out, bottom 0.5s ease-out;
+  z-index: 95;
+  border-top: 1px solid grey;
+  border-bottom: 1px solid grey;
+
+  @include not-mobile {
+    display: none !important;
+  }
+
+  &.active {
+    transition: top 0.35s ease, bottom 0.5s ease, border-color 0.2s ease 0.45s;
+    border-color: white;
+  }
+
+  &.top {
+    top: -130vh;
+
+    &.active {
+      top: -42vh;
+    }
+  }
+
+  &.bottom {
+    z-index: 94;
+    bottom: -130vh;
+
+    &.active {
+      bottom: -42vh;
+    }
+  }
+}

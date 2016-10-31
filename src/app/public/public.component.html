@@ -1,16 +1,43 @@
-<nav class="ui page nav container">
-  <a class="logo" [routerLink]="['/']">
-    <img src="/assets/icon/favicon.png">
-    <span class="text">Churchill Spring Ball</span>
-  </a>
-  <div class="links">
-    <span class="item"><a [routerLink]=" ['/'] ">Home</a></span>
-    <span class="item" *ngIf="!users.isAuthenticated()"><a href="/auth/raven">Login</a></span>
-    <!-- TODO: have an Account dropdown and show the user's name here? -->
-    <span class="item" *ngIf="users.isAuthenticated()"><a [routerLink]="['/logout']">Logout</a></span>
-    <span class="item"><a class="ui primary right labeled icon button" [routerLink]=" ['/tickets'] ">Tickets <i class="ticket icon"></i></a></span>
+<div #navbar id="navigation-bar">
+  <div class="ui container">
+    <div class="logo">
+      <a [routerLink]="['/']">
+        <img src="/assets/icon/favicon.png">
+        <span class="text">Churchill Spring Ball</span>
+      </a>
+    </div>
+    <nav id="primary-menu" class="desktop links menu">
+      <ul>
+        <span class="item"><a [routerLink]=" ['/'] ">Home</a></span>
+        <span class="item" *ngIf="!users.isAuthenticated()"><a href="/auth/raven">Login</a></span>
+        <!-- TODO: have an Account dropdown and show the user's name here? -->
+        <span class="item" *ngIf="users.isAuthenticated()"><a [routerLink]="['/logout']">Logout</a></span>
+    <span class="item"><a class="ui primary right labeled icon button" [routerLink]=" ['/tickets'] ">Tickets <i
+      class="ticket icon"></i></a></span>
+      </ul>
+    </nav>
+    <nav class="mobile toggle menu">
+      <ul>
+        <li><a><span>Menu Toggle</span></a></li>
+      </ul>
+    </nav>
   </div>
-</nav>
+  <div class="ui mobile container">
+    <nav id="primary-menu" class="mobile vertical links">
+      <ul>
+        <span class="item"><a [routerLink]=" ['/'] ">Home</a></span>
+        <span class="item" *ngIf="!users.isAuthenticated()"><a href="/auth/raven">Login</a></span>
+        <!-- TODO: have an Account dropdown and show the user's name here? -->
+        <span class="item" *ngIf="users.isAuthenticated()"><a [routerLink]="['/logout']">Logout</a></span>
+    <span class="item"><a class="ui primary right labeled icon button" [routerLink]=" ['/tickets'] ">Tickets <i
+      class="ticket icon"></i></a></span>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<div class="top mobile slice"></div>
+<div class="bottom mobile slice"></div>
 
 <main class="page main">
   <router-outlet></router-outlet>
@@ -21,6 +48,7 @@
     <div class="three column row">
       <div class="right aligned legal column">
         <h5 class="ui inverted header">The Fun Stuff</h5>
+
         <div class="ui inverted link list">
           <a class="terms item">Terms and Conditions</a>
           <a class="cookies item">Cookies Policy</a>
@@ -33,6 +61,7 @@
       </div>
       <div class="left aligned open-source column">
         <h5 class="ui inverted header">Quick links</h5>
+
         <div class="ui inverted link list">
           <a class="item">Home</a>
           <a class="item">Tickets</a>
@@ -43,7 +72,9 @@
     <div class="row">
       <div class="sixteen wide center aligned column">
         <p class="copyright">Copyright 2016 © Churchill Spring Ball</p>
-        <p class="copyright">Website Design and Development by <a href="http://www.github.com/hoxxep">Liam Gray</a> and <a href="http://www.glendelmdesign.co.uk">Matt Lewsley</a>. All banter reserved.</p>
+
+        <p class="copyright">Website Design and Development by <a href="http://www.github.com/hoxxep">Liam Gray</a> and
+          <a href="http://www.glendelmdesign.co.uk">Matt Lewsley</a>. All banter reserved.</p>
       </div>
     </div>
   </div>
