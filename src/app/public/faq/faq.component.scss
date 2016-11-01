@@ -1,6 +1,12 @@
 .faq.component {
   .faq.section {
+    .ui.question.segment {
+      margin-bottom: 2rem;
 
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
   }
 
   .purchase.tickets.section {

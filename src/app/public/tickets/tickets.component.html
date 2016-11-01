@@ -86,7 +86,7 @@
           </div>
           <p>Name change is free until January 1st, at which point you will be charged an admin fee of £10. Name change will close on February 1st.</p>
 
-          <div class="ui labeled button" tabindex="0" *ngIf="nameChange" [ngClass]="{disabled: !nameChangeValid() || sendingNameChangeRequest, loading: sendingNameChangeRequest}" (click)="saveNameChange()">
+          <div class="ui labeled fluid button" tabindex="0" *ngIf="nameChange" [ngClass]="{disabled: !nameChangeValid() || sendingNameChangeRequest, loading: sendingNameChangeRequest}" (click)="saveNameChange()">
             <div class="ui primary button">
               Save Name Change{{editCount>1 ? 's' : ''}}
             </div>
@@ -95,7 +95,7 @@
             </div>
           </div>
 
-          <p *ngIf="!nameChange"><a class="ui primary button" [routerLink]="['/tickets/purchase']">Buy More Tickets</a></p>
+          <p *ngIf="!nameChange"><a class="ui primary fluid button" [routerLink]="['/tickets/purchase']">Buy More Tickets</a></p>
         </div>
       </div>
     </div>
