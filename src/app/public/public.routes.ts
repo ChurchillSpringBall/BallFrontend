@@ -4,7 +4,7 @@ import {AUTH_ROUTES} from '../shared/auth/auth.routes';
 
 import {
   HomeComponent,
-  AboutComponent,
+  TermsComponent,
   TicketsComponent,
   PurchaseTicketsComponent
 } from './index';
@@ -14,7 +14,7 @@ export const PUBLIC_ROUTES: Routes = [{
   component: PublicComponent,
   children: [
     {path: '', component: HomeComponent},
-    {path: 'about', component: AboutComponent},
+    {path: 'terms', component: TermsComponent},
     {path: 'tickets', component: TicketsComponent},
     {path: 'tickets/purchase', component: PurchaseTicketsComponent},
     ...AUTH_ROUTES

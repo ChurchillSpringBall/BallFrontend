@@ -31,11 +31,11 @@
                  (mouseleave)="mouseLeave(ticket)"
             >
               <h2>{{ ticket.name || 'Ticketholder Name' }}</h2>
-              <p>
+              <p class="details text">
                 {{ ticket.email || 'Ticketholder Email' }}<br>
                 <strong>{{ ticket.type.name }}</strong>
               </p>
-              <p>Purchased On<br>
+              <p class="purchased text">Purchased On<br>
                 {{ ticket.order.created | date:'short' }}<br>
                 {{ ticket.price | currency:'GBP':true:'1.2-2' }} via
                 {{ ticket.order.paymentMethod === 'stripe' ? 'Stripe' : 'College Account' }}</p>

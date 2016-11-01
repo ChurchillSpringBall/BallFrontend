@@ -1,0 +1,53 @@
+/**
+ * Override the default SweetAlert2 styles
+ */
+.swal2-container {
+  .swal2-modal {
+    border-radius: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    h2 {
+      font-weight: 300;
+    }
+
+    .swal2-content {
+      font-weight: 400;
+      font-size: 1rem;
+    }
+
+    // copy/pasted semantic styles with !important to override the swal-injected style attributes
+    button.swal2-styled {
+      cursor: pointer;
+      display: inline-block;
+      min-height: 1em;
+      outline: none;
+      border: none;
+      vertical-align: baseline;
+      background: #E0E1E2 none !important;
+      color: rgba(0, 0, 0, 0.6) !important;
+      font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+      margin: 0 0.25em 0 0;
+      padding: 0.78571429em 1.5em 0.78571429em;
+      text-transform: none;
+      text-shadow: none;
+      font-weight: bold;
+      line-height: 1em;
+      font-style: normal;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 0.28571429rem;
+      box-shadow: 0 0 0 1px transparent inset, 0 0 0 0 rgba(34, 36, 38, 0.15) inset;
+      user-select: none;
+      transition: opacity 0.1s ease, background-color 0.1s ease, color 0.1s ease, box-shadow 0.1s ease, background 0.1s ease, -webkit-box-shadow 0.1s ease, -moz-box-shadow 0.1s ease;
+      -webkit-tap-highlight-color: transparent;
+      font-size: 1rem;
+
+      &.swal2-confirm {
+        background-color: #2185D0 !important;
+        color: #FFFFFF !important;
+        text-shadow: none;
+        background-image: none;
+      }
+    }
+  }
+}

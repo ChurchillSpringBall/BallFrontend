@@ -19,6 +19,8 @@ import '@angularclass/hmr';
 
 // Cookies
 import 'angular2-cookie/core';
+
+// Frontend libraries
 import 'ng2-sweetalert2';
 
 // RxJS

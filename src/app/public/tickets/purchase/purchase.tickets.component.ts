@@ -2,7 +2,7 @@ import {Component, NgZone} from '@angular/core';
 import {CurrencyPipe} from '@angular/common';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
-import {UserApi, OrderApi, TicketApi, TicketTypeApi, Order, Ticket} from '../../../shared/sdk';
+import {UserApi, OrderApi, TicketApi, TicketTypeApi, Order, Ticket, Profile} from '../../../shared/sdk';
 import {SweetAlertService} from 'ng2-sweetalert2';
 
 @Component({
@@ -23,7 +23,7 @@ export class PurchaseTicketsComponent {
   private maxTickets: number = 20;
   private stripeToken: string = 'pk_test_pbW1kBm6URlNhqXhiRu7AynG';
 
-  private profileObservable;
+  private profile: Profile;
 
   constructor(private router: Router,
               private swal: SweetAlertService,
@@ -38,6 +38,11 @@ export class PurchaseTicketsComponent {
    * Ng Initialisation
    */
   ngOnInit() {
+    if (!this.users.isAuthenticated()) {
+      this.router.navigate(['/login']);
+      return;
+    }
+
     this.ticketTypes.find()
       .flatMap(types => { // Get all the ticket types types
         this.typesOfTickets = types;
@@ -46,7 +51,7 @@ export class PurchaseTicketsComponent {
         return Observable.forkJoin(types.map(type => this.tickets.count({where: {ticketTypeId: type.id}})));
       })
       .subscribe(counts => { // Populate counts, initialise purchase quantity
-        this.typesOfTickets.forEach((type, index) => {
+        this.typesOfTickets.forEach((type: any, index: number) => {
           type.sold = counts[index].count;
           type.purchaseQuantity = 0;
         });
@@ -55,10 +60,9 @@ export class PurchaseTicketsComponent {
     // Get the user profile for isChurchill
     this.users.getProfile(this.users.getCurrentId())
       .subscribe(profile => {
+        this.profile = profile;
         this.isChurchill = profile.isChurchill;
       });
-
-    this.profileObservable = this.users.getProfile(this.users.getCurrentId());
   }
 
   /**
@@ -139,15 +143,13 @@ export class PurchaseTicketsComponent {
         return total + type.purchaseQuantity;
       }, 0);
 
-      this.profileObservable.subscribe(profile => {
-        stripePayment.open({
-          name: 'Churchill Spring Ball',
-          email: profile.email,
-          allowRememberMe: false,
-          description: `${numberOfTickets} Ticket${numberOfTickets > 1 ? 's' : ''}`,
-          amount: Math.round(this.calculateOrderTotalWithFees() * 100),
-          currency: 'GBP'
-        });
+      stripePayment.open({
+        name: 'Churchill Spring Ball',
+        email: this.profile.email,
+        allowRememberMe: false,
+        description: `${numberOfTickets} Ticket${numberOfTickets > 1 ? 's' : ''}`,
+        amount: Math.round(this.calculateOrderTotalWithFees() * 100),
+        currency: 'GBP'
       });
     } else if (this.paymentMethod === 'college-account') {
       const formattedPrice = new CurrencyPipe('GB').transform(this.calculateOrderTotalWithFees(), 'GBP', true, '1.2-2');

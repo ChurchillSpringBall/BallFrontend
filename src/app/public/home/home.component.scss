@@ -1,11 +1,24 @@
+@import '../../styles/responsive';
+
 .home.component {
   .header.section {
     padding-top: 3rem;
     padding-bottom: 6rem;
+    position: relative;
 
     .header.image {
       width: 500px;
       max-width: 100%;
+      position: relative;
+      //z-index: 10;
+    }
+
+    #particles {
+      position: absolute;
+      top: -93px;  // header padding offset
+      left: 0;
+      right: 0;
+      bottom: 0;
     }
   }
 
@@ -22,6 +35,48 @@
       img {
         height: 50px;
         margin: 20px;
+      }
+    }
+  }
+
+  .details.video.section {
+    padding: 3rem 0;
+
+    @include mobile {
+      .title, .subtitle {
+        text-align: center;
+      }
+    }
+
+    .subtitle {
+      font-family: arial, sans-serif;
+      margin-bottom: 1rem;
+    }
+
+    ol {
+      padding-left: 1.2rem;
+
+      li {
+        padding: 0.2em 0 0.2em 0.5em;
+      }
+    }
+
+    .date {
+      color: #8091A5;
+    }
+
+    .youtube.video {
+      position: relative;
+      padding-bottom: 50%; // 16:9 is 56.25%, 50% (2:1) is what the spring ball video is
+      padding-top: 25px;
+      height: 0;
+
+      iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
       }
     }
   }

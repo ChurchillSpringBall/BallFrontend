@@ -1,0 +1,13 @@
+.terms.component {
+  padding: 0 0 3rem;
+
+  .title {
+    text-align: center;
+  }
+
+  ol {
+    > li {
+      padding: 0.3em 0 0.3em 1.2em;
+    }
+  }
+}

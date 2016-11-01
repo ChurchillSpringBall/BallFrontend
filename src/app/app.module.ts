@@ -23,6 +23,15 @@ import * as AUTH_COMPONENTS from './shared/auth';
 import * as CUSTOM_PIPES from './shared/pipes';
 import {SDKModule} from './shared/sdk/index';
 
+// Set the Loopback SDK base url properly
+import {LoopBackConfig} from './shared/sdk/lb.config';
+
+declare const location: any;
+if (typeof location.origin === 'undefined') {
+  location.origin = location.protocol + '//' + location.host;
+}
+LoopBackConfig.setBaseURL(location.origin);
+
 // Application wide providers
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
@@ -36,6 +45,7 @@ type StoreType = {
   restoreInputValues: () => void,
   disposeOldHosts: () => void
 };
+
 
 /**
  * `AppModule` is the main entry point into Angular2's bootstraping process

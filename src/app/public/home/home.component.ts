@@ -1,6 +1,9 @@
 import {Component, ViewChild, ElementRef} from '@angular/core';
 import {Carousel} from '../../shared/jquery/carousel';
 import {TicketTypeApi, TicketType} from '../../shared/sdk';
+import {PARTICLES_CONFIG} from './particles.config';
+
+declare const particlesJS: any;
 
 @Component({
   selector: 'home',  // <home></home>
