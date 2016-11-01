@@ -27,6 +27,7 @@
     <nav id="primary-menu" class="mobile vertical links">
       <ul>
         <span class="item"><a [routerLink]=" ['/'] ">Home</a></span>
+        <span class="item"><a [routerLink]=" ['/faq'] ">FAQ</a></span>
         <span class="item" *ngIf="!users.isAuthenticated()"><a [routerLink]="['/login']">Login</a></span>
         <!-- TODO: have an Account dropdown and show the user's name here? -->
         <span class="item" *ngIf="users.isAuthenticated()"><a [routerLink]="['/logout']">Logout</a></span>
