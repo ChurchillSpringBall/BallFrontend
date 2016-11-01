@@ -21,7 +21,7 @@ export class PurchaseTicketsComponent {
   private flatFee: number = 0.2;
   private stripeRate: number = 0.014;
   private maxTickets: number = 20;
-  private stripeToken: string = 'pk_test_pbW1kBm6URlNhqXhiRu7AynG';
+  private stripeToken: string = 'pk_live_C2R23weSkgmJYF1ZDsCbIXHk';  // pk_test_VzE4g2WQgyIECkn35raV5lwN
 
   private profile: Profile;
 
