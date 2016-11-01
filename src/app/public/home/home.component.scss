@@ -39,7 +39,7 @@
     }
   }
 
-  .details.video.section {
+  .video.section {
     padding: 3rem 0;
 
     @include mobile {
@@ -78,6 +78,14 @@
         width: 100%;
         height: 100%;
       }
+    }
+  }
+
+  .details.section {
+    padding: 3rem 0;
+
+    p {
+      color: #8091A5;
     }
   }
 
