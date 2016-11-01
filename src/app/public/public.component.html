@@ -9,6 +9,7 @@
     <nav id="primary-menu" class="desktop links menu">
       <ul>
         <span class="item"><a [routerLink]=" ['/'] ">Home</a></span>
+        <span class="item"><a [routerLink]=" ['/faq'] ">FAQ</a></span>
         <span class="item" *ngIf="!users.isAuthenticated()"><a [routerLink]="['/login']">Login</a></span>
         <!-- TODO: have an Account dropdown and show the user's name here? -->
         <span class="item" *ngIf="users.isAuthenticated()"><a [routerLink]="['/logout']">Logout</a></span>
@@ -64,7 +65,7 @@
         <div class="ui link list">
           <a class="item" [routerLink]="['/']">Home</a>
           <a class="item" [routerLink]="['/tickets']">Tickets</a>
-          <a class="item" [routerLink]="['/login']">Log In</a>
+          <a class="item" [routerLink]="['/faq']">FAQ</a>
         </div>
       </div>
     </div>
