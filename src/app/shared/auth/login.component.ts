@@ -1,4 +1,3 @@
-import {SDKToken} from '../sdk/models';
 import {LoopBackAuth} from '../sdk/services';
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';

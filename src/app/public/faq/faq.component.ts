@@ -1,8 +1,9 @@
-import {Component} from '@angular/core';
+import {Component, ViewEncapsulation} from '@angular/core';
 import {TicketTypeApi, TicketType} from '../../shared/sdk';
 
 @Component({
   selector: 'faq',
+  encapsulation: ViewEncapsulation.None,
   styleUrls: ['./faq.component.scss'],
   templateUrl: './faq.component.html'
 })

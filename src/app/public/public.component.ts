@@ -11,6 +11,7 @@ declare const window: any;
  */
 @Component({
   selector: 'container',
+  encapsulation: ViewEncapsulation.None,
   styleUrls: [
     './public.component.scss',
   ],

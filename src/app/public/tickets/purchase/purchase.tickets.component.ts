@@ -1,4 +1,4 @@
-import {Component, NgZone} from '@angular/core';
+import {Component, NgZone, ViewEncapsulation} from '@angular/core';
 import {CurrencyPipe} from '@angular/common';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
@@ -6,7 +6,8 @@ import {UserApi, OrderApi, TicketApi, TicketTypeApi, Order, Ticket, Profile} fro
 import {SweetAlertService} from 'ng2-sweetalert2';
 
 @Component({
-  selector: 'container',
+  selector: 'purchase-tickets',
+  encapsulation: ViewEncapsulation.None,
   styleUrls: [
     './purchase.tickets.component.scss',
   ],

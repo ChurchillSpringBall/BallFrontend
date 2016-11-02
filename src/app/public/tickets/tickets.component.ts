@@ -5,7 +5,8 @@ import {Observable} from "rxjs";
 import {SweetAlertService} from 'ng2-sweetalert2';
 
 @Component({
-  selector: 'container',
+  selector: 'tickets',
+  encapsulation: ViewEncapsulation.None,
   styleUrls: [
     './tickets.component.scss',
   ],
