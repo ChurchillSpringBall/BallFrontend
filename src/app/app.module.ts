@@ -26,6 +26,8 @@ import {SDKModule} from './shared/sdk/index';
 // Set the Loopback SDK base url properly
 import {LoopBackConfig} from './shared/sdk/lb.config';
 
+import {AgmCoreModule} from 'angular2-google-maps/core';
+
 declare const location: any;
 if (typeof location.origin === 'undefined') {
   location.origin = location.protocol + '//' + location.host;
@@ -64,7 +66,12 @@ type StoreType = {
     FormsModule,
     HttpModule,
     RouterModule.forRoot(ROUTES, {useHash: true}),
-    SDKModule.forRoot()
+    SDKModule.forRoot(),
+    // TODO: google maps API live key: AIzaSyBMPFU7jQ5ebxUO7LVOcef6Y4rLiQwrFiI
+    // TODO: testing key: AIzaSyAhpRFp78ECtLmDoUu6MkeRnzXiDGOy2fU
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAhpRFp78ECtLmDoUu6MkeRnzXiDGOy2fU'
+    })
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,

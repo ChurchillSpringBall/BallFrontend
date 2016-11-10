@@ -1,0 +1,17 @@
+@import "../../styles/responsive";
+
+.work.component {
+  @include mobile {
+    .ui.grid.reverse-on-mobile {  // using reverse-on-mobile naming to avoid any semantic 'mobile reversed' stuff
+      .column {
+        &:first-child {
+          order: 2;
+        }
+
+        &:last-child {
+          order: 1;
+        }
+      }
+    }
+  }
+}
