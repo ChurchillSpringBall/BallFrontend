@@ -67,10 +67,8 @@ type StoreType = {
     HttpModule,
     RouterModule.forRoot(ROUTES, {useHash: true}),
     SDKModule.forRoot(),
-    // TODO: google maps API live key: AIzaSyBMPFU7jQ5ebxUO7LVOcef6Y4rLiQwrFiI
-    // TODO: testing key: AIzaSyAhpRFp78ECtLmDoUu6MkeRnzXiDGOy2fU
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAhpRFp78ECtLmDoUu6MkeRnzXiDGOy2fU'
+      apiKey: 'AIzaSyBMPFU7jQ5ebxUO7LVOcef6Y4rLiQwrFiI'  // NOTE: this api key is locked to *.springball.com/*
     })
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
