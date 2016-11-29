@@ -117,6 +117,11 @@ export class PurchaseTicketsComponent {
   protected makePayment(): void {
     this.sendingPurchaseRequest = true;
 
+    this.typesOfTickets.forEach((type) => {
+      //noinspection JSPrimitiveTypeWrapperUsage
+      type.purchaseQuantity = Math.round(type.purchaseQuantity);
+    });
+
     if (this.paymentMethod === 'stripe') { // Handle stripe
       let tokenSuccess = false;
       const stripePayment = (<any>window).StripeCheckout.configure({
