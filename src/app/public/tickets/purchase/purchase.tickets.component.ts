@@ -49,7 +49,7 @@ export class PurchaseTicketsComponent {
         this.typesOfTickets = types;
         // TODO: use a single "ticket types available" endpoint so I don't give away the # of sold tickets?
         // This will send off parallel requests to count the number of each ticket sold
-        return Observable.forkJoin(types.map(type => this.tickets.count({where: {ticketTypeId: type.id}})));
+        return Observable.forkJoin(types.map(type => this.tickets.count({ticketTypeId: type.id})));
       })
       .subscribe(counts => { // Populate counts, initialise purchase quantity
         this.typesOfTickets.forEach((type: any, index: number) => {
