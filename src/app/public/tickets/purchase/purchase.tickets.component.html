@@ -45,13 +45,13 @@
               <div class="field">
                 <div class="ui radio checkbox">
                   <input type="radio" name="payment-method" [(ngModel)]="paymentMethod" value="college-account"
-                         [disabled]="!isChurchill">
+                         [disabled]="true || !isChurchill"><!-- Disabled via the true || -->
                   <label>College Account (No fee)</label>
                 </div>
               </div>
             </div>
           </div>
-          <p>Please note that payment via college account is only available to Churchill members.</p>
+          <p>Please note that payment via college account is only available to Churchill members before December 2nd.</p>
 
           <p><strong>Total:</strong> {{ calculateOrderTotal() + (paymentMethod === 'stripe' ? calculateStripeFee() : 0)
             | currency:'GBP':true:'1.2-2' }}</p>
