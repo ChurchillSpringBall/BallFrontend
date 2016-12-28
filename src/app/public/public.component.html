@@ -15,8 +15,7 @@
         <span class="item" *ngIf="!users.isAuthenticated()"><a [routerLink]="['/login']">Login</a></span>
         <!-- TODO: have an Account dropdown and show the user's name here? -->
         <span class="item" *ngIf="users.isAuthenticated()"><a [routerLink]="['/logout']">Logout</a></span>
-    <span class="item"><a class="ui primary right labeled icon button" [routerLink]=" ['/tickets'] ">Tickets <i
-      class="ticket icon"></i></a></span>
+        <span class="item"><a class="ui primary right labeled icon button" [routerLink]=" ['/tickets'] ">Tickets <i class="ticket icon"></i></a></span>
       </ul>
     </nav>
     <nav class="mobile toggle menu">
@@ -35,8 +34,9 @@
         <span class="item" *ngIf="!users.isAuthenticated()"><a [routerLink]="['/login']">Login</a></span>
         <!-- TODO: have an Account dropdown and show the user's name here? -->
         <span class="item" *ngIf="users.isAuthenticated()"><a [routerLink]="['/logout']">Logout</a></span>
-    <span class="item"><a class="ui primary right labeled icon button" [routerLink]=" ['/tickets'] ">Tickets <i
-      class="ticket icon"></i></a></span>
+        <span class="item">
+          <a class="ui primary right labeled icon button" [routerLink]=" ['/tickets'] ">Tickets <i class="ticket icon"></i></a>
+        </span>
       </ul>
     </nav>
   </div>
@@ -80,8 +80,7 @@
         <p class="copyright">Copyright 2016 &copy; Churchill Spring Ball Committee</p>
         <p class="copyright">
           Website built by <a href="https://uk.linkedin.com/in/theliamgray">Liam Gray</a>,
-          <a href="https://uk.linkedin.com/in/rogersnm">Nick Rogers</a>, and
-          <a href="http://glendelmdesign.co.uk/">Matt Lewsley</a>
+          <a href="https://uk.linkedin.com/in/rogersnm">Nick Rogers</a>
         </p>
       </div>
     </div>

@@ -144,4 +144,24 @@
       }
     }
   }
+
+  .committee.section {
+    padding: 3rem 0;
+
+    .container.container > div {
+      img {
+        display: block;
+        margin: 0 auto;
+        width: 75%;
+      }
+
+      .name {
+        font-weight: bold;
+      }
+
+      .position {
+        color: #8091A5;
+      }
+    }
+  }
 }

@@ -43,8 +43,8 @@
         <p>Applications have now closed! If you need to get in touch with the committee for audition or performing information, please email <a href="mailto:ents@springball.com">ents@springball.com</a>.</p>
       </div>
       <div class="sixteen wide mobile eight wide tablet four wide computer column">
-        <h3>Work</h3>
-        <p>Worker applications have closed. If you have any questions about working at Churchill Spring Ball, please contact <a href="mailto:personnel@springball.com">personnel@springball.com</a>.</p>
+        <h3>Group Discounts</h3>
+        <p>Group discounts are now available for orders of 5 tickets or more. Please contact <a href="mailto:ticketing@springball.com">ticketing@springball.com</a> for more information.</p>
       </div>
       <div class="sixteen wide mobile eight wide tablet four wide computer column">
         <h3>Big Narstie</h3>
@@ -80,16 +80,6 @@
     </div>
   </div>
 
-  <!-- <div class="bordered committee section">
-    <div class="ui grid container">
-      <div class="sixteen wide center aligned column">
-        <h1 class="title">Committee</h1>
-        <h2 class="subtitle">Some text about the sick committee</h2>
-        <p>TODO: committee section slider or something here</p>
-      </div>
-    </div>
-  </div> -->
-
   <div class="bordered purchase tickets section">
     <div class="ui very relaxed centered grid container">
       <div class="sixteen wide center aligned column">
@@ -112,6 +102,22 @@
         </div>
       </div>
 
+    </div>
+  </div>
+
+  <div class="bordered committee section">
+    <div class="ui grid container">
+      <div class="sixteen wide center aligned column">
+        <h1 class="title">Committee</h1>
+        <h2 class="subtitle">Springball is brought to you by this wonderful team</h2>
+        <div class="ui centered relaxed grid container">
+          <div *ngFor="let person of committee" class="sixteen wide mobile eight wide tablet four wide computer column center aligned">
+            <img [src]="person.image" />
+            <div class="name">{{person.name}}</div>
+            <div class="position">{{person.title}}</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -161,7 +161,7 @@ export class PurchaseTicketsComponent {
       const formattedPrice = new CurrencyPipe('GB').transform(this.calculateOrderTotalWithFees(), 'GBP', true, '1.2-2');
       this.swal.confirm({
         title: 'Are you sure?',
-        text: `You will be billed ${formattedPrice} to your Churchill College Havent Till Account.`,
+        text: `You will be billed ${formattedPrice} to your Churchill College Haven Till Account.`,
         showCancelButton: true
       })
         .then(() => {
