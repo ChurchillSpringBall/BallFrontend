@@ -6,7 +6,7 @@
         <h1>Your Tickets</h1>
       </div>
       <div class="sixteen wide mobile only center aligned column" *ngIf="nameChange">
-        <div class="ui labeled button" tabindex="0" (click)="saveNameChange()">
+        <div class="ui labeled button" tabindex="0" [ngClass]="{disabled: !nameChangeValid() || sendingNameChangeRequest, loading: sendingNameChangeRequest}" (click)="saveNameChange()">
           <div class="ui primary button">
             Save Name Change{{editCount>1 ? 's' : ''}}
           </div>
