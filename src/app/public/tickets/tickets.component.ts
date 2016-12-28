@@ -1,6 +1,6 @@
-import {Component, ViewEncapsulation} from '@angular/core';
+import {Component, NgZone, ViewEncapsulation} from '@angular/core';
 import {Router} from '@angular/router';
-import {UserApi, OrderApi, TicketTypeApi, TicketApi, Ticket, TicketType} from '../../shared/sdk';
+import {UserApi, OrderApi, TicketTypeApi, TicketApi, Ticket, TicketType, Profile} from '../../shared/sdk';
 import {Observable} from "rxjs";
 import {SweetAlertService} from 'ng2-sweetalert2';
 
@@ -19,13 +19,16 @@ export class TicketsComponent {
   editCount: number = 0;
   nameChange: boolean = false;
   sendingNameChangeRequest = false;
+  stripeToken: string = 'pk_test_SAPqlS85kFIIuGh7W8FV8LU9'; //pk_live_C2R23weSkgmJYF1ZDsCbIXHk';  // pk_test_VzE4g2WQgyIECkn35raV5lwN
+  profile: Profile;
 
   constructor(private users: UserApi,
               private orders: OrderApi,
               private ticketApi: TicketApi,
               private ticketTypes: TicketTypeApi,
               private swal: SweetAlertService,
-              private router: Router) {
+              private router: Router,
+              private _ngZone: NgZone) {
   }
 
   ngOnInit() {
@@ -40,6 +43,11 @@ export class TicketsComponent {
     this.editCount = 0;
     this.nameChange = false;
     this.sendingNameChangeRequest = false;
+
+    this.users.getProfile(this.users.getCurrentId())
+      .subscribe(profile => {
+        this.profile = profile;
+      });
 
     let orderCache = null;
     this.users.getOrders(this.users.getCurrentId())
@@ -97,7 +105,31 @@ export class TicketsComponent {
   // TODO: Revert to original ticket state (just fetch them again if you want)
   protected saveNameChange(): void {
     const editedTickets = this.tickets
-      .filter(ticket => ticket.editing)
+      .filter(ticket => ticket.editing && (
+        ticket.newName.localeCompare(ticket.name) !== 0 ||
+        ticket.newEmail.localeCompare(ticket.email) !== 0
+      ));
+
+    // If nothing actually changed then reset the UI and return
+    if (editedTickets.length === 0) {
+      this.ngOnInit();
+      return;
+    }
+
+    const ticketsWithFeeDue = editedTickets
+      .filter(ticket => ticket.name !== null && ticket.name !== "" &&
+                        ticket.email !== null && ticket.email !== "")
+      .map(ticket => {
+        return {
+          id: ticket.id,
+          name: ticket.newName,
+          email: ticket.newEmail
+        };
+      });
+
+    const ticketsWithFreeNameChange = editedTickets
+      .filter(ticket => ticket.name === null || ticket.name === "" ||
+                        ticket.email === null || ticket.email === "")
       .map(ticket => {
         return {
           id: ticket.id,
@@ -108,26 +140,102 @@ export class TicketsComponent {
 
     this.sendingNameChangeRequest = true;
 
-    Observable.forkJoin(editedTickets.map(ticket => this.ticketApi.nameChange(ticket)))
-      .subscribe(tickets => {
-        console.log(tickets);
+    // If there are no free ones, do the paid ones
+    if (ticketsWithFreeNameChange.length === 0) {
+      this.processNameChangesWithFees(ticketsWithFeeDue);
+    } else {
+      // Else do the free ones first, then do the payment request
+      Observable.forkJoin(ticketsWithFreeNameChange.map(ticket => this.ticketApi.nameChange(ticket)))
+        .subscribe(tickets => {
+          if (ticketsWithFeeDue.length === 0) {
+            this.swal.success({
+              title: 'Success',
+              text: 'We\'ve updated the names on your tickets!'
+            });
 
-        this.swal.success({
-          title: 'Success',
-          text: 'We\'ve updated the names on your tickets!'
+            this.ngOnInit();
+
+            return;
+          }
+
+          this.processNameChangesWithFees(ticketsWithFeeDue);
+        }, error => {
+          console.error(error);
+
+          this.swal.error({
+            title: 'Error',
+            text: 'We could not save the names on your tickets. Please try again or contact the Churchill Spring Ball Committee.'
+          });
+
+          this.ngOnInit();
         });
+      }
+  }
 
-        this.ngOnInit();
-      }, error => {
-        console.error(error);
+  protected processNameChangesWithFees(ticketsWithFeeDue: any): void {
+    let nameChangeFeePerTicket = 10;
+    let totalFee = ticketsWithFeeDue.length * nameChangeFeePerTicket;
 
-        this.swal.error({
-          title: 'Error',
-          text: 'We could not save the names on your tickets. Please try again or contact the Churchill Spring Ball Committee.'
-        });
+    this.swal.question({
+      title: 'Name Change Fee',
+      text: 'The deadline for free name changes has passed. Name changes are now charged at £10/ticket. To proceed you must pay a £' + totalFee + ' fee.',
+      showCancelButton: true,
+      confirmButtonColor: "#DD6B55",
+      confirmButtonText: "Proceed",
+      cancelButtonText: "Cancel"
+    }).then(() => {
+      let tokenSuccess = false;
+      const stripePayment = (<any>window).StripeCheckout.configure({
+        // TODO: set stripe token globally
+        key: this.stripeToken,
+        locale: 'auto',
+        billingAddress: false,
+        closed: () => {
+          this._ngZone.run(() => {
+            if (!tokenSuccess) {
+              this.ngOnInit();
+            }
+          });
+        },
+        token: (token: any) => {
+          tokenSuccess = true;
+          this._ngZone.run(() => {
+            Observable.forkJoin(ticketsWithFeeDue.map(ticket => this.ticketApi.nameChange(ticket)))
+              .subscribe(tickets => {
+                console.log(tickets);
 
-        this.ngOnInit();
+                this.swal.success({
+                  title: 'Success',
+                  text: 'We\'ve updated the names on your tickets!'
+                });
+
+                this.ngOnInit();
+              }, error => {
+                console.error(error);
+
+                this.swal.error({
+                  title: 'Error',
+                  text: 'We could not save the names on your tickets. Please try again or contact the Churchill Spring Ball Committee.'
+                });
+
+                this.ngOnInit();
+              });
+          });
+        }
       });
+
+      stripePayment.open({
+        name: 'Churchill Spring Ball',
+        email: this.profile.email,
+        allowRememberMe: false,
+        description: `Name change for ${ticketsWithFeeDue.length} Ticket${ticketsWithFeeDue.length > 1 ? 's' : ''}`,
+        amount: totalFee * 100,
+        currency: 'GBP'
+      });
+    }, () => {
+      // cancelled
+      this.ngOnInit();
+    });
   }
 
   /**

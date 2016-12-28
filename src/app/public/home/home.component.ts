@@ -13,7 +13,7 @@ export class HomeComponent {
   @ViewChild('promoCarousel') promoCarousel: ElementRef;
   ticketTypes: TicketType[] = [];
 
-  committee = [
+  committee: any[] = [
     {
       name: 'Shauna Gulrajani',
       title: 'PRESIDENT',
