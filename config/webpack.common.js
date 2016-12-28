@@ -147,12 +147,12 @@ module.exports = function (options) {
          */
         {
           test: /\.(jpg|png|gif|svg)$/,
-          loader: 'file'
+          loader: 'file-loader'
         },
 
         {
           test: /\.(woff2?|ttf|eot|svg)$/,
-          loader: 'url?limit=10000'
+          loader: 'url-loader?limit=10000'
         },
 
         // Semantic-UI
@@ -195,7 +195,7 @@ module.exports = function (options) {
        *
        * See: https://github.com/s-panferov/awesome-typescript-loader#forkchecker-boolean-defaultfalse
        */
-      new ForkCheckerPlugin(),
+      /*new ForkCheckerPlugin(),*/
       /*
        * Plugin: CommonsChunkPlugin
        * Description: Shares common code between the pages.

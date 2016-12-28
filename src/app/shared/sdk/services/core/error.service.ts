@@ -9,7 +9,7 @@ import 'rxjs/add/observable/throw';
  */
 @Injectable()
 export class ErrorHandler {
-  public handleError(error: Response): ErrorObservable {
+  public handleError(error: Response): ErrorObservable<any> {
     return Observable.throw(error.json().error || 'Server error');
   }
 }
