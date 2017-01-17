@@ -4,7 +4,6 @@ import {
   User
 } from '../index';
 
-declare var Object: any;
 export interface OrderInterface {
   created?: any;
   paymentMethod: string;
@@ -18,23 +17,16 @@ export interface OrderInterface {
 }
 
 export class Order implements OrderInterface {
-  created: any;
+  created?: any;
   paymentMethod: string;
-  paymentFee: number;
-  paymentToken: string;
+  paymentFee?: number;
+  paymentToken?: string;
   total: number;
-  id: number;
-  userId: number;
-  tickets: Array<Ticket>;
-  user: User;
-  constructor(instance?: OrderInterface) {
+  id?: number;
+  userId?: number;
+  tickets?: Array<Ticket>;
+  user?: User;
+  constructor(instance?: Order) {
     Object.assign(this, instance);
-  }
-  /**
-   * The name of the model represented by this $resource,
-   * i.e. `Order`.
-   */
-  public static getModelName() {
-    return "Order";
   }
 }

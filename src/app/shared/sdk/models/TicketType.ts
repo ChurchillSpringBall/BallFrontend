@@ -3,7 +3,6 @@ import {
   Ticket
 } from '../index';
 
-declare var Object: any;
 export interface TicketTypeInterface {
   name?: string;
   description?: string;
@@ -20,14 +19,7 @@ export class TicketType implements TicketTypeInterface {
   quantity: number;
   id: number;
   tickets: Array<Ticket>;
-  constructor(instance?: TicketTypeInterface) {
+  constructor(instance?: TicketType) {
     Object.assign(this, instance);
-  }
-  /**
-   * The name of the model represented by this $resource,
-   * i.e. `TicketType`.
-   */
-  public static getModelName() {
-    return "TicketType";
   }
 }

@@ -8,7 +8,6 @@ import { LoopBackFilter,  } from '../../models/BaseModels';
 import { JSONSearchParams } from '../core/search.params';
 import { ErrorHandler } from '../core/error.service';
 import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { TicketType } from '../../models/TicketType';
 import { Ticket } from '../../models/Ticket';
@@ -47,7 +46,7 @@ export class TicketTypeApi extends BaseLoopBackApi {
    * This usually means the response is a `TicketType` object.)
    * </em>
    */
-  public findByIdTickets(id: any, fk: any): Observable<any> {
+  public findByIdTickets(id: any, fk: any) {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/TicketTypes/:id/tickets/:fk";
@@ -58,7 +57,7 @@ export class TicketTypeApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result;
+    return result.map((instance: TicketType) => new TicketType(instance));
   }
 
   /**
@@ -74,7 +73,7 @@ export class TicketTypeApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public destroyByIdTickets(id: any, fk: any): Observable<any> {
+  public destroyByIdTickets(id: any, fk: any) {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/TicketTypes/:id/tickets/:fk";
@@ -108,7 +107,7 @@ export class TicketTypeApi extends BaseLoopBackApi {
    * This usually means the response is a `TicketType` object.)
    * </em>
    */
-  public updateByIdTickets(id: any, fk: any, data: any = undefined): Observable<any> {
+  public updateByIdTickets(id: any, fk: any, data: any = undefined) {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/TicketTypes/:id/tickets/:fk";
@@ -140,7 +139,7 @@ export class TicketTypeApi extends BaseLoopBackApi {
    * This usually means the response is a `TicketType` object.)
    * </em>
    */
-  public getTickets(id: any, filter: LoopBackFilter = undefined): Observable<any> {
+  public getTickets(id: any, filter: LoopBackFilter = undefined) {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/TicketTypes/:id/tickets";
@@ -172,7 +171,7 @@ export class TicketTypeApi extends BaseLoopBackApi {
    * This usually means the response is a `TicketType` object.)
    * </em>
    */
-  public createTickets(id: any, data: any = undefined): Observable<any> {
+  public createTickets(id: any, data: any = undefined) {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/TicketTypes/:id/tickets";
@@ -198,7 +197,7 @@ export class TicketTypeApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public deleteTickets(id: any): Observable<any> {
+  public deleteTickets(id: any) {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/TicketTypes/:id/tickets";
@@ -226,7 +225,7 @@ export class TicketTypeApi extends BaseLoopBackApi {
    *
    *  - `count` – `{number}` - 
    */
-  public countTickets(id: any, where: any = undefined): Observable<any> {
+  public countTickets(id: any, where: any = undefined) {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/TicketTypes/:id/tickets/count";
@@ -256,7 +255,7 @@ export class TicketTypeApi extends BaseLoopBackApi {
    * This usually means the response is a `TicketType` object.)
    * </em>
    */
-  public create(data: any = undefined): Observable<TicketType> {
+  public create(data: any = undefined) {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/TicketTypes";
@@ -285,7 +284,7 @@ export class TicketTypeApi extends BaseLoopBackApi {
    * This usually means the response is a `TicketType` object.)
    * </em>
    */
-  public patchOrCreate(data: any = undefined): Observable<any> {
+  public patchOrCreate(data: any = undefined) {
     let method: string = "PATCH";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/TicketTypes";
@@ -314,7 +313,7 @@ export class TicketTypeApi extends BaseLoopBackApi {
    * This usually means the response is a `TicketType` object.)
    * </em>
    */
-  public replaceOrCreate(data: any = undefined): Observable<any> {
+  public replaceOrCreate(data: any = undefined) {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/TicketTypes/replaceOrCreate";
@@ -345,7 +344,7 @@ export class TicketTypeApi extends BaseLoopBackApi {
    * This usually means the response is a `TicketType` object.)
    * </em>
    */
-  public upsertWithWhere(where: any = undefined, data: any = undefined): Observable<TicketType> {
+  public upsertWithWhere(where: any = undefined, data: any = undefined) {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/TicketTypes/upsertWithWhere";
@@ -372,7 +371,7 @@ export class TicketTypeApi extends BaseLoopBackApi {
    *
    *  - `exists` – `{boolean}` - 
    */
-  public exists(id: any): Observable<any> {
+  public exists(id: any) {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/TicketTypes/:id/exists";
@@ -401,7 +400,7 @@ export class TicketTypeApi extends BaseLoopBackApi {
    * This usually means the response is a `TicketType` object.)
    * </em>
    */
-  public findById(id: any, filter: LoopBackFilter = undefined): Observable<TicketType> {
+  public findById(id: any, filter: LoopBackFilter = undefined) {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/TicketTypes/:id";
@@ -433,7 +432,7 @@ export class TicketTypeApi extends BaseLoopBackApi {
    * This usually means the response is a `TicketType` object.)
    * </em>
    */
-  public replaceById(id: any, data: any = undefined): Observable<any> {
+  public replaceById(id: any, data: any = undefined) {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/TicketTypes/:id/replace";
@@ -462,7 +461,7 @@ export class TicketTypeApi extends BaseLoopBackApi {
    * This usually means the response is a `TicketType` object.)
    * </em>
    */
-  public find(filter: LoopBackFilter = undefined): Observable<Array<TicketType>> {
+  public find(filter: LoopBackFilter = undefined) {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/TicketTypes";
@@ -490,7 +489,7 @@ export class TicketTypeApi extends BaseLoopBackApi {
    * This usually means the response is a `TicketType` object.)
    * </em>
    */
-  public findOne(filter: LoopBackFilter = undefined): Observable<TicketType> {
+  public findOne(filter: LoopBackFilter = undefined) {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/TicketTypes/findOne";
@@ -515,9 +514,9 @@ export class TicketTypeApi extends BaseLoopBackApi {
    *   populated with the actual data once the response is returned
    *   from the server.
    *
-   * The number of instances updated
+   * Information related to the outcome of the operation
    */
-  public updateAll(where: any = undefined, data: any = undefined): Observable<any> {
+  public updateAll(where: any = undefined, data: any = undefined) {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/TicketTypes/update";
@@ -545,7 +544,7 @@ export class TicketTypeApi extends BaseLoopBackApi {
    * This usually means the response is a `TicketType` object.)
    * </em>
    */
-  public deleteById(id: any): Observable<any> {
+  public deleteById(id: any) {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/TicketTypes/:id";
@@ -571,7 +570,7 @@ export class TicketTypeApi extends BaseLoopBackApi {
    *
    *  - `count` – `{number}` - 
    */
-  public count(where: any = undefined): Observable<any> {
+  public count(where: any = undefined) {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/TicketTypes/count";
@@ -601,7 +600,7 @@ export class TicketTypeApi extends BaseLoopBackApi {
    * This usually means the response is a `TicketType` object.)
    * </em>
    */
-  public patchAttributes(id: any, data: any = undefined): Observable<any> {
+  public patchAttributes(id: any, data: any = undefined) {
     let method: string = "PATCH";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/TicketTypes/:id";
@@ -631,7 +630,7 @@ export class TicketTypeApi extends BaseLoopBackApi {
    *
    *  - `changes` – `{ReadableStream}` - 
    */
-  public createChangeStream(): Observable<any> {
+  public createChangeStream() {
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/TicketTypes/change-stream";
     let subject = new Subject();
@@ -663,7 +662,7 @@ export class TicketTypeApi extends BaseLoopBackApi {
    * This usually means the response is a `TicketType` object.)
    * </em>
    */
-  public createManyTickets(id: any, data: Array<any> = undefined): Observable<any> {
+  public createManyTickets(id: any, data: Array<any> = undefined) {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/TicketTypes/:id/tickets";
@@ -694,7 +693,7 @@ export class TicketTypeApi extends BaseLoopBackApi {
    * This usually means the response is a `TicketType` object.)
    * </em>
    */
-  public createMany(data: Array<any> = undefined): Observable<Array<TicketType>> {
+  public createMany(data: Array<any> = undefined) {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/TicketTypes";

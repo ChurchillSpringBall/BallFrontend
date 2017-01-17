@@ -1,6 +1,5 @@
 /* tslint:disable */
 
-declare var Object: any;
 export interface LoopBackFilter {
   fields?: any;
   include?: any;
@@ -31,10 +30,10 @@ export class AccessToken implements AccessTokenInterface {
 }
 
 export class SDKToken extends AccessToken {
-    id: any = null;
+    id:string = null;
     ttl: number = null;
     created: any = null;
-    userId: any = null;
+    userId: string = null;
     user: any = null;
     rememberMe: boolean = null;
     constructor(instance?: AccessToken) {

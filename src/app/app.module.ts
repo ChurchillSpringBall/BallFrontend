@@ -32,7 +32,7 @@ declare const location: any;
 if (typeof location.origin === 'undefined') {
   location.origin = location.protocol + '//' + location.host;
 }
-LoopBackConfig.setBaseURL(location.origin);
+// LoopBackConfig.setBaseURL(location.origin);
 
 // Application wide providers
 const APP_PROVIDERS = [

@@ -4,7 +4,6 @@ import {
   TicketType
 } from '../index';
 
-declare var Object: any;
 export interface TicketInterface {
   name?: string;
   email?: string;
@@ -20,25 +19,18 @@ export interface TicketInterface {
 }
 
 export class Ticket implements TicketInterface {
-  name: string;
-  email: string;
-  price: number;
-  barCode: string;
-  admittedAt: any;
-  collectedAt: any;
-  id: number;
-  orderId: number;
-  ticketTypeId: number;
-  order: Order;
-  ticketType: TicketType;
-  constructor(instance?: TicketInterface) {
+  name?: string;
+  email?: string;
+  price?: number;
+  barCode?: string;
+  admittedAt?: any;
+  collectedAt?: any;
+  id?: number;
+  orderId?: number;
+  ticketTypeId?: number;
+  order?: Order;
+  ticketType?: TicketType;
+  constructor(instance?: Ticket) {
     Object.assign(this, instance);
-  }
-  /**
-   * The name of the model represented by this $resource,
-   * i.e. `Ticket`.
-   */
-  public static getModelName() {
-    return "Ticket";
   }
 }
