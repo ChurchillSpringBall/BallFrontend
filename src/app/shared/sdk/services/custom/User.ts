@@ -8,6 +8,7 @@ import { LoopBackFilter, SDKToken, AccessToken } from '../../models/BaseModels';
 import { JSONSearchParams } from '../core/search.params';
 import { ErrorHandler } from '../core/error.service';
 import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { User } from '../../models/User';
 import { Order } from '../../models/Order';
@@ -47,7 +48,7 @@ export class UserApi extends BaseLoopBackApi {
    * This usually means the response is a `User` object.)
    * </em>
    */
-  public findByIdAccessTokens(id: any, fk: any) {
+  public findByIdAccessTokens(id: any, fk: any): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/:id/accessTokens/:fk";
@@ -58,7 +59,7 @@ export class UserApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result.map((instance: User) => new User(instance));
+    return result;
   }
 
   /**
@@ -74,7 +75,7 @@ export class UserApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public destroyByIdAccessTokens(id: any, fk: any) {
+  public destroyByIdAccessTokens(id: any, fk: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/:id/accessTokens/:fk";
@@ -108,7 +109,7 @@ export class UserApi extends BaseLoopBackApi {
    * This usually means the response is a `User` object.)
    * </em>
    */
-  public updateByIdAccessTokens(id: any, fk: any, data: any = undefined) {
+  public updateByIdAccessTokens(id: any, fk: any, data: any = undefined): Observable<any> {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/:id/accessTokens/:fk";
@@ -140,7 +141,7 @@ export class UserApi extends BaseLoopBackApi {
    * This usually means the response is a `User` object.)
    * </em>
    */
-  public findByIdOrders(id: any, fk: any) {
+  public findByIdOrders(id: any, fk: any): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/:id/orders/:fk";
@@ -151,7 +152,7 @@ export class UserApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result.map((instance: User) => new User(instance));
+    return result;
   }
 
   /**
@@ -167,7 +168,7 @@ export class UserApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public destroyByIdOrders(id: any, fk: any) {
+  public destroyByIdOrders(id: any, fk: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/:id/orders/:fk";
@@ -201,7 +202,7 @@ export class UserApi extends BaseLoopBackApi {
    * This usually means the response is a `User` object.)
    * </em>
    */
-  public updateByIdOrders(id: any, fk: any, data: any = undefined) {
+  public updateByIdOrders(id: any, fk: any, data: any = undefined): Observable<any> {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/:id/orders/:fk";
@@ -233,7 +234,7 @@ export class UserApi extends BaseLoopBackApi {
    * This usually means the response is a `User` object.)
    * </em>
    */
-  public getProfile(id: any, refresh: any = undefined) {
+  public getProfile(id: any, refresh: any = undefined): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/:id/profile";
@@ -265,7 +266,7 @@ export class UserApi extends BaseLoopBackApi {
    * This usually means the response is a `User` object.)
    * </em>
    */
-  public createProfile(id: any, data: any = undefined) {
+  public createProfile(id: any, data: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/:id/profile";
@@ -298,7 +299,7 @@ export class UserApi extends BaseLoopBackApi {
    * This usually means the response is a `User` object.)
    * </em>
    */
-  public updateProfile(id: any, data: any = undefined) {
+  public updateProfile(id: any, data: any = undefined): Observable<any> {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/:id/profile";
@@ -324,7 +325,7 @@ export class UserApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public destroyProfile(id: any) {
+  public destroyProfile(id: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/:id/profile";
@@ -353,7 +354,7 @@ export class UserApi extends BaseLoopBackApi {
    * This usually means the response is a `User` object.)
    * </em>
    */
-  public findByIdIdentities(id: any, fk: any) {
+  public findByIdIdentities(id: any, fk: any): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/:id/identities/:fk";
@@ -364,7 +365,7 @@ export class UserApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result.map((instance: User) => new User(instance));
+    return result;
   }
 
   /**
@@ -380,7 +381,7 @@ export class UserApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public destroyByIdIdentities(id: any, fk: any) {
+  public destroyByIdIdentities(id: any, fk: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/:id/identities/:fk";
@@ -414,7 +415,7 @@ export class UserApi extends BaseLoopBackApi {
    * This usually means the response is a `User` object.)
    * </em>
    */
-  public updateByIdIdentities(id: any, fk: any, data: any = undefined) {
+  public updateByIdIdentities(id: any, fk: any, data: any = undefined): Observable<any> {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/:id/identities/:fk";
@@ -446,7 +447,7 @@ export class UserApi extends BaseLoopBackApi {
    * This usually means the response is a `User` object.)
    * </em>
    */
-  public findByIdCredentials(id: any, fk: any) {
+  public findByIdCredentials(id: any, fk: any): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/:id/credentials/:fk";
@@ -457,7 +458,7 @@ export class UserApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result.map((instance: User) => new User(instance));
+    return result;
   }
 
   /**
@@ -473,7 +474,7 @@ export class UserApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public destroyByIdCredentials(id: any, fk: any) {
+  public destroyByIdCredentials(id: any, fk: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/:id/credentials/:fk";
@@ -507,7 +508,7 @@ export class UserApi extends BaseLoopBackApi {
    * This usually means the response is a `User` object.)
    * </em>
    */
-  public updateByIdCredentials(id: any, fk: any, data: any = undefined) {
+  public updateByIdCredentials(id: any, fk: any, data: any = undefined): Observable<any> {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/:id/credentials/:fk";
@@ -539,7 +540,7 @@ export class UserApi extends BaseLoopBackApi {
    * This usually means the response is a `User` object.)
    * </em>
    */
-  public getAccessTokens(id: any, filter: LoopBackFilter = undefined) {
+  public getAccessTokens(id: any, filter: LoopBackFilter = undefined): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/:id/accessTokens";
@@ -571,7 +572,7 @@ export class UserApi extends BaseLoopBackApi {
    * This usually means the response is a `User` object.)
    * </em>
    */
-  public createAccessTokens(id: any, data: any = undefined) {
+  public createAccessTokens(id: any, data: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/:id/accessTokens";
@@ -597,7 +598,7 @@ export class UserApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public deleteAccessTokens(id: any) {
+  public deleteAccessTokens(id: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/:id/accessTokens";
@@ -625,7 +626,7 @@ export class UserApi extends BaseLoopBackApi {
    *
    *  - `count` – `{number}` - 
    */
-  public countAccessTokens(id: any, where: any = undefined) {
+  public countAccessTokens(id: any, where: any = undefined): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/:id/accessTokens/count";
@@ -655,7 +656,7 @@ export class UserApi extends BaseLoopBackApi {
    * This usually means the response is a `User` object.)
    * </em>
    */
-  public getOrders(id: any, filter: LoopBackFilter = undefined) {
+  public getOrders(id: any, filter: LoopBackFilter = undefined): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/:id/orders";
@@ -687,7 +688,7 @@ export class UserApi extends BaseLoopBackApi {
    * This usually means the response is a `User` object.)
    * </em>
    */
-  public createOrders(id: any, data: any = undefined) {
+  public createOrders(id: any, data: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/:id/orders";
@@ -713,7 +714,7 @@ export class UserApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public deleteOrders(id: any) {
+  public deleteOrders(id: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/:id/orders";
@@ -741,7 +742,7 @@ export class UserApi extends BaseLoopBackApi {
    *
    *  - `count` – `{number}` - 
    */
-  public countOrders(id: any, where: any = undefined) {
+  public countOrders(id: any, where: any = undefined): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/:id/orders/count";
@@ -771,7 +772,7 @@ export class UserApi extends BaseLoopBackApi {
    * This usually means the response is a `User` object.)
    * </em>
    */
-  public getIdentities(id: any, filter: LoopBackFilter = undefined) {
+  public getIdentities(id: any, filter: LoopBackFilter = undefined): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/:id/identities";
@@ -803,7 +804,7 @@ export class UserApi extends BaseLoopBackApi {
    * This usually means the response is a `User` object.)
    * </em>
    */
-  public createIdentities(id: any, data: any = undefined) {
+  public createIdentities(id: any, data: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/:id/identities";
@@ -829,7 +830,7 @@ export class UserApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public deleteIdentities(id: any) {
+  public deleteIdentities(id: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/:id/identities";
@@ -857,7 +858,7 @@ export class UserApi extends BaseLoopBackApi {
    *
    *  - `count` – `{number}` - 
    */
-  public countIdentities(id: any, where: any = undefined) {
+  public countIdentities(id: any, where: any = undefined): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/:id/identities/count";
@@ -887,7 +888,7 @@ export class UserApi extends BaseLoopBackApi {
    * This usually means the response is a `User` object.)
    * </em>
    */
-  public getCredentials(id: any, filter: LoopBackFilter = undefined) {
+  public getCredentials(id: any, filter: LoopBackFilter = undefined): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/:id/credentials";
@@ -919,7 +920,7 @@ export class UserApi extends BaseLoopBackApi {
    * This usually means the response is a `User` object.)
    * </em>
    */
-  public createCredentials(id: any, data: any = undefined) {
+  public createCredentials(id: any, data: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/:id/credentials";
@@ -945,7 +946,7 @@ export class UserApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public deleteCredentials(id: any) {
+  public deleteCredentials(id: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/:id/credentials";
@@ -973,7 +974,7 @@ export class UserApi extends BaseLoopBackApi {
    *
    *  - `count` – `{number}` - 
    */
-  public countCredentials(id: any, where: any = undefined) {
+  public countCredentials(id: any, where: any = undefined): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/:id/credentials/count";
@@ -1003,7 +1004,7 @@ export class UserApi extends BaseLoopBackApi {
    * This usually means the response is a `User` object.)
    * </em>
    */
-  public create(data: any = undefined) {
+  public create(data: any = undefined): Observable<User> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users";
@@ -1032,7 +1033,7 @@ export class UserApi extends BaseLoopBackApi {
    * This usually means the response is a `User` object.)
    * </em>
    */
-  public patchOrCreate(data: any = undefined) {
+  public patchOrCreate(data: any = undefined): Observable<any> {
     let method: string = "PATCH";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users";
@@ -1061,7 +1062,7 @@ export class UserApi extends BaseLoopBackApi {
    * This usually means the response is a `User` object.)
    * </em>
    */
-  public replaceOrCreate(data: any = undefined) {
+  public replaceOrCreate(data: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/replaceOrCreate";
@@ -1092,7 +1093,7 @@ export class UserApi extends BaseLoopBackApi {
    * This usually means the response is a `User` object.)
    * </em>
    */
-  public upsertWithWhere(where: any = undefined, data: any = undefined) {
+  public upsertWithWhere(where: any = undefined, data: any = undefined): Observable<User> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/upsertWithWhere";
@@ -1119,7 +1120,7 @@ export class UserApi extends BaseLoopBackApi {
    *
    *  - `exists` – `{boolean}` - 
    */
-  public exists(id: any) {
+  public exists(id: any): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/:id/exists";
@@ -1148,7 +1149,7 @@ export class UserApi extends BaseLoopBackApi {
    * This usually means the response is a `User` object.)
    * </em>
    */
-  public findById(id: any, filter: LoopBackFilter = undefined) {
+  public findById(id: any, filter: LoopBackFilter = undefined): Observable<User> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/:id";
@@ -1180,7 +1181,7 @@ export class UserApi extends BaseLoopBackApi {
    * This usually means the response is a `User` object.)
    * </em>
    */
-  public replaceById(id: any, data: any = undefined) {
+  public replaceById(id: any, data: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/:id/replace";
@@ -1209,7 +1210,7 @@ export class UserApi extends BaseLoopBackApi {
    * This usually means the response is a `User` object.)
    * </em>
    */
-  public find(filter: LoopBackFilter = undefined) {
+  public find(filter: LoopBackFilter = undefined): Observable<Array<User>> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users";
@@ -1237,7 +1238,7 @@ export class UserApi extends BaseLoopBackApi {
    * This usually means the response is a `User` object.)
    * </em>
    */
-  public findOne(filter: LoopBackFilter = undefined) {
+  public findOne(filter: LoopBackFilter = undefined): Observable<User> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/findOne";
@@ -1264,7 +1265,7 @@ export class UserApi extends BaseLoopBackApi {
    *
    * Information related to the outcome of the operation
    */
-  public updateAll(where: any = undefined, data: any = undefined) {
+  public updateAll(where: any = undefined, data: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/update";
@@ -1292,7 +1293,7 @@ export class UserApi extends BaseLoopBackApi {
    * This usually means the response is a `User` object.)
    * </em>
    */
-  public deleteById(id: any) {
+  public deleteById(id: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/:id";
@@ -1318,7 +1319,7 @@ export class UserApi extends BaseLoopBackApi {
    *
    *  - `count` – `{number}` - 
    */
-  public count(where: any = undefined) {
+  public count(where: any = undefined): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/count";
@@ -1348,7 +1349,7 @@ export class UserApi extends BaseLoopBackApi {
    * This usually means the response is a `User` object.)
    * </em>
    */
-  public patchAttributes(id: any, data: any = undefined) {
+  public patchAttributes(id: any, data: any = undefined): Observable<any> {
     let method: string = "PATCH";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/:id";
@@ -1378,7 +1379,7 @@ export class UserApi extends BaseLoopBackApi {
    *
    *  - `changes` – `{ReadableStream}` - 
    */
-  public createChangeStream() {
+  public createChangeStream(): Observable<any> {
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/change-stream";
     let subject = new Subject();
@@ -1417,7 +1418,7 @@ export class UserApi extends BaseLoopBackApi {
    * 
    *
    */
-  public login(credentials: any, include: any = 'user', rememberMe: boolean = true) {
+  public login(credentials: any, include: any = 'user', rememberMe: boolean = true): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/login";
@@ -1453,7 +1454,7 @@ export class UserApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public logout() {
+  public logout(): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/logout";
@@ -1481,15 +1482,14 @@ export class UserApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public confirm(uid: any, token: any, redirect: any = undefined) {
+  public confirm(uid: any, token: any, redirect: any = undefined): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/confirm";
-    let routeParams: any = {
-      uid: uid
-    };
+    let routeParams: any = {};
     let postBody: any = {};
     let urlParams: any = {};
+    if (uid) urlParams.uid = uid;
     if (token) urlParams.token = token;
     if (redirect) urlParams.redirect = redirect;
     let result = this.request(method, url, routeParams, urlParams, postBody);
@@ -1509,7 +1509,7 @@ export class UserApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public resetPassword(options: any) {
+  public resetPassword(options: any): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/reset";
@@ -1540,7 +1540,7 @@ export class UserApi extends BaseLoopBackApi {
    * This usually means the response is a `User` object.)
    * </em>
    */
-  public createManyProfile(id: any, data: Array<any> = undefined) {
+  public createManyProfile(id: any, data: Array<any> = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/:id/profile";
@@ -1573,7 +1573,7 @@ export class UserApi extends BaseLoopBackApi {
    * This usually means the response is a `User` object.)
    * </em>
    */
-  public createManyAccessTokens(id: any, data: Array<any> = undefined) {
+  public createManyAccessTokens(id: any, data: Array<any> = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/:id/accessTokens";
@@ -1606,7 +1606,7 @@ export class UserApi extends BaseLoopBackApi {
    * This usually means the response is a `User` object.)
    * </em>
    */
-  public createManyOrders(id: any, data: Array<any> = undefined) {
+  public createManyOrders(id: any, data: Array<any> = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/:id/orders";
@@ -1639,7 +1639,7 @@ export class UserApi extends BaseLoopBackApi {
    * This usually means the response is a `User` object.)
    * </em>
    */
-  public createManyIdentities(id: any, data: Array<any> = undefined) {
+  public createManyIdentities(id: any, data: Array<any> = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/:id/identities";
@@ -1672,7 +1672,7 @@ export class UserApi extends BaseLoopBackApi {
    * This usually means the response is a `User` object.)
    * </em>
    */
-  public createManyCredentials(id: any, data: Array<any> = undefined) {
+  public createManyCredentials(id: any, data: Array<any> = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users/:id/credentials";
@@ -1703,7 +1703,7 @@ export class UserApi extends BaseLoopBackApi {
    * This usually means the response is a `User` object.)
    * </em>
    */
-  public createMany(data: Array<any> = undefined) {
+  public createMany(data: Array<any> = undefined): Observable<Array<User>> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/users";

@@ -8,6 +8,7 @@ import { LoopBackFilter,  } from '../../models/BaseModels';
 import { JSONSearchParams } from '../core/search.params';
 import { ErrorHandler } from '../core/error.service';
 import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { Profile } from '../../models/Profile';
 import { User } from '../../models/User';
@@ -46,7 +47,7 @@ export class ProfileApi extends BaseLoopBackApi {
    * This usually means the response is a `Profile` object.)
    * </em>
    */
-  public getUser(id: any, refresh: any = undefined) {
+  public getUser(id: any, refresh: any = undefined): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Profiles/:id/user";
@@ -76,7 +77,7 @@ export class ProfileApi extends BaseLoopBackApi {
    * This usually means the response is a `Profile` object.)
    * </em>
    */
-  public create(data: any = undefined) {
+  public create(data: any = undefined): Observable<Profile> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Profiles";
@@ -105,7 +106,7 @@ export class ProfileApi extends BaseLoopBackApi {
    * This usually means the response is a `Profile` object.)
    * </em>
    */
-  public patchOrCreate(data: any = undefined) {
+  public patchOrCreate(data: any = undefined): Observable<any> {
     let method: string = "PATCH";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Profiles";
@@ -134,7 +135,7 @@ export class ProfileApi extends BaseLoopBackApi {
    * This usually means the response is a `Profile` object.)
    * </em>
    */
-  public replaceOrCreate(data: any = undefined) {
+  public replaceOrCreate(data: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Profiles/replaceOrCreate";
@@ -165,7 +166,7 @@ export class ProfileApi extends BaseLoopBackApi {
    * This usually means the response is a `Profile` object.)
    * </em>
    */
-  public upsertWithWhere(where: any = undefined, data: any = undefined) {
+  public upsertWithWhere(where: any = undefined, data: any = undefined): Observable<Profile> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Profiles/upsertWithWhere";
@@ -192,7 +193,7 @@ export class ProfileApi extends BaseLoopBackApi {
    *
    *  - `exists` – `{boolean}` - 
    */
-  public exists(id: any) {
+  public exists(id: any): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Profiles/:id/exists";
@@ -221,7 +222,7 @@ export class ProfileApi extends BaseLoopBackApi {
    * This usually means the response is a `Profile` object.)
    * </em>
    */
-  public findById(id: any, filter: LoopBackFilter = undefined) {
+  public findById(id: any, filter: LoopBackFilter = undefined): Observable<Profile> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Profiles/:id";
@@ -253,7 +254,7 @@ export class ProfileApi extends BaseLoopBackApi {
    * This usually means the response is a `Profile` object.)
    * </em>
    */
-  public replaceById(id: any, data: any = undefined) {
+  public replaceById(id: any, data: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Profiles/:id/replace";
@@ -282,7 +283,7 @@ export class ProfileApi extends BaseLoopBackApi {
    * This usually means the response is a `Profile` object.)
    * </em>
    */
-  public find(filter: LoopBackFilter = undefined) {
+  public find(filter: LoopBackFilter = undefined): Observable<Array<Profile>> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Profiles";
@@ -310,7 +311,7 @@ export class ProfileApi extends BaseLoopBackApi {
    * This usually means the response is a `Profile` object.)
    * </em>
    */
-  public findOne(filter: LoopBackFilter = undefined) {
+  public findOne(filter: LoopBackFilter = undefined): Observable<Profile> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Profiles/findOne";
@@ -337,7 +338,7 @@ export class ProfileApi extends BaseLoopBackApi {
    *
    * Information related to the outcome of the operation
    */
-  public updateAll(where: any = undefined, data: any = undefined) {
+  public updateAll(where: any = undefined, data: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Profiles/update";
@@ -365,7 +366,7 @@ export class ProfileApi extends BaseLoopBackApi {
    * This usually means the response is a `Profile` object.)
    * </em>
    */
-  public deleteById(id: any) {
+  public deleteById(id: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Profiles/:id";
@@ -391,7 +392,7 @@ export class ProfileApi extends BaseLoopBackApi {
    *
    *  - `count` – `{number}` - 
    */
-  public count(where: any = undefined) {
+  public count(where: any = undefined): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Profiles/count";
@@ -421,7 +422,7 @@ export class ProfileApi extends BaseLoopBackApi {
    * This usually means the response is a `Profile` object.)
    * </em>
    */
-  public patchAttributes(id: any, data: any = undefined) {
+  public patchAttributes(id: any, data: any = undefined): Observable<any> {
     let method: string = "PATCH";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Profiles/:id";
@@ -451,7 +452,7 @@ export class ProfileApi extends BaseLoopBackApi {
    *
    *  - `changes` – `{ReadableStream}` - 
    */
-  public createChangeStream() {
+  public createChangeStream(): Observable<any> {
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Profiles/change-stream";
     let subject = new Subject();
@@ -480,15 +481,14 @@ export class ProfileApi extends BaseLoopBackApi {
    *
    *  - `success` – `{boolean}` - 
    */
-  public loadProfile(userid: any) {
+  public loadProfile(userid: any): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Profiles/load";
-    let routeParams: any = {
-      userid: userid
-    };
+    let routeParams: any = {};
     let postBody: any = {};
     let urlParams: any = {};
+    if (userid) urlParams.userid = userid;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -509,7 +509,7 @@ export class ProfileApi extends BaseLoopBackApi {
    * This usually means the response is a `Profile` object.)
    * </em>
    */
-  public createMany(data: Array<any> = undefined) {
+  public createMany(data: Array<any> = undefined): Observable<Array<Profile>> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Profiles";

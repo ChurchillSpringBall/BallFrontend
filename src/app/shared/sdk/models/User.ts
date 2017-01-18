@@ -4,6 +4,7 @@ import {
   Profile
 } from '../index';
 
+declare var Object: any;
 export interface UserInterface {
   realm?: string;
   username?: string;
@@ -32,7 +33,14 @@ export class User implements UserInterface {
   profile: Profile;
   identities: Array<any>;
   credentials: Array<any>;
-  constructor(instance?: User) {
+  constructor(instance?: UserInterface) {
     Object.assign(this, instance);
+  }
+  /**
+   * The name of the model represented by this $resource,
+   * i.e. `User`.
+   */
+  public static getModelName() {
+    return "User";
   }
 }

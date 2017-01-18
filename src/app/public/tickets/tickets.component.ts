@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {UserApi, OrderApi, TicketTypeApi, TicketApi, Ticket, TicketType, Profile} from '../../shared/sdk';
 import {Observable} from "rxjs";
 import {SweetAlertService} from 'ng2-sweetalert2';
+import {Order} from "../../shared/sdk/models/Order";
 
 @Component({
   selector: 'tickets',
@@ -19,7 +20,7 @@ export class TicketsComponent {
   editCount: number = 0;
   nameChange: boolean = false;
   sendingNameChangeRequest = false;
-  stripeToken: string = 'pk_test_SAPqlS85kFIIuGh7W8FV8LU9'; //pk_live_C2R23weSkgmJYF1ZDsCbIXHk';  // pk_test_VzE4g2WQgyIECkn35raV5lwN
+  stripeToken: string = 'pk_test_JI4TNsUtPqAwwppcYSeWzzVi'; //pk_live_C2R23weSkgmJYF1ZDsCbIXHk';  // pk_test_VzE4g2WQgyIECkn35raV5lwN
   profile: Profile;
 
   constructor(private users: UserApi,
@@ -157,7 +158,7 @@ export class TicketsComponent {
 
             return;
           }
-
+          console.log('test');
           this.processNameChangesWithFees(ticketsWithFeeDue);
         }, error => {
           console.error(error);
@@ -170,6 +171,46 @@ export class TicketsComponent {
           this.ngOnInit();
         });
       }
+  }
+
+  protected createNameChangeOrder(totalFee:number, ticketsWithFeeDue: any, token:any):void {
+
+    const order = new Order({
+      paymentMethod: 'stripe',
+      paymentFee: 0, // TODO ask if we need this fee here
+      total: totalFee,
+      paymentToken: token.id,
+    });
+    this.orders.processNameChangeFee(order, undefined)
+      .subscribe(savedOrder => {
+        console.log(savedOrder);
+        Observable.forkJoin(ticketsWithFeeDue.map(ticket => this.ticketApi.nameChange(ticket)))
+          .subscribe(tickets => {
+            console.log(tickets);
+            this.swal.success({
+              title: 'Success',
+              text: 'We\'ve updated the names on your tickets!'
+            });
+            this.ngOnInit();
+          }, error => {
+            console.error(error);
+
+            this.swal.error({
+              title: 'Error',
+              text: 'We could not save the names on your tickets. Please try again or contact the Churchill Spring Ball Committee.'
+            });
+
+            this.ngOnInit();
+          });
+      }, error => {
+        console.error(error);
+
+        this.swal.error({
+          title: 'Error Changing Ticket Name',
+          text: 'Please contact the Spring Ball Committee! Error:' + error.message
+        });
+        return;
+      });
   }
 
   protected processNameChangesWithFees(ticketsWithFeeDue: any): void {
@@ -200,30 +241,10 @@ export class TicketsComponent {
         token: (token: any) => {
           tokenSuccess = true;
           this._ngZone.run(() => {
-            Observable.forkJoin(ticketsWithFeeDue.map(ticket => this.ticketApi.nameChange(ticket)))
-              .subscribe(tickets => {
-                console.log(tickets);
-
-                this.swal.success({
-                  title: 'Success',
-                  text: 'We\'ve updated the names on your tickets!'
-                });
-
-                this.ngOnInit();
-              }, error => {
-                console.error(error);
-
-                this.swal.error({
-                  title: 'Error',
-                  text: 'We could not save the names on your tickets. Please try again or contact the Churchill Spring Ball Committee.'
-                });
-
-                this.ngOnInit();
-              });
+            this.createNameChangeOrder(totalFee, ticketsWithFeeDue, token);
           });
         }
       });
-
       stripePayment.open({
         name: 'Churchill Spring Ball',
         email: this.profile.email,

@@ -22,7 +22,7 @@ export class PurchaseTicketsComponent {
   private flatFee: number = 0.2;
   private stripeRate: number = 0.014;
   private maxTickets: number = 20;
-  private stripeToken: string = 'pk_live_C2R23weSkgmJYF1ZDsCbIXHk';  // pk_test_VzE4g2WQgyIECkn35raV5lwN
+  private stripeToken: string = 'pk_test_JI4TNsUtPqAwwppcYSeWzzVi';  // pk_test_VzE4g2WQgyIECkn35raV5lwN
 
   private profile: Profile;
 
@@ -116,7 +116,6 @@ export class PurchaseTicketsComponent {
    */
   protected makePayment(): void {
     this.sendingPurchaseRequest = true;
-
     this.typesOfTickets.forEach((type) => {
       //noinspection JSPrimitiveTypeWrapperUsage
       type.purchaseQuantity = Math.round(type.purchaseQuantity);
@@ -175,7 +174,6 @@ export class PurchaseTicketsComponent {
               text: 'An error occurred before we could secure your tickets. Please try again.'
             });
           }
-
           this.sendingPurchaseRequest = false;
         });
     }
@@ -186,7 +184,7 @@ export class PurchaseTicketsComponent {
    * @param token - the stripe token
    */
   protected purchaseTickets(token): void {
-    // Construct order
+
     const order = new Order({
       paymentMethod: this.paymentMethod,
       paymentFee: (this.paymentMethod === 'stripe' ? this.calculateStripeFee() : 0),

@@ -8,6 +8,7 @@ import { LoopBackFilter,  } from '../../models/BaseModels';
 import { JSONSearchParams } from '../core/search.params';
 import { ErrorHandler } from '../core/error.service';
 import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { Order } from '../../models/Order';
 import { Ticket } from '../../models/Ticket';
@@ -47,7 +48,7 @@ export class OrderApi extends BaseLoopBackApi {
    * This usually means the response is a `Order` object.)
    * </em>
    */
-  public findByIdTickets(id: any, fk: any) {
+  public findByIdTickets(id: any, fk: any): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Orders/:id/tickets/:fk";
@@ -58,7 +59,7 @@ export class OrderApi extends BaseLoopBackApi {
     let postBody: any = {};
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody);
-    return result.map((instance: Order) => new Order(instance));
+    return result;
   }
 
   /**
@@ -74,7 +75,7 @@ export class OrderApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public destroyByIdTickets(id: any, fk: any) {
+  public destroyByIdTickets(id: any, fk: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Orders/:id/tickets/:fk";
@@ -108,7 +109,7 @@ export class OrderApi extends BaseLoopBackApi {
    * This usually means the response is a `Order` object.)
    * </em>
    */
-  public updateByIdTickets(id: any, fk: any, data: any = undefined) {
+  public updateByIdTickets(id: any, fk: any, data: any = undefined): Observable<any> {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Orders/:id/tickets/:fk";
@@ -140,7 +141,7 @@ export class OrderApi extends BaseLoopBackApi {
    * This usually means the response is a `Order` object.)
    * </em>
    */
-  public getUser(id: any, refresh: any = undefined) {
+  public getUser(id: any, refresh: any = undefined): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Orders/:id/user";
@@ -170,7 +171,7 @@ export class OrderApi extends BaseLoopBackApi {
    * This usually means the response is a `Order` object.)
    * </em>
    */
-  public getTickets(id: any, filter: LoopBackFilter = undefined) {
+  public getTickets(id: any, filter: LoopBackFilter = undefined): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Orders/:id/tickets";
@@ -202,7 +203,7 @@ export class OrderApi extends BaseLoopBackApi {
    * This usually means the response is a `Order` object.)
    * </em>
    */
-  public createTickets(id: any, data: any = undefined) {
+  public createTickets(id: any, data: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Orders/:id/tickets";
@@ -228,7 +229,7 @@ export class OrderApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public deleteTickets(id: any) {
+  public deleteTickets(id: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Orders/:id/tickets";
@@ -256,7 +257,7 @@ export class OrderApi extends BaseLoopBackApi {
    *
    *  - `count` – `{number}` - 
    */
-  public countTickets(id: any, where: any = undefined) {
+  public countTickets(id: any, where: any = undefined): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Orders/:id/tickets/count";
@@ -286,7 +287,7 @@ export class OrderApi extends BaseLoopBackApi {
    * This usually means the response is a `Order` object.)
    * </em>
    */
-  public create(data: any = undefined) {
+  public create(data: any = undefined): Observable<Order> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Orders";
@@ -315,7 +316,7 @@ export class OrderApi extends BaseLoopBackApi {
    * This usually means the response is a `Order` object.)
    * </em>
    */
-  public patchOrCreate(data: any = undefined) {
+  public patchOrCreate(data: any = undefined): Observable<any> {
     let method: string = "PATCH";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Orders";
@@ -344,7 +345,7 @@ export class OrderApi extends BaseLoopBackApi {
    * This usually means the response is a `Order` object.)
    * </em>
    */
-  public replaceOrCreate(data: any = undefined) {
+  public replaceOrCreate(data: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Orders/replaceOrCreate";
@@ -375,7 +376,7 @@ export class OrderApi extends BaseLoopBackApi {
    * This usually means the response is a `Order` object.)
    * </em>
    */
-  public upsertWithWhere(where: any = undefined, data: any = undefined) {
+  public upsertWithWhere(where: any = undefined, data: any = undefined): Observable<Order> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Orders/upsertWithWhere";
@@ -402,7 +403,7 @@ export class OrderApi extends BaseLoopBackApi {
    *
    *  - `exists` – `{boolean}` - 
    */
-  public exists(id: any) {
+  public exists(id: any): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Orders/:id/exists";
@@ -431,7 +432,7 @@ export class OrderApi extends BaseLoopBackApi {
    * This usually means the response is a `Order` object.)
    * </em>
    */
-  public findById(id: any, filter: LoopBackFilter = undefined) {
+  public findById(id: any, filter: LoopBackFilter = undefined): Observable<Order> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Orders/:id";
@@ -463,7 +464,7 @@ export class OrderApi extends BaseLoopBackApi {
    * This usually means the response is a `Order` object.)
    * </em>
    */
-  public replaceById(id: any, data: any = undefined) {
+  public replaceById(id: any, data: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Orders/:id/replace";
@@ -492,7 +493,7 @@ export class OrderApi extends BaseLoopBackApi {
    * This usually means the response is a `Order` object.)
    * </em>
    */
-  public find(filter: LoopBackFilter = undefined) {
+  public find(filter: LoopBackFilter = undefined): Observable<Array<Order>> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Orders";
@@ -520,7 +521,7 @@ export class OrderApi extends BaseLoopBackApi {
    * This usually means the response is a `Order` object.)
    * </em>
    */
-  public findOne(filter: LoopBackFilter = undefined) {
+  public findOne(filter: LoopBackFilter = undefined): Observable<Order> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Orders/findOne";
@@ -547,7 +548,7 @@ export class OrderApi extends BaseLoopBackApi {
    *
    * Information related to the outcome of the operation
    */
-  public updateAll(where: any = undefined, data: any = undefined) {
+  public updateAll(where: any = undefined, data: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Orders/update";
@@ -575,7 +576,7 @@ export class OrderApi extends BaseLoopBackApi {
    * This usually means the response is a `Order` object.)
    * </em>
    */
-  public deleteById(id: any) {
+  public deleteById(id: any): Observable<any> {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Orders/:id";
@@ -601,7 +602,7 @@ export class OrderApi extends BaseLoopBackApi {
    *
    *  - `count` – `{number}` - 
    */
-  public count(where: any = undefined) {
+  public count(where: any = undefined): Observable<any> {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Orders/count";
@@ -631,7 +632,7 @@ export class OrderApi extends BaseLoopBackApi {
    * This usually means the response is a `Order` object.)
    * </em>
    */
-  public patchAttributes(id: any, data: any = undefined) {
+  public patchAttributes(id: any, data: any = undefined): Observable<any> {
     let method: string = "PATCH";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Orders/:id";
@@ -661,7 +662,7 @@ export class OrderApi extends BaseLoopBackApi {
    *
    *  - `changes` – `{ReadableStream}` - 
    */
-  public createChangeStream() {
+  public createChangeStream(): Observable<any> {
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Orders/change-stream";
     let subject = new Subject();
@@ -694,17 +695,15 @@ export class OrderApi extends BaseLoopBackApi {
    *
    *  - `order` – `{object}` - 
    */
-  public makeOrder(order: any, req: any = undefined) {
+  public makeOrder(order: any, req: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Orders/make";
     let routeParams: any = {};
     let postBody: any = {
-      order: order,
-      req: req
+      order: order
     };
     let urlParams: any = {};
-    if (order) urlParams.order = order;
     if (req) urlParams.req = req;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
@@ -729,17 +728,15 @@ export class OrderApi extends BaseLoopBackApi {
    *
    *  - `order` – `{object}` - 
    */
-  public processNameChangeFee(order: any, req: any = undefined) {
+  public processNameChangeFee(order: any, req: any = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Orders/namechangefee";
     let routeParams: any = {};
     let postBody: any = {
-      order: order,
-      req: req
+      order: order
     };
     let urlParams: any = {};
-    if (order) urlParams.order = order;
     if (req) urlParams.req = req;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
@@ -763,7 +760,7 @@ export class OrderApi extends BaseLoopBackApi {
    * This usually means the response is a `Order` object.)
    * </em>
    */
-  public createManyTickets(id: any, data: Array<any> = undefined) {
+  public createManyTickets(id: any, data: Array<any> = undefined): Observable<any> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Orders/:id/tickets";
@@ -794,7 +791,7 @@ export class OrderApi extends BaseLoopBackApi {
    * This usually means the response is a `Order` object.)
    * </em>
    */
-  public createMany(data: Array<any> = undefined) {
+  public createMany(data: Array<any> = undefined): Observable<Array<Order>> {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Orders";
