@@ -17,6 +17,8 @@ export class PurchaseTicketsComponent {
   public typesOfTickets: any = [];
   public isChurchill: boolean = false;
   public paymentMethod: string = 'stripe';
+  public charitableDonation: number;
+
   private sendingPurchaseRequest: boolean = false;
   // TODO: factor out these settings into a static app.config.ts
   private flatFee: number = 0.2;
@@ -79,9 +81,9 @@ export class PurchaseTicketsComponent {
    * @returns {any}
    */
   protected calculateOrderTotal(): number {
-    return this.typesOfTickets.reduce((total, ticket) => {
-      return total + (ticket.purchaseQuantity * ticket.price);
-    }, 0);
+    return this.typesOfTickets.reduce((total, ticket) => (
+      total + (ticket.purchaseQuantity * ticket.price)
+  ), 0) + (this.charitableDonation ? this.charitableDonation : 0);
   }
 
   /**
@@ -189,7 +191,8 @@ export class PurchaseTicketsComponent {
       paymentMethod: this.paymentMethod,
       paymentFee: (this.paymentMethod === 'stripe' ? this.calculateStripeFee() : 0),
       total: this.calculateOrderTotalWithFees(),
-      paymentToken: token ? token.id : null
+      paymentToken: token ? token.id : null,
+      charitableDonation: this.charitableDonation,
     });
 
     // Construct tickets array
