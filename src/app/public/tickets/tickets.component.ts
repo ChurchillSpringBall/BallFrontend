@@ -119,7 +119,7 @@ export class TicketsComponent {
 
     const ticketsWithFeeDue = editedTickets
       .filter(ticket => ticket.name !== null && ticket.name !== "" &&
-                        ticket.email !== null && ticket.email !== "")
+      ticket.email !== null && ticket.email !== "")
       .map(ticket => {
         return {
           id: ticket.id,
@@ -130,7 +130,7 @@ export class TicketsComponent {
 
     const ticketsWithFreeNameChange = editedTickets
       .filter(ticket => ticket.name === null || ticket.name === "" ||
-                        ticket.email === null || ticket.email === "")
+      ticket.email === null || ticket.email === "")
       .map(ticket => {
         return {
           id: ticket.id,
@@ -158,7 +158,6 @@ export class TicketsComponent {
 
             return;
           }
-          console.log('test');
           this.processNameChangesWithFees(ticketsWithFeeDue);
         }, error => {
           console.error(error);
@@ -170,38 +169,43 @@ export class TicketsComponent {
 
           this.ngOnInit();
         });
-      }
+    }
   }
 
-  protected createNameChangeOrder(totalFee:number, ticketsWithFeeDue: any, token:any):void {
-
+  protected createNameChangeOrder(totalFee: number, ticketsWithFeeDue: any, token: any): void {
+    console.log((ticketsWithFeeDue));
+    console.log(typeof(ticketsWithFeeDue))
     const order = new Order({
       paymentMethod: 'stripe',
       paymentFee: 0, // TODO ask if we need this fee here
       total: totalFee,
       paymentToken: token.id,
     });
-    this.orders.processNameChangeFee(order, undefined)
-      .subscribe(savedOrder => {
-        console.log(savedOrder);
-        Observable.forkJoin(ticketsWithFeeDue.map(ticket => this.ticketApi.nameChange(ticket)))
-          .subscribe(tickets => {
-            console.log(tickets);
-            this.swal.success({
-              title: 'Success',
-              text: 'We\'ve updated the names on your tickets!'
-            });
-            this.ngOnInit();
-          }, error => {
-            console.error(error);
+    //check tickets match id of user
+    Observable.forkJoin(ticketsWithFeeDue.map(ticket => this.ticketApi.checkTicket(ticket)))
+      .subscribe(tickets => {
+        this.orders.processNameChangeFee(order, undefined)
+          .subscribe(savedOrder => {
+            console.log(savedOrder);
+            Observable.forkJoin(ticketsWithFeeDue.map(ticket => this.ticketApi.nameChange(ticket)))
+              .subscribe(tickets => {
+                console.log(tickets);
+                this.swal.success({
+                  title: 'Success',
+                  text: 'We\'ve updated the names on your tickets!'
+                });
+                this.ngOnInit();
+              }, error => {
+                console.error(error);
 
-            this.swal.error({
-              title: 'Error',
-              text: 'We could not save the names on your tickets. Please try again or contact the Churchill Spring Ball Committee.'
-            });
+                this.swal.error({
+                  title: 'Error',
+                  text: 'We could not save the names on your tickets. Please try again or contact the Churchill Spring Ball Committee.'
+                });
 
-            this.ngOnInit();
-          });
+                this.ngOnInit();
+              });
+          })
       }, error => {
         console.error(error);
 

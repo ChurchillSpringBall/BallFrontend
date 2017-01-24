@@ -57,7 +57,7 @@
                         <input class="charityInput"
                                type="number"
                                [(ngModel)]="charitableDonation"
-                               min="0.01"
+                               min="0.00"
                                step="0.01"
                                placeholder="0.00"
                         >
@@ -72,7 +72,7 @@
           <p><strong>Total:</strong> {{ calculateOrderTotal() + (paymentMethod === 'stripe' ? calculateStripeFee() : 0)
             | currency:'GBP':true:'1.2-2' }}</p>
 
-          <button class="ui primary fluid button" [ngClass]="{loading: sendingPurchaseRequest}" [disabled]="!checkTicketsAvailable() || sendingPurchaseRequest" (click)="makePayment()">Purchase
+          <button class="ui primary fluid button" [ngClass]="{loading: sendingPurchaseRequest}" [disabled]="!checkTicketsAvailable() || sendingPurchaseRequest || charitableDonation < 0" (click)="makePayment()">Purchase
           </button>
         </div>
       </div>

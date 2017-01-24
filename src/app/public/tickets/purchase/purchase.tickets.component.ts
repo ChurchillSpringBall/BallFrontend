@@ -192,7 +192,7 @@ export class PurchaseTicketsComponent {
       paymentFee: (this.paymentMethod === 'stripe' ? this.calculateStripeFee() : 0),
       total: this.calculateOrderTotalWithFees(),
       paymentToken: token ? token.id : null,
-      charitableDonation: this.charitableDonation,
+      charitableDonation: this.charitableDonation ? this.charitableDonation : 0,
     });
 
     // Construct tickets array
