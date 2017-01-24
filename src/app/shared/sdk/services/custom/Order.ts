@@ -546,7 +546,7 @@ export class OrderApi extends BaseLoopBackApi {
    *   populated with the actual data once the response is returned
    *   from the server.
    *
-   * The number of instances updated
+   * Information related to the outcome of the operation
    */
   public updateAll(where: any = undefined, data: any = undefined): Observable<any> {
     let method: string = "POST";
@@ -699,6 +699,39 @@ export class OrderApi extends BaseLoopBackApi {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Orders/make";
+    let routeParams: any = {};
+    let postBody: any = {
+      order: order
+    };
+    let urlParams: any = {};
+    if (req) urlParams.req = req;
+    let result = this.request(method, url, routeParams, urlParams, postBody);
+    return result;
+  }
+
+  /**
+   * <em>
+         * (The remote method definition does not provide any description.)
+         * </em>
+   *
+   * @param object data Request data.
+   *
+   *  - `order` – `{object}` - 
+   *
+   *  - `req` – `{object}` - 
+   *
+   * @returns object An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * Data properties:
+   *
+   *  - `order` – `{object}` - 
+   */
+  public processNameChangeFee(order: any, req: any = undefined): Observable<any> {
+    let method: string = "POST";
+    let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Orders/namechangefee";
     let routeParams: any = {};
     let postBody: any = {
       order: order

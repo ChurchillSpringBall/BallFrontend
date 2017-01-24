@@ -13,7 +13,7 @@ import {Router} from '@angular/router';
       <div class="ui segment">
         <h1 class="title">Log In</h1>
         <p>Note that we only support Raven log in for current members of the university (eg. those with a valid @cam.ac.uk address).</p>
-        <a class="ui primary button" href="/auth/raven">Login with Raven</a>
+        <a class="ui primary button" href="http://localhost:3001/auth/raven">Login with Raven</a>
       </div>
     </div>
   </div>

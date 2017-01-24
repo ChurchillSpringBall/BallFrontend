@@ -515,7 +515,7 @@ export class TicketTypeApi extends BaseLoopBackApi {
    *   populated with the actual data once the response is returned
    *   from the server.
    *
-   * The number of instances updated
+   * Information related to the outcome of the operation
    */
   public updateAll(where: any = undefined, data: any = undefined): Observable<any> {
     let method: string = "POST";

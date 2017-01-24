@@ -11,6 +11,7 @@ export interface OrderInterface {
   paymentFee?: number;
   paymentToken?: string;
   total: number;
+  charitableDonation?: number;
   id?: number;
   userId?: number;
   tickets?: Array<Ticket>;
@@ -23,6 +24,7 @@ export class Order implements OrderInterface {
   paymentFee: number;
   paymentToken: string;
   total: number;
+  charitableDonation: number;
   id: number;
   userId: number;
   tickets: Array<Ticket>;

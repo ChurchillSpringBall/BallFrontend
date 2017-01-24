@@ -35,28 +35,44 @@
           <div class="ui form">
             <div class="grouped fields">
               <label>Payment Method</label>
-              <div class="field">
-                <div class="ui radio checkbox">
-                  <input type="radio" name="payment-method" [(ngModel)]="paymentMethod" value="stripe"
-                         checked="checked">
-                  <label>Stripe ({{ calculateStripeFee() | currency:'GBP':true:'1.2-2' }} fee)</label>
+                <div class="field">
+                  <div class="ui radio checkbox">
+                    <input type="radio" name="payment-method" [(ngModel)]="paymentMethod" value="stripe"
+                           checked="checked">
+                    <label>Stripe ({{ calculateStripeFee() | currency:'GBP':true:'1.2-2' }} fee)</label>
+                  </div>
                 </div>
-              </div>
-              <div class="field">
+
+                <div class="field">
                 <div class="ui radio checkbox">
                   <input type="radio" name="payment-method" [(ngModel)]="paymentMethod" value="college-account"
                          [disabled]="true || !isChurchill"><!-- Disabled via the true || -->
                   <label>College Account (No fee)</label>
                 </div>
               </div>
+                <label>Charitable Donation</label>
+                <div class="field">
+                    <div class="ui charity">
+                        <span>£</span>
+                        <input class="charityInput"
+                               type="number"
+                               [(ngModel)]="charitableDonation"
+                               min="0.00"
+                               step="0.01"
+                               placeholder="0.00"
+                        >
+                    </div>
+                </div>
             </div>
+
+
           </div>
           <p>Please note that payment via college account is only available to Churchill members before December 2nd.</p>
 
           <p><strong>Total:</strong> {{ calculateOrderTotal() + (paymentMethod === 'stripe' ? calculateStripeFee() : 0)
             | currency:'GBP':true:'1.2-2' }}</p>
 
-          <button class="ui primary fluid button" [ngClass]="{loading: sendingPurchaseRequest}" [disabled]="!checkTicketsAvailable() || sendingPurchaseRequest" (click)="makePayment()">Purchase
+          <button class="ui primary fluid button" [ngClass]="{loading: sendingPurchaseRequest}" [disabled]="!checkTicketsAvailable() || sendingPurchaseRequest || charitableDonation < 0" (click)="makePayment()">Purchase
           </button>
         </div>
       </div>
