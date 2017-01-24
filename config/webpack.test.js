@@ -51,7 +51,7 @@ module.exports = function (options) {
       /**
        * Make sure root is src
        */
-      modules: [ path.resolve(__dirname, 'src'), 'node_modules' ]
+      modules: [path.resolve(__dirname, 'src'), 'node_modules']
 
     },
 
@@ -211,7 +211,7 @@ module.exports = function (options) {
         helpers.root('src') // location of your src
       ),
 
-       /**
+      /**
        * Plugin LoaderOptionsPlugin (experimental)
        *
        * See: https://gist.github.com/sokra/27b24881210b56bbaff7
@@ -253,4 +253,4 @@ module.exports = function (options) {
     }
 
   };
-}
+};
