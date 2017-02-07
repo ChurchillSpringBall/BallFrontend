@@ -54,9 +54,14 @@
                 </p>
 
                 <p>
-                  <a (click)="toggleTicket(ticket)" class="ui right labeled icon button" [ngClass]="{primary: !ticket.editing}">
-                    {{ ticket.editing ? 'Cancel' : 'Name Change' }}
-                    <i class="icon" [ngClass]="{edit: !ticket.editing, trash: ticket.editing}"></i>
+                  <!--<a (click)="toggleTicket(ticket)" class="ui right labeled icon button" [ngClass]="{primary: !ticket.editing}">-->
+                    <!--{{ ticket.editing ? 'Cancel' : 'Name Change' }}-->
+                    <!--<i class="icon" [ngClass]="{edit: !ticket.editing, trash: ticket.editing}"></i>-->
+                  <!--</a>-->
+
+                  <a class="ui right disabled labeled icon button" [ngClass]="{primary: true}">
+                  Name Change Closed
+                  <i class="icon" [ngClass]="{edit: true}"></i>
                   </a>
                 </p>
               </div>
@@ -68,7 +73,8 @@
               <div class="sixteen wide mobile sixteen wide tablet eight wide computer center aligned column">
                 <div class="ui click effect ticket segment">
                   <h2 class="subtitle">You haven't purchased any tickets yet!</h2>
-                  <p><a class="ui primary button" [routerLink]="['/tickets/purchase']">Buy Now</a></p>
+                  <!--<p><a class="ui primary button" [routerLink]="['/tickets/purchase']">Buy Now</a></p>-->
+                  <p><a class="ui primary disabled button">Sold Out</a></p>
                 </div>
               </div>
             </div>
@@ -95,7 +101,8 @@
             </div>
           </div>
 
-          <p *ngIf="!nameChange"><a class="ui primary fluid button" [routerLink]="['/tickets/purchase']">Buy More Tickets</a></p>
+          <!--<p *ngIf="!nameChange"><a class="ui primary fluid button" [routerLink]="['/tickets/purchase']">Buy More Tickets</a></p>-->
+          <p *ngIf="!nameChange"><a class="ui primary disabled fluid button" [routerLink]="['/tickets/purchase']">Sold Out</a></p>
         </div>
       </div>
     </div>
